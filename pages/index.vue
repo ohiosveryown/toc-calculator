@@ -1,5 +1,32 @@
 <template>
   <div class="app">
+    <!-- Sticky Summary Bar -->
+    <div
+      class="sticky-summary"
+      :class="{ visible: showStickySummary }"
+    >
+      <div class="sticky-summary-content">
+        <div class="sticky-summary-item">
+          <p class="type-body-medium">Square</p>
+          <p class="type-heading-600">
+            {{ formatCurrency(squareMonthlyCost) }}
+          </p>
+        </div>
+        <div class="sticky-summary-divider"></div>
+        <div class="sticky-summary-item">
+          <p class="type-body-medium">Toast</p>
+          <p class="type-heading-600">{{ formatCurrency(toastMonthlyCost) }}</p>
+        </div>
+        <div class="sticky-summary-divider"></div>
+        <div class="sticky-summary-item savings">
+          <p class="type-body-medium">You save</p>
+          <p class="type-heading-600">
+            {{ formatCurrency(monthlySavings) }}/mo
+          </p>
+        </div>
+      </div>
+    </div>
+
     <header class="header-hero">
       <span class="type-kicker">Eyebrow</span>
       <h1 class="type-hero">Cost comparison for food & beverage businesses</h1>
@@ -92,8 +119,9 @@
                 </div>
                 <div class="gradient-overlay"></div>
                 <a
-                  href="#"
+                  href="#detailed-breakdown"
                   class="feature-link type-body-medium"
+                  @click.prevent="scrollToBreakdown"
                   >See all features</a
                 >
               </div>
@@ -127,11 +155,11 @@
                 </div>
                 <div class="feature-row">
                   <span class="type-body text-muted">Online ordering site</span>
-                  <span class="type-body-medium">$60/month</span>
+                  <span class="type-body-medium">$75/month</span>
                 </div>
                 <div class="feature-row">
                   <span class="type-body text-muted">Loyalty program</span>
-                  <span class="type-body-medium">$45/month</span>
+                  <span class="type-body-medium">$50/month</span>
                 </div>
                 <div class="gradient-overlay"></div>
                 <a
@@ -188,10 +216,13 @@
       </div>
     </section>
 
-    <section class="breakdown-section">
+    <section
+      id="detailed-breakdown"
+      class="breakdown-section"
+    >
       <div class="breakdown-container">
         <header class="breakdown-header">
-          <h3 class="type-heading-500-serif">Detailed cost breakdown</h3>
+          <h3 class="type-heading-500">Detailed cost breakdown</h3>
         </header>
 
         <div class="breakdown-table">
@@ -316,6 +347,65 @@
 
   .app {
     margin: 0 auto;
+    padding-bottom: 200vh;
+  }
+
+  // Sticky Summary Bar
+  .sticky-summary {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: $color-neutral-900;
+    border-bottom: 1px solid $border-muted;
+    z-index: 100;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    padding: 1.6rem 2rem;
+
+    &.visible {
+      transform: translateY(0);
+    }
+  }
+
+  .sticky-summary-content {
+    max-width: 160rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+
+    @include breakpoint(md) {
+      gap: 2rem;
+    }
+  }
+
+  .sticky-summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+
+    p:first-child {
+      color: $text-body-muted;
+    }
+
+    p:last-child {
+      color: $color-neutral-000;
+    }
+
+    &.savings {
+      p:last-child {
+        color: $button-cta-fill-primary;
+      }
+    }
+  }
+
+  .sticky-summary-divider {
+    width: 1px;
+    height: 4rem;
+    background: $border-muted;
   }
 
   .header-hero {
@@ -644,9 +734,13 @@
 
   // Breakdown Section
   .breakdown-section {
+    margin: 0 auto;
     padding: 6.4rem 0;
     width: 100%;
     background: $color-neutral-1000;
+    @include breakpoint(md) {
+      //   width: grid-width(11);
+    }
   }
 
   .breakdown-container {
@@ -775,12 +869,13 @@
 </style>
 
 <script setup lang="ts">
-  import { ref, computed, watch } from 'vue'
+  import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
   import Slider from '@/components/Slider.vue'
 
   const locations = ref(1)
   const kioskDevices = ref(0)
   const kdsDevices = ref(0)
+  const showStickySummary = ref(false)
 
   // Feature checkboxes state
   const features = ref({
@@ -811,6 +906,18 @@
   const SQUARE_KDS_PRICE = 0 // Included in Square Plus
   const TOAST_KDS_PRICE = 40
 
+  // Feature pricing (Toast additional costs, Square includes all)
+  const FEATURE_COSTS = {
+    smsMarketing: 50,
+    onlineOrdering: 75,
+    loyalty: 50,
+    staffManagement: 149,
+    giftCards: 25,
+    qrCode: 20,
+    customerDirectory: 30,
+    emailMarketing: 50,
+  }
+
   // Computed pricing
   const squareMonthlyCost = computed(() => {
     return (
@@ -821,11 +928,24 @@
   })
 
   const toastMonthlyCost = computed(() => {
-    return (
+    // Calculate base Toast cost
+    let cost =
       TOAST_BASE_PRICE * locations.value +
       TOAST_KIOSK_PRICE * kioskDevices.value +
       TOAST_KDS_PRICE * kdsDevices.value
-    )
+
+    // Add feature costs if checked
+    if (features.value.smsMarketing) cost += FEATURE_COSTS.smsMarketing
+    if (features.value.onlineOrdering) cost += FEATURE_COSTS.onlineOrdering
+    if (features.value.loyalty) cost += FEATURE_COSTS.loyalty
+    if (features.value.staffManagement) cost += FEATURE_COSTS.staffManagement
+    if (features.value.giftCards) cost += FEATURE_COSTS.giftCards
+    if (features.value.qrCode) cost += FEATURE_COSTS.qrCode
+    if (features.value.customerDirectory)
+      cost += FEATURE_COSTS.customerDirectory
+    if (features.value.emailMarketing) cost += FEATURE_COSTS.emailMarketing
+
+    return cost
   })
 
   const monthlySavings = computed(() => {
@@ -861,5 +981,34 @@
       !showContactSalesOnKiosk.value &&
       kdsDevices.value >= 10
     )
+  })
+
+  // Smooth scroll to breakdown section
+  const scrollToBreakdown = () => {
+    const element = document.getElementById('detailed-breakdown')
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+  }
+
+  // Handle scroll to show/hide sticky summary
+  const handleScroll = () => {
+    const pricingSection = document.querySelector('.pricing-cards')
+    if (pricingSection) {
+      const rect = pricingSection.getBoundingClientRect()
+      // Show sticky bar when pricing cards scroll out of view
+      showStickySummary.value = rect.bottom < 0
+    }
+  }
+
+  onMounted(() => {
+    window.addEventListener('scroll', handleScroll)
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll)
   })
 </script>
