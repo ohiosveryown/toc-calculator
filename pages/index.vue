@@ -14,8 +14,49 @@
     <section class="pricing-cards">
       <div class="pricing-cards-container">
         <header class="header-pricing-cards">
-          <h3 class="type-heading-500-serif">Customize you comparison</h3>
+          <div class="header-content">
+            <h3 class="type-heading-500">Customize you comparison</h3>
+            <p class="type-body text-muted">
+              Adjust your location count and select the specific tools you need
+              to see a personalized cost breakdown. We’ve matched our Square
+              Plus features to leading alternatives to help you find the most
+              accurate total cost for your business.
+            </p>
+            <!-- <p class="type-body text-muted">
+              Have a Toast quote or a recent invoice? Drag and drop it anywhere
+              on this page or upload it and we'll map your existing costs
+              directly to a Square Plus plan so you can see your exact
+              savings<sup class="card-sup">1</sup>.
+            </p>
+            <button class="top-spacer btn-secondary type-body-medium">
+                Upload
+            </button> -->
+          </div>
         </header>
+
+        <div class="sliders-grid">
+          <Slider
+            label="Locations:"
+            v-model="locations"
+            :min="0"
+            :max="10"
+            :show-contact-sales="showContactSalesOnLocations"
+          />
+          <Slider
+            label="Kiosk devices:"
+            v-model="kioskDevices"
+            :min="0"
+            :max="10"
+            :show-contact-sales="showContactSalesOnKiosk"
+          />
+          <Slider
+            label="KDS devices:"
+            v-model="kdsDevices"
+            :min="0"
+            :max="10"
+            :show-contact-sales="showContactSalesOnKDS"
+          />
+        </div>
 
         <ul class="cards-list">
           <!-- Square Card -->
@@ -25,7 +66,9 @@
             </div>
 
             <div class="card-price">
-              <p class="type-heading-700">$114</p>
+              <p class="type-heading-700">
+                {{ formatCurrency(squareMonthlyCost) }}
+              </p>
               <p class="type-body text-muted">per month • Square Plus</p>
             </div>
 
@@ -47,6 +90,7 @@
                   <span class="type-body text-muted">Loyalty program</span>
                   <span class="type-body-medium">Standard</span>
                 </div>
+                <div class="gradient-overlay"></div>
                 <a
                   href="#"
                   class="feature-link type-body-medium"
@@ -63,7 +107,9 @@
             </div>
 
             <div class="card-price">
-              <p class="type-heading-700">$424</p>
+              <p class="type-heading-700">
+                {{ formatCurrency(toastMonthlyCost) }}
+              </p>
               <p class="type-body text-muted">
                 per month • Toast equivalent plan<sup class="card-sup">2</sup>
               </p>
@@ -87,6 +133,12 @@
                   <span class="type-body text-muted">Loyalty program</span>
                   <span class="type-body-medium">$45/month</span>
                 </div>
+                <div class="gradient-overlay"></div>
+                <a
+                  href="#"
+                  class="feature-link type-body-medium hide"
+                  >See all features</a
+                >
               </div>
             </div>
           </li>
@@ -94,16 +146,22 @@
           <!-- Savings Card -->
           <li class="pricing-card savings-card">
             <div class="card-header">
-              <h4 class="type-subheading-300">No more crumbs. Save: 73%.</h4>
+              <h4 class="type-subheading-300">
+                No more crumbs. Save: {{ savingsPercentage }}%.
+              </h4>
             </div>
 
             <div class="card-savings">
               <div class="savings-item">
-                <p class="type-heading-700">$3,720</p>
+                <p class="type-heading-700">
+                  {{ formatCurrency(annualSavings) }}
+                </p>
                 <p class="type-body text-muted">savings per year</p>
               </div>
               <div class="savings-item">
-                <p class="type-heading-700">$310</p>
+                <p class="type-heading-700">
+                  {{ formatCurrency(monthlySavings) }}
+                </p>
                 <p class="type-body text-muted">savings per month</p>
               </div>
             </div>
@@ -129,6 +187,126 @@
         </ul>
       </div>
     </section>
+
+    <section class="breakdown-section">
+      <div class="breakdown-container">
+        <header class="breakdown-header">
+          <h3 class="type-heading-500-serif">Detailed cost breakdown</h3>
+        </header>
+
+        <div class="breakdown-table">
+          <div class="table-header">
+            <p class="type-body-medium">Feature</p>
+            <p class="type-body-medium">Square</p>
+            <p class="type-body-medium ml-1">Toast</p>
+          </div>
+
+          <div class="table-row">
+            <div class="feature-cell">
+              <input
+                type="checkbox"
+                v-model="features.smsMarketing"
+                class="custom-checkbox"
+              />
+              <p class="type-body text-muted">SMS marketing</p>
+            </div>
+            <p class="type-body value-cell">Standard</p>
+            <p class="type-body value-cell-right">+$50/month</p>
+          </div>
+
+          <div class="table-row">
+            <div class="feature-cell">
+              <input
+                type="checkbox"
+                v-model="features.onlineOrdering"
+                class="custom-checkbox"
+              />
+              <p class="type-body text-muted">Online ordering site</p>
+            </div>
+            <p class="type-body value-cell">Standard</p>
+            <p class="type-body value-cell-right">+$75/month</p>
+          </div>
+
+          <div class="table-row">
+            <div class="feature-cell">
+              <input
+                type="checkbox"
+                v-model="features.loyalty"
+                class="custom-checkbox"
+              />
+              <p class="type-body text-muted">Loyalty program</p>
+            </div>
+            <p class="type-body value-cell">Standard</p>
+            <p class="type-body value-cell-right">+$50/month</p>
+          </div>
+
+          <div class="table-row">
+            <div class="feature-cell">
+              <input
+                type="checkbox"
+                v-model="features.staffManagement"
+                class="custom-checkbox"
+              />
+              <p class="type-body text-muted">Staff management</p>
+            </div>
+            <p class="type-body value-cell">Standard</p>
+            <p class="type-body value-cell-right">+$149/month</p>
+          </div>
+
+          <div class="table-row">
+            <div class="feature-cell">
+              <input
+                type="checkbox"
+                v-model="features.giftCards"
+                class="custom-checkbox"
+              />
+              <p class="type-body text-muted">Gift cards</p>
+            </div>
+            <p class="type-body value-cell">Standard</p>
+            <p class="type-body value-cell-right">+$25/month</p>
+          </div>
+
+          <div class="table-row">
+            <div class="feature-cell">
+              <input
+                type="checkbox"
+                v-model="features.qrCode"
+                class="custom-checkbox"
+              />
+              <p class="type-body text-muted">QR code ordering</p>
+            </div>
+            <p class="type-body value-cell">Standard</p>
+            <p class="type-body value-cell-right">+$20/month</p>
+          </div>
+
+          <div class="table-row">
+            <div class="feature-cell">
+              <input
+                type="checkbox"
+                v-model="features.customerDirectory"
+                class="custom-checkbox"
+              />
+              <p class="type-body text-muted">Customer directory</p>
+            </div>
+            <p class="type-body value-cell">Standard</p>
+            <p class="type-body value-cell-right">+$30/month</p>
+          </div>
+
+          <div class="table-row">
+            <div class="feature-cell">
+              <input
+                type="checkbox"
+                v-model="features.emailMarketing"
+                class="custom-checkbox"
+              />
+              <p class="type-body text-muted">Email marketing</p>
+            </div>
+            <p class="type-body value-cell">Standard</p>
+            <p class="type-body value-cell-right">+$50/month</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -147,7 +325,6 @@
     justify-content: center;
     gap: 4rem;
     margin: 6.4rem auto 8.8rem;
-    max-width: 160rem;
 
     h1,
     h2 {
@@ -160,7 +337,36 @@
     }
 
     @include breakpoint(md) {
-      width: grid-width(8);
+      width: grid-width(7);
+    }
+  }
+
+  // Customization Section
+  .customization-section {
+    padding: 0 2rem;
+    margin: 0 auto 6.4rem;
+    max-width: 160rem;
+  }
+
+  .customization-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 1.6rem 0;
+
+    h3 {
+      color: $color-neutral-000;
+    }
+  }
+
+  .sliders-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8.8rem;
+
+    @include breakpoint(md) {
+      flex-direction: row;
+      gap: 8.8rem;
     }
   }
 
@@ -190,10 +396,29 @@
   }
 
   .header-pricing-cards {
-    padding-top: 1.6rem;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    padding: 2.4rem 0;
+
+    @include breakpoint(md) {
+      //   flex-direction: column;
+      //   align-items: flex-start;
+    }
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    flex: 1;
 
     h3 {
       color: $color-neutral-000;
+    }
+
+    p {
+      max-width: 71.4rem;
     }
   }
 
@@ -277,6 +502,22 @@
     flex-direction: column;
     gap: 1rem;
     position: relative;
+
+    .gradient-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 12rem;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 1) 100%
+      );
+      pointer-events: none;
+      z-index: var(--z1);
+    }
   }
 
   .feature-row {
@@ -308,6 +549,7 @@
     align-items: center;
     position: relative;
     border-bottom: 1px solid transparent;
+    z-index: 2;
 
     &::after {
       content: '';
@@ -373,4 +615,251 @@
     padding: 1rem 2rem;
     cursor: pointer;
   }
+
+  .btn-secondary {
+    background: transparent;
+    color: $button-cta-text-secondary;
+    border: 1px solid $button-cta-stroke-secondary;
+    border-radius: 5rem;
+    min-width: 12rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .top-spacer {
+    margin-top: 1rem;
+  }
+
+  .hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .ml-1 {
+    transform: translateX(1rem);
+  }
+
+  // Breakdown Section
+  .breakdown-section {
+    padding: 6.4rem 0;
+    width: 100%;
+    background: $color-neutral-1000;
+  }
+
+  .breakdown-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0 auto;
+    padding: 0 10.8rem;
+    max-width: 160rem;
+
+    @include breakpoint(md) {
+      padding: 0 2rem;
+    }
+
+    @include breakpoint(mdl) {
+      width: grid-width(10);
+    }
+  }
+
+  .breakdown-header {
+    padding-bottom: 2.4rem;
+
+    h3 {
+      color: $color-neutral-000;
+    }
+  }
+
+  .breakdown-table {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.2rem;
+  }
+
+  .table-header {
+    display: flex;
+    gap: 4.7rem;
+    align-items: center;
+    padding: 2rem 0;
+
+    p {
+      color: $color-neutral-000;
+
+      &:first-child {
+        flex: 1;
+      }
+
+      &:nth-child(2),
+      &:nth-child(3) {
+        width: 12.1rem;
+        text-align: center;
+      }
+    }
+  }
+
+  .table-row {
+    display: flex;
+    gap: 4.7rem;
+    align-items: center;
+    padding: 2rem 0;
+    border-top: 1px solid $border-muted;
+  }
+
+  .feature-cell {
+    display: flex;
+    flex: 1;
+    gap: 1.6rem;
+    align-items: center;
+
+    p {
+      flex: 1;
+    }
+  }
+
+  .custom-checkbox {
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: $color-neutral-1000;
+    border: 1px solid $color-neutral-000;
+    border-radius: 0.2rem;
+    position: relative;
+    transition: all 0.2s ease;
+
+    &:checked {
+      background-color: $color-neutral-000;
+      border-color: $color-neutral-000;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 42%;
+        width: 0.5rem;
+        height: 1rem;
+        border: solid $color-neutral-1000;
+        border-width: 0 0.2rem 0.2rem 0;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+    }
+
+    &:hover {
+      border-color: $color-neutral-300;
+    }
+
+    &:focus {
+      outline: 2px solid $color-neutral-500;
+      outline-offset: 2px;
+    }
+  }
+
+  .value-cell {
+    width: 12.1rem;
+    text-align: center;
+    color: $color-neutral-000;
+  }
+
+  .value-cell-right {
+    width: 12.1rem;
+    text-align: right;
+    color: $color-neutral-000;
+  }
 </style>
+
+<script setup lang="ts">
+  import { ref, computed, watch } from 'vue'
+  import Slider from '@/components/Slider.vue'
+
+  const locations = ref(1)
+  const kioskDevices = ref(0)
+  const kdsDevices = ref(0)
+
+  // Feature checkboxes state
+  const features = ref({
+    smsMarketing: true,
+    onlineOrdering: true,
+    loyalty: true,
+    staffManagement: true,
+    giftCards: true,
+    qrCode: true,
+    customerDirectory: true,
+    emailMarketing: true,
+  })
+
+  // Enforce minimum value of 1 for locations
+  watch(locations, (newValue) => {
+    if (newValue < 1) {
+      locations.value = 1
+    }
+  })
+
+  // Base pricing per location
+  const SQUARE_BASE_PRICE = 114
+  const TOAST_BASE_PRICE = 424
+
+  // Device pricing (Square includes these, Toast charges extra)
+  const SQUARE_KIOSK_PRICE = 0 // Included in Square Plus
+  const TOAST_KIOSK_PRICE = 50
+  const SQUARE_KDS_PRICE = 0 // Included in Square Plus
+  const TOAST_KDS_PRICE = 40
+
+  // Computed pricing
+  const squareMonthlyCost = computed(() => {
+    return (
+      SQUARE_BASE_PRICE * locations.value +
+      SQUARE_KIOSK_PRICE * kioskDevices.value +
+      SQUARE_KDS_PRICE * kdsDevices.value
+    )
+  })
+
+  const toastMonthlyCost = computed(() => {
+    return (
+      TOAST_BASE_PRICE * locations.value +
+      TOAST_KIOSK_PRICE * kioskDevices.value +
+      TOAST_KDS_PRICE * kdsDevices.value
+    )
+  })
+
+  const monthlySavings = computed(() => {
+    return toastMonthlyCost.value - squareMonthlyCost.value
+  })
+
+  const annualSavings = computed(() => {
+    return monthlySavings.value * 12
+  })
+
+  const savingsPercentage = computed(() => {
+    if (toastMonthlyCost.value === 0) return 0
+    return Math.round((monthlySavings.value / toastMonthlyCost.value) * 100)
+  })
+
+  // Format currency
+  const formatCurrency = (amount: number) => {
+    return `$${amount.toLocaleString()}`
+  }
+
+  // Only show "Contact sales" on the first slider that reaches 10+
+  const showContactSalesOnLocations = computed(() => {
+    return locations.value >= 10
+  })
+
+  const showContactSalesOnKiosk = computed(() => {
+    return !showContactSalesOnLocations.value && kioskDevices.value >= 10
+  })
+
+  const showContactSalesOnKDS = computed(() => {
+    return (
+      !showContactSalesOnLocations.value &&
+      !showContactSalesOnKiosk.value &&
+      kdsDevices.value >= 10
+    )
+  })
+</script>
