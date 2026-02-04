@@ -89,11 +89,6 @@ html {
 }
 
 body {
-  display: grid;
-  place-items: center;
-  // min-height: 100vh;
-  max-height: 100vh;
-  overflow-y: hidden;
   font: normal 1.5rem/1.4 var(--cash-regular);
   color: #000;
   background: #fff;

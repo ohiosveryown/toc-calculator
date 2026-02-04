@@ -1,0 +1,92 @@
+// ==========================================================================
+// Color Variables
+// Extracted from Figma Design System
+// ==========================================================================
+
+// Neutral Colors
+// --------------------------------------------------------------------------
+$color-neutral-1000: #ffffff;
+$color-neutral-900: #f7f6f5;
+$color-neutral-800: #e5e5e5;
+$color-neutral-700: #cccccc;
+$color-neutral-500: #999999;
+$color-neutral-300: #707070;
+$color-neutral-200: #333333;
+$color-neutral-100: #1f1f1f;
+$color-neutral-000: #000000;
+
+// Text Colors
+// --------------------------------------------------------------------------
+$text-heading-base: #ffffff;
+$text-body-muted: #707070;
+
+// Background Colors
+// --------------------------------------------------------------------------
+$background-default: #000000;
+$background-accent: #f7f6f5;
+
+// Border Colors
+// --------------------------------------------------------------------------
+$border-base: #000000;
+$border-muted: #e5e5e5;
+
+// Icon Colors
+// --------------------------------------------------------------------------
+$icon-base: #000000;
+
+// Button Colors - CTA Primary
+// --------------------------------------------------------------------------
+$button-cta-text-primary: #ffffff;
+$button-cta-fill-primary: #006aff;
+
+// Button Colors - CTA Secondary
+// --------------------------------------------------------------------------
+$button-cta-text-secondary: #006aff;
+$button-cta-fill-secondary: transparent;
+$button-cta-stroke-secondary: #006aff;
+
+// ==========================================================================
+// Color Map (for dynamic access)
+// ==========================================================================
+$colors: (
+  // Neutral
+  'neutral-1000': $color-neutral-1000,
+  'neutral-900': $color-neutral-900,
+  'neutral-800': $color-neutral-800,
+  'neutral-700': $color-neutral-700,
+  'neutral-500': $color-neutral-500,
+  'neutral-300': $color-neutral-300,
+  'neutral-200': $color-neutral-200,
+  'neutral-100': $color-neutral-100,
+  'neutral-000': $color-neutral-000,
+  
+  // Text
+  'text-heading-base': $text-heading-base,
+  'text-body-muted': $text-body-muted,
+  
+  // Background
+  'background-default': $background-default,
+  'background-accent': $background-accent,
+  
+  // Border
+  'border-base': $border-base,
+  'border-muted': $border-muted,
+  
+  // Icon
+  'icon-base': $icon-base,
+  
+  // Buttons
+  'button-cta-text-primary': $button-cta-text-primary,
+  'button-cta-fill-primary': $button-cta-fill-primary,
+  'button-cta-text-secondary': $button-cta-text-secondary,
+  'button-cta-fill-secondary': $button-cta-fill-secondary,
+  'button-cta-stroke-secondary': $button-cta-stroke-secondary,
+);
+
+// ==========================================================================
+// Helper Function
+// ==========================================================================
+// Usage: color(neutral-900) or color(button-cta-fill-primary)
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
