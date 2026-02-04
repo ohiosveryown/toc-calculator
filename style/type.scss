@@ -1,0 +1,240 @@
+// Typography System
+// Based on Square design system from Figma
+
+// ============================================
+// CSS Variables - Type Scale
+// ============================================
+
+:root {
+  // Font Families
+  --font-cash-sans: 'Cash Sans Regular', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-cash-sans-medium: 'Cash Sans Medium', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-cash-mono: 'Cash Mono Regular', monospace;
+  --font-exact-block: 'Exact Block Regular', serif;
+
+  // Font Sizes (1rem = 10px with 62.5% base)
+  --font-size-auxiliary: 1.4rem;  // 14px - Eyebrow/Kicker
+  --font-size-100: 1.6rem;        // 16px - Body
+  --font-size-300: 2.4rem;        // 24px - Subheading
+  --font-size-500: 3.2rem;        // 32px - Heading
+  --font-size-600: 3.6rem;        // 36px - Heading
+  --font-size-700: 4rem;          // 40px - Heading
+  --font-size-900: 7.2rem;        // 72px - Hero
+
+  // Line Heights (1rem = 10px with 62.5% base)
+  --line-height-auxiliary: 2rem;   // 20px
+  --line-height-100: 2.4rem;       // 24px
+  --line-height-300: 2.8rem;       // 28px
+  --line-height-500: 3.6rem;       // 36px
+  --line-height-600: 4rem;         // 40px
+  --line-height-700: 4.4rem;       // 44px
+  --line-height-900: 7.2rem;       // 72px
+
+  // Letter Spacing
+  --letter-spacing-0: 0px;
+  --letter-spacing-tight-1: -0.24px;  // -0.01em for 24px
+  --letter-spacing-tight-2: -0.64px;  // -0.02em for 32px
+  --letter-spacing-tight-3: -0.72px;  // -0.02em for 36px
+  --letter-spacing-tight-4: -0.8px;   // -0.02em for 40px
+  --letter-spacing-tight-5: -2.88px;  // -0.04em for 72px
+  --letter-spacing-wide: 1.4px;       // 0.1em for uppercase eyebrow
+
+  // Font Weights
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+}
+
+// ============================================
+// Typography Utility Classes
+// ============================================
+
+// Hero / Display (900)
+.type-hero,
+.type-display {
+  font-family: var(--font-exact-block);
+  font-size: var(--font-size-900);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-900);
+  letter-spacing: var(--letter-spacing-tight-5);
+}
+
+// Heading 700
+.type-heading-700 {
+  font-family: var(--font-cash-sans-medium);
+  font-size: var(--font-size-700);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-700);
+  letter-spacing: var(--letter-spacing-tight-4);
+}
+
+// Heading 600 - Serif
+.type-heading-600-serif {
+  font-family: var(--font-exact-block);
+  font-size: var(--font-size-600);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-600);
+  letter-spacing: var(--letter-spacing-tight-3);
+}
+
+// Heading 600 - Sans
+.type-heading-600,
+.type-heading-600-sans {
+  font-family: var(--font-cash-sans-medium);
+  font-size: var(--font-size-600);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-600);
+  letter-spacing: var(--letter-spacing-tight-3);
+}
+
+// Heading 500 - Serif
+.type-heading-500-serif {
+  font-family: var(--font-exact-block);
+  font-size: var(--font-size-500);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-500);
+  letter-spacing: var(--letter-spacing-tight-2);
+}
+
+// Heading 500 - Sans
+.type-heading-500,
+.type-heading-500-sans {
+  font-family: var(--font-cash-sans-medium);
+  font-size: var(--font-size-500);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-500);
+  letter-spacing: var(--letter-spacing-tight-2);
+}
+
+// Subheading 300
+.type-subheading,
+.type-subheading-300 {
+  font-family: var(--font-cash-sans-medium);
+  font-size: var(--font-size-300);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-300);
+  letter-spacing: var(--letter-spacing-tight-1);
+}
+
+// Body 100 - Medium
+.type-body-medium,
+.type-body-100-medium {
+  font-family: var(--font-cash-sans-medium);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-100);
+  letter-spacing: var(--letter-spacing-0);
+}
+
+// Body 100 - Regular (Default)
+.type-body,
+.type-body-regular,
+.type-body-100 {
+  font-family: var(--font-cash-sans);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-100);
+  letter-spacing: var(--letter-spacing-0);
+}
+
+// Auxiliary - Eyebrow / Kicker
+.type-eyebrow,
+.type-kicker,
+.type-auxiliary {
+  font-family: var(--font-cash-mono);
+  font-size: var(--font-size-auxiliary);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-auxiliary);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+// ============================================
+// Semantic Text Colors
+// ============================================
+
+:root {
+  --text-heading-base: #000000;
+  --text-body-base: #000000;
+  --text-body-muted: #707070;
+  --text-link: #000000;
+  --text-link-hover: #006aff;
+}
+
+.text-heading {
+  color: var(--text-heading-base);
+}
+
+.text-body {
+  color: var(--text-body-base);
+}
+
+.text-muted {
+  color: var(--text-body-muted);
+}
+
+.text-link {
+  color: var(--text-link);
+  
+  &:hover {
+    color: var(--text-link-hover);
+  }
+}
+
+// ============================================
+// Responsive Typography
+// ============================================
+
+@media (max-width: 768px) {
+  :root {
+    // Scale down large type sizes on mobile (1rem = 10px with 62.5% base)
+    --font-size-900: 4.8rem;    // 48px (down from 72px)
+    --font-size-700: 3.2rem;    // 32px (down from 40px)
+    --font-size-600: 2.8rem;    // 28px (down from 36px)
+    --font-size-500: 2.4rem;    // 24px (down from 32px)
+    
+    --line-height-900: 5.2rem;  // 52px
+    --line-height-700: 3.6rem;  // 36px
+    --line-height-600: 3.2rem;  // 32px
+    --line-height-500: 2.8rem;  // 28px
+  }
+}
+
+// ============================================
+// Helper Classes
+// ============================================
+
+.font-cash-sans {
+  font-family: var(--font-cash-sans);
+}
+
+.font-cash-sans-medium {
+  font-family: var(--font-cash-sans-medium);
+}
+
+.font-cash-mono {
+  font-family: var(--font-cash-mono);
+}
+
+.font-exact-block {
+  font-family: var(--font-exact-block);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
