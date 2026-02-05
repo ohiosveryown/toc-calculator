@@ -1,32 +1,5 @@
 <template>
   <div class="app">
-    <!-- Sticky Summary Bar -->
-    <div
-      class="sticky-summary"
-      :class="{ visible: showStickySummary }"
-    >
-      <div class="sticky-summary-content">
-        <div class="sticky-summary-item">
-          <p class="type-body-medium">Square</p>
-          <p class="type-heading-600">
-            {{ formatCurrency(squareMonthlyCost) }}
-          </p>
-        </div>
-        <div class="sticky-summary-divider"></div>
-        <div class="sticky-summary-item">
-          <p class="type-body-medium">Toast</p>
-          <p class="type-heading-600">{{ formatCurrency(toastMonthlyCost) }}</p>
-        </div>
-        <div class="sticky-summary-divider"></div>
-        <div class="sticky-summary-item savings">
-          <p class="type-body-medium">You save</p>
-          <p class="type-heading-600">
-            {{ formatCurrency(monthlySavings) }}/mo
-          </p>
-        </div>
-      </div>
-    </div>
-
     <header class="header-hero">
       <span class="type-kicker">Eyebrow</span>
       <h1 class="type-hero">Cost comparison for food & beverage businesses</h1>
@@ -139,7 +112,7 @@
                 {{ formatCurrency(toastMonthlyCost) }}
               </p>
               <p class="type-body text-muted">
-                per month • Toast equivalent plan<sup class="card-sup">2</sup>
+                per month • Toast equivalent plan<sup class="card-sup">1</sup>
               </p>
             </div>
 
@@ -221,15 +194,15 @@
       class="breakdown-section"
     >
       <div class="breakdown-container">
-        <header class="breakdown-header">
-          <h3 class="type-heading-500">Detailed cost breakdown</h3>
-        </header>
-
         <div class="breakdown-table">
           <div class="table-header">
-            <p class="type-body-medium">Feature</p>
-            <p class="type-body-medium">Square</p>
-            <p class="type-body-medium ml-1">Toast</p>
+            <h3 class="type-heading-500">Detailed cost breakdown</h3>
+            <p class="type-body-medium">
+              Square: {{ formatCurrency(squareMonthlyCost) }} /mo.
+            </p>
+            <p class="type-body-medium ml-1">
+              Toast: {{ formatCurrency(toastMonthlyCost) }} /mo.
+            </p>
           </div>
 
           <div class="table-row">
@@ -338,6 +311,26 @@
         </div>
       </div>
     </section>
+
+    <section class="disclosure-section">
+      <div class="disclosure-container">
+        <div class="disclosure-card">
+          <div class="disclosure-content">
+            <!-- <div class="disclosure-heading">
+              <h4 class="type-subheading-300">Disclosure</h4>
+            </div> -->
+            <p class="font-size-auxiliary text-muted">
+              <sup class="card-sup">1</sup>Total cost of ownership for Toast is
+              based on publicly available rates and research as of January 8,
+              2026. Since Toast doesn't publicly display all add-on pricing,
+              some figures are estimates based on industry standards. Actual
+              costs may vary based on your contract terms, hardware needs, or
+              location. Contact Toast directly for a personalized quote.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -347,65 +340,6 @@
 
   .app {
     margin: 0 auto;
-    padding-bottom: 200vh;
-  }
-
-  // Sticky Summary Bar
-  .sticky-summary {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: $color-neutral-900;
-    border-bottom: 1px solid $border-muted;
-    z-index: 100;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease;
-    padding: 1.6rem 2rem;
-
-    &.visible {
-      transform: translateY(0);
-    }
-  }
-
-  .sticky-summary-content {
-    max-width: 160rem;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4rem;
-
-    @include breakpoint(md) {
-      gap: 2rem;
-    }
-  }
-
-  .sticky-summary-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    align-items: center;
-
-    p:first-child {
-      color: $text-body-muted;
-    }
-
-    p:last-child {
-      color: $color-neutral-000;
-    }
-
-    &.savings {
-      p:last-child {
-        color: $button-cta-fill-primary;
-      }
-    }
-  }
-
-  .sticky-summary-divider {
-    width: 1px;
-    height: 4rem;
-    background: $border-muted;
   }
 
   .header-hero {
@@ -760,14 +694,6 @@
     }
   }
 
-  .breakdown-header {
-    padding-bottom: 2.4rem;
-
-    h3 {
-      color: $color-neutral-000;
-    }
-  }
-
   .breakdown-table {
     display: flex;
     flex-direction: column;
@@ -777,21 +703,20 @@
   .table-header {
     display: flex;
     gap: 4.7rem;
-    align-items: center;
+    align-items: baseline;
     padding: 2rem 0;
+
+    h3 {
+      flex: 1;
+      color: $color-neutral-000;
+      white-space: nowrap;
+    }
 
     p {
       color: $color-neutral-000;
-
-      &:first-child {
-        flex: 1;
-      }
-
-      &:nth-child(2),
-      &:nth-child(3) {
-        width: 12.1rem;
-        text-align: center;
-      }
+      white-space: nowrap;
+      width: 12.1rem;
+      text-align: center;
     }
   }
 
@@ -866,16 +791,69 @@
     text-align: right;
     color: $color-neutral-000;
   }
+
+  // Disclosure Section
+  .disclosure-section {
+    margin: 0 auto;
+    padding: 6.4rem 0;
+    width: 100%;
+    background: $color-neutral-1000;
+  }
+
+  .disclosure-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    // padding: 0 10.8rem;
+    // max-width: 160rem;
+  }
+
+  .disclosure-card {
+    background: $background-accent;
+    border-radius: 1rem;
+    padding: 8rem 3rem;
+  }
+
+  .disclosure-content {
+    display: flex;
+    gap: 2.9rem;
+    align-items: flex-start;
+
+    @include breakpoint(md) {
+      flex-direction: column;
+      gap: 1.6rem;
+      max-width: 160rem;
+      width: grid-width(10);
+      margin: 0 auto;
+    }
+
+    p {
+      width: grid-width(8);
+      flex: 1;
+    }
+  }
+
+  .disclosure-heading {
+    flex-shrink: 0;
+    width: 47.6rem;
+
+    h4 {
+      color: $color-neutral-000;
+    }
+
+    @include breakpoint(md) {
+      width: 100%;
+    }
+  }
 </style>
 
 <script setup lang="ts">
-  import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+  import { ref, computed, watch } from 'vue'
   import Slider from '@/components/Slider.vue'
 
   const locations = ref(1)
   const kioskDevices = ref(0)
   const kdsDevices = ref(0)
-  const showStickySummary = ref(false)
 
   // Feature checkboxes state
   const features = ref({
@@ -993,22 +971,4 @@
       })
     }
   }
-
-  // Handle scroll to show/hide sticky summary
-  const handleScroll = () => {
-    const pricingSection = document.querySelector('.pricing-cards')
-    if (pricingSection) {
-      const rect = pricingSection.getBoundingClientRect()
-      // Show sticky bar when pricing cards scroll out of view
-      showStickySummary.value = rect.bottom < 0
-    }
-  }
-
-  onMounted(() => {
-    window.addEventListener('scroll', handleScroll)
-  })
-
-  onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll)
-  })
 </script>
