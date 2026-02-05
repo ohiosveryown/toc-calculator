@@ -1,8 +1,15 @@
 <template>
-  <div class="dropdown-container">
+  <div
+    class="dropdown-container"
+    :class="{
+      'variant-inline': variant === 'inline',
+      'variant-stacked': variant === 'stacked'
+    }"
+  >
     <label
       v-if="label"
-      class="dropdown-label type-body-medium"
+      class="dropdown-label"
+      :class="variant === 'inline' ? 'type-subheading-300' : 'type-body-medium'"
     >
       {{ label }}
     </label>
@@ -10,7 +17,8 @@
       <select
         :value="modelValue"
         @input="handleChange"
-        class="dropdown-select type-body"
+        class="dropdown-select"
+        :class="variant === 'inline' ? 'type-subheading-300' : 'type-body'"
       >
         <option
           v-for="option in options"
@@ -42,60 +50,102 @@
 
   .dropdown-container {
     display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    width: 100%;
+    flex-shrink: 0;
+
+    &.variant-inline {
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    &.variant-stacked {
+      flex-direction: column;
+      gap: 0.8rem;
+      width: 100%;
+    }
   }
 
   .dropdown-label {
     color: $color-neutral-000;
+
+    .variant-inline & {
+      white-space: nowrap;
+    }
   }
 
   .dropdown-wrapper {
     position: relative;
-    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .variant-stacked & {
+      width: 100%;
+    }
   }
 
   .dropdown-select {
-    width: 100%;
-    padding: 1.2rem 4rem 1.2rem 1.6rem;
-    background: $color-neutral-1000;
-    border: 1px solid $border-muted;
-    border-radius: 1rem;
-    color: $color-neutral-000;
-    font-family: var(--font-cash-sans);
-    font-size: var(--font-size-100);
-    line-height: var(--line-height-100);
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    transition: border-color 0.2s ease;
+    color: $color-neutral-000;
 
-    &:hover {
-      border-color: $color-neutral-500;
+    .variant-inline & {
+      padding: 0 2.8rem 0 0;
+      background: transparent;
+      border: none;
+      text-align: right;
+    }
+
+    .variant-stacked & {
+      width: 100%;
+      padding: 1.2rem 4rem 1.2rem 1.6rem;
+      background: $color-neutral-1000;
+      border: 1px solid $border-muted;
+      border-radius: 1rem;
+      transition: border-color 0.2s ease;
+
+      &:hover {
+        border-color: $color-neutral-500;
+      }
     }
 
     &:focus {
       outline: 2px solid $button-cta-fill-primary;
       outline-offset: 2px;
-      border-color: $button-cta-fill-primary;
+
+      .variant-inline & {
+        border-radius: 0.4rem;
+      }
+
+      .variant-stacked & {
+        border-color: $button-cta-fill-primary;
+      }
     }
 
     &:disabled {
-      background: $color-neutral-900;
       cursor: not-allowed;
       color: $color-neutral-500;
+
+      .variant-stacked & {
+        background: $color-neutral-900;
+      }
     }
   }
 
   .dropdown-icon {
     position: absolute;
-    right: 1.6rem;
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
     color: $color-neutral-000;
+
+    .variant-inline & {
+      right: 0.4rem;
+    }
+
+    .variant-stacked & {
+      right: 1.6rem;
+    }
   }
 </style>
 
@@ -108,12 +158,14 @@
     min?: number
     max?: number
     step?: number
+    variant?: 'inline' | 'stacked'
   }
 
   const props = withDefaults(defineProps<Props>(), {
     min: 0,
     max: 10,
     step: 1,
+    variant: 'inline',
   })
 
   const emit = defineEmits<{

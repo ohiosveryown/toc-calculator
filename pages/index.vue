@@ -1,6 +1,9 @@
 <template>
   <div class="app">
-    <header class="header-hero">
+    <header
+      class="header-hero"
+      :class="{ 'left-aligned-mode': leftAlignedMode }"
+    >
       <span class="type-kicker">Eyebrow</span>
       <h1 class="type-hero">Cost comparison for food & beverage businesses</h1>
       <h2 class="type-body">
@@ -11,15 +14,22 @@
       </h2>
     </header>
 
-    <section class="pricing-cards">
+    <section
+      class="pricing-cards"
+      :class="{ 'left-aligned-mode': leftAlignedMode }"
+    >
       <div class="pricing-cards-container">
         <header
-          v-if="!useDropdowns"
+          v-if="inputMode === 'sliders'"
           class="header-pricing-cards"
+          :class="{ 'left-aligned-mode': leftAlignedMode }"
         >
           <div class="header-content">
             <h3 class="type-heading-500">Customize you comparison</h3>
-            <p class="type-body text-muted">
+            <p
+              v-if="!leftAlignedMode"
+              class="type-body text-muted"
+            >
               Adjust your location count and select the specific tools you need
               to see a personalized cost breakdown. We’ve matched our Square
               Plus features to leading alternatives to help you find the most
@@ -37,8 +47,14 @@
           </div>
         </header>
 
-        <div class="sliders-grid">
-          <template v-if="!useDropdowns">
+        <div
+          class="sliders-grid"
+          :class="{
+            'inline-dropdowns-mode': inputMode === 'inline-dropdowns',
+            'stacked-dropdowns-mode': inputMode === 'stacked-dropdowns',
+          }"
+        >
+          <template v-if="inputMode === 'sliders'">
             <Slider
               label="Locations:"
               v-model="locations"
@@ -61,24 +77,50 @@
               :show-contact-sales="showContactSalesOnKDS"
             />
           </template>
-          <template v-else>
+          <template v-else-if="inputMode === 'inline-dropdowns'">
             <Dropdown
               label="Locations:"
               v-model="locations"
               :min="1"
               :max="10"
+              variant="inline"
             />
             <Dropdown
               label="Kiosk devices:"
               v-model="kioskDevices"
               :min="0"
               :max="10"
+              variant="inline"
             />
             <Dropdown
               label="KDS devices:"
               v-model="kdsDevices"
               :min="0"
               :max="10"
+              variant="inline"
+            />
+          </template>
+          <template v-else>
+            <Dropdown
+              label="Locations:"
+              v-model="locations"
+              :min="1"
+              :max="10"
+              variant="stacked"
+            />
+            <Dropdown
+              label="Kiosk devices:"
+              v-model="kioskDevices"
+              :min="0"
+              :max="10"
+              variant="stacked"
+            />
+            <Dropdown
+              label="KDS devices:"
+              v-model="kdsDevices"
+              :min="0"
+              :max="10"
+              variant="stacked"
             />
           </template>
         </div>
@@ -357,6 +399,8 @@
       </div>
     </section>
   </div>
+
+  <Footer />
 </template>
 
 <style lang="scss" scoped>
@@ -380,13 +424,37 @@
       text-align: center;
     }
 
+    h1 {
+      max-width: 17ch;
+    }
+
     h2 {
       max-width: 88ch;
       color: $text-body-muted;
     }
 
-    @include breakpoint(md) {
-      width: grid-width(7);
+    // @include breakpoint(md) {
+    //   width: grid-width(7);
+    // }
+
+    &.left-aligned-mode {
+      align-items: flex-start;
+      max-width: 160rem;
+      padding: 0 10.8rem;
+      margin-bottom: 5.6rem;
+
+      @include breakpoint(md) {
+        padding: 0 2rem;
+      }
+
+      @include breakpoint(mdl) {
+        width: grid-width(10);
+      }
+
+      h1,
+      h2 {
+        text-align: left;
+      }
     }
   }
 
@@ -417,12 +485,53 @@
       flex-direction: row;
       gap: 8.8rem;
     }
+
+    &.inline-dropdowns-mode {
+      flex-direction: row;
+      gap: 4rem;
+      align-items: center;
+      padding: 2.4rem 0;
+
+      > *:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 2rem;
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      > * {
+        position: relative;
+        padding-right: 1.6rem;
+      }
+    }
+
+    &.stacked-dropdowns-mode {
+      flex-direction: column;
+      gap: 2.4rem;
+      padding: 0;
+
+      .dropdown-container {
+        width: 32%;
+      }
+
+      @include breakpoint(md) {
+        flex-direction: row;
+      }
+    }
   }
 
   .pricing-cards {
     padding: 3.2rem 0 6.4rem;
     width: 100%;
     background: $color-neutral-900;
+
+    &.left-aligned-mode {
+      background: #fff;
+    }
   }
 
   .pricing-cards-container {
@@ -442,6 +551,10 @@
       //   border: 1px solid blue;
       width: grid-width(10);
     }
+
+    .pricing-cards.left-aligned-mode & {
+      gap: 2.4rem;
+    }
   }
 
   .header-pricing-cards {
@@ -453,6 +566,16 @@
     @include breakpoint(md) {
       //   flex-direction: column;
       //   align-items: flex-start;
+    }
+
+    &.left-aligned-mode {
+      align-items: flex-start;
+
+      .header-content {
+        h3 {
+          text-align: left;
+        }
+      }
     }
   }
 
@@ -495,9 +618,17 @@
     flex-direction: column;
     gap: 4rem;
 
+    .pricing-cards.left-aligned-mode & {
+      background: #f7f6f5;
+    }
+
     &.savings-card {
       background: $color-neutral-900;
       border: 1px solid $border-muted;
+
+      .pricing-cards.left-aligned-mode & {
+        background: #f7f6f5;
+      }
     }
   }
 
@@ -566,6 +697,15 @@
       );
       pointer-events: none;
       z-index: var(--z1);
+
+      .pricing-cards.left-aligned-mode & {
+        background: linear-gradient(
+          to bottom,
+          rgba(247, 246, 245, 0) 0%,
+          rgba(247, 246, 245, 0.6) 50%,
+          rgba(247, 246, 245, 1) 100%
+        );
+      }
     }
   }
 
@@ -880,7 +1020,10 @@
   const locations = ref(1)
   const kioskDevices = ref(0)
   const kdsDevices = ref(0)
-  const useDropdowns = ref(false)
+  const inputMode = ref<'sliders' | 'inline-dropdowns' | 'stacked-dropdowns'>(
+    'sliders',
+  )
+  const leftAlignedMode = ref(false)
 
   // Feature checkboxes state
   const features = ref({
@@ -1000,14 +1143,25 @@
   }
 
   // Toggle between sliders and dropdowns with uppercase 'D'
+  // Cycle through input modes with uppercase 'D'
+  // Toggle left-aligned layout with uppercase 'L'
+  // Navigate to aside page with right arrow key
   const handleKeyPress = (event: KeyboardEvent) => {
-    if (event.key === 'D' && !event.shiftKey && event.getModifierState('CapsLock') === false) {
-      // Uppercase D without shift key (CapsLock off)
-      return
-    }
     if (event.key === 'D' && event.shiftKey) {
-      // Shift + D
-      useDropdowns.value = !useDropdowns.value
+      // Shift + D - cycle through modes
+      if (inputMode.value === 'sliders') {
+        inputMode.value = 'inline-dropdowns'
+      } else if (inputMode.value === 'inline-dropdowns') {
+        inputMode.value = 'stacked-dropdowns'
+      } else {
+        inputMode.value = 'sliders'
+      }
+    } else if (event.key === 'L' && event.shiftKey) {
+      // Shift + L - toggle left-aligned mode
+      leftAlignedMode.value = !leftAlignedMode.value
+    } else if (event.key === 'ArrowRight') {
+      // Right arrow - navigate to aside page
+      navigateTo('/aside')
     }
   }
 
