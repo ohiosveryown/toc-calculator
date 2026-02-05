@@ -13,7 +13,10 @@
 
     <section class="pricing-cards">
       <div class="pricing-cards-container">
-        <header class="header-pricing-cards">
+        <header
+          v-if="!useDropdowns"
+          class="header-pricing-cards"
+        >
           <div class="header-content">
             <h3 class="type-heading-500">Customize you comparison</h3>
             <p class="type-body text-muted">
@@ -35,27 +38,49 @@
         </header>
 
         <div class="sliders-grid">
-          <Slider
-            label="Locations:"
-            v-model="locations"
-            :min="0"
-            :max="10"
-            :show-contact-sales="showContactSalesOnLocations"
-          />
-          <Slider
-            label="Kiosk devices:"
-            v-model="kioskDevices"
-            :min="0"
-            :max="10"
-            :show-contact-sales="showContactSalesOnKiosk"
-          />
-          <Slider
-            label="KDS devices:"
-            v-model="kdsDevices"
-            :min="0"
-            :max="10"
-            :show-contact-sales="showContactSalesOnKDS"
-          />
+          <template v-if="!useDropdowns">
+            <Slider
+              label="Locations:"
+              v-model="locations"
+              :min="0"
+              :max="10"
+              :show-contact-sales="showContactSalesOnLocations"
+            />
+            <Slider
+              label="Kiosk devices:"
+              v-model="kioskDevices"
+              :min="0"
+              :max="10"
+              :show-contact-sales="showContactSalesOnKiosk"
+            />
+            <Slider
+              label="KDS devices:"
+              v-model="kdsDevices"
+              :min="0"
+              :max="10"
+              :show-contact-sales="showContactSalesOnKDS"
+            />
+          </template>
+          <template v-else>
+            <Dropdown
+              label="Locations:"
+              v-model="locations"
+              :min="1"
+              :max="10"
+            />
+            <Dropdown
+              label="Kiosk devices:"
+              v-model="kioskDevices"
+              :min="0"
+              :max="10"
+            />
+            <Dropdown
+              label="KDS devices:"
+              v-model="kdsDevices"
+              :min="0"
+              :max="10"
+            />
+          </template>
         </div>
 
         <ul class="cards-list">
@@ -848,12 +873,14 @@
 </style>
 
 <script setup lang="ts">
-  import { ref, computed, watch } from 'vue'
+  import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
   import Slider from '@/components/Slider.vue'
+  import Dropdown from '@/components/Dropdown.vue'
 
   const locations = ref(1)
   const kioskDevices = ref(0)
   const kdsDevices = ref(0)
+  const useDropdowns = ref(false)
 
   // Feature checkboxes state
   const features = ref({
@@ -971,4 +998,24 @@
       })
     }
   }
+
+  // Toggle between sliders and dropdowns with uppercase 'D'
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === 'D' && !event.shiftKey && event.getModifierState('CapsLock') === false) {
+      // Uppercase D without shift key (CapsLock off)
+      return
+    }
+    if (event.key === 'D' && event.shiftKey) {
+      // Shift + D
+      useDropdowns.value = !useDropdowns.value
+    }
+  }
+
+  onMounted(() => {
+    window.addEventListener('keydown', handleKeyPress)
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener('keydown', handleKeyPress)
+  })
 </script>
