@@ -77,7 +77,7 @@
           <div class="aside-card">
             <div class="card-header">
               <h4 class="type-subheading-200">
-                No more crumbs. Save: {{ savingsPercentage }}%.
+                No more crumbs: save {{ savingsPercentage }}%.
               </h4>
             </div>
 

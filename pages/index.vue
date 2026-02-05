@@ -215,7 +215,7 @@
           <li class="pricing-card savings-card">
             <div class="card-header">
               <h4 class="type-subheading-300">
-                No more crumbs. Save: {{ savingsPercentage }}%.
+                No more crumbs: save {{ savingsPercentage }}%.
               </h4>
             </div>
 
