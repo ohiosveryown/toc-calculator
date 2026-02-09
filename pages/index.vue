@@ -379,6 +379,8 @@
       </div>
     </section>
 
+    <Testomonial class="testimonial-section" />
+
     <section class="disclosure-section">
       <div class="disclosure-container">
         <div class="disclosure-card">
@@ -834,7 +836,7 @@
   // Breakdown Section
   .breakdown-section {
     margin: 0 auto;
-    padding: 6.4rem 0;
+    padding: 6.4rem 0 0;
     width: 100%;
     background: $color-neutral-1000;
     @include breakpoint(md) {
@@ -855,7 +857,14 @@
     }
 
     @include breakpoint(mdl) {
-      width: grid-width(10);
+      width: grid-width(9);
+    }
+  }
+
+  .testimonial-section {
+    @include breakpoint(md) {
+      margin: 0 auto !important;
+      width: grid-width(9.5) !important;
     }
   }
 
@@ -959,10 +968,10 @@
 
   // Disclosure Section
   .disclosure-section {
-    margin: 0 auto;
+    margin: 6.4rem auto 0;
     padding: 6.4rem 0;
     width: 100%;
-    background: $color-neutral-1000;
+    background: $background-accent;
   }
 
   .disclosure-container {
@@ -974,7 +983,7 @@
   }
 
   .disclosure-card {
-    background: $background-accent;
+    // background: $background-accent;
     border-radius: 1rem;
     padding: 8rem 3rem;
   }
@@ -987,13 +996,13 @@
     @include breakpoint(md) {
       flex-direction: column;
       gap: 1.6rem;
-      max-width: 160rem;
+      //   max-width: 160rem;
       width: grid-width(10);
       margin: 0 auto;
     }
 
     p {
-      width: grid-width(8);
+      //   width: grid-width(8);
       flex: 1;
     }
   }

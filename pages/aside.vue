@@ -48,11 +48,17 @@
           <div class="features-table">
             <div class="table-header">
               <p class="type-body-medium">Feature</p>
-              <p class="type-body-medium text-center">
-                Square: {{ formatCurrency(squarePrice) }}/mo.
+              <p
+                class="type-body-medium text-center"
+                style="transform: translateX(0.4rem)"
+              >
+                Square
               </p>
-              <p class="type-body-medium text-center">
-                Toast: {{ formatCurrency(toastPrice) }}/mo.
+              <p
+                class="type-body-medium text-center"
+                style="transform: translateX(1rem)"
+              >
+                Toast
               </p>
             </div>
 
@@ -71,6 +77,18 @@
               </div>
               <p class="type-body value-cell">Included</p>
               <p class="type-body value-cell-right">{{ feature.cost }}</p>
+            </div>
+
+            <div class="table-row table-row-total">
+              <div class="feature-cell">
+                <p class="type-subheading-200">Total cost</p>
+              </div>
+              <p class="value-cell type-subheading-200">
+                {{ formatCurrency(squarePrice) }}/month
+              </p>
+              <p class="value-cell-right type-subheading-200">
+                {{ formatCurrency(toastPrice) }}/month
+              </p>
             </div>
           </div>
 
@@ -117,14 +135,16 @@
       </div>
     </section>
 
+    <Testomonial />
+
     <section class="disclosure-section">
       <div class="disclosure-container">
         <div class="disclosure-card">
           <div class="disclosure-content">
-            <div class="disclosure-heading">
+            <!-- <div class="disclosure-heading">
               <h4 class="type-subheading-300">Disclosures</h4>
-            </div>
-            <p class="type-body text-muted">
+            </div> -->
+            <p class="text-muted">
               Total cost of ownership for Toast is based on publicly available
               rates and research as of January 8, 2026. Since Toast doesn't
               publicly display all add-on pricing, some figures are estimates
@@ -263,6 +283,16 @@
     align-items: center;
     padding: 2rem 0;
     border-top: 1px solid $border-muted;
+  }
+
+  .table-row-total {
+    padding-top: 2.4rem;
+    border-top-width: 2px;
+
+    .value-cell,
+    .value-cell-right {
+      white-space: nowrap;
+    }
   }
 
   .feature-cell {
@@ -412,9 +442,9 @@
 
   .disclosure-section {
     margin: 0 auto;
-    padding: 3.2rem 0;
+    padding: 6.4rem 0;
     width: 100%;
-    background: $color-neutral-1000;
+    background: $background-accent;
   }
 
   .disclosure-container {
@@ -426,12 +456,12 @@
 
     @include breakpoint(md) {
       padding: 0 2rem;
-      width: grid-width(10);
+      width: grid-width(12);
     }
   }
 
   .disclosure-card {
-    background: $background-accent;
+    // background: $background-accent;
     border-radius: 1rem;
     padding: 3rem;
   }
@@ -448,6 +478,7 @@
 
     p {
       flex: 1;
+      font-size: var(--font-size-auxiliary);
     }
   }
 
