@@ -17,31 +17,52 @@
         <div class="pricing-header">
           <div class="customization-header">
             <h3 class="type-subheading-400">Customize you comparison</h3>
+            <!-- <p class="type-body text-muted">
+              Have a Toast quote or a recent invoice? Drag and drop it anywhere
+              on this page or upload it and we’ll map your existing costs
+              directly to a Square Plus plan so you can see your exact savings1.
+            </p> -->
           </div>
 
-          <div class="sliders-grid">
-            <Slider
-              class="slider-spacing"
-              label="Locations:"
+          <div class="steppers-grid">
+            <Stepper
+              class="stepper-spacing"
+              label="Locations"
               v-model="locations"
-              :min="0"
-              :max="10"
+              :min="1"
+              :max="99"
             />
-            <Slider
-              class="slider-spacing"
-              label="Kiosk devices:"
+            <Stepper
+              class="stepper-spacing"
+              label="Kiosk devices"
               v-model="kioskDevices"
               :min="0"
-              :max="10"
+              :max="99"
             />
-            <Slider
-              class="slider-spacing"
-              label="KDS devices:"
+            <Stepper
+              class="stepper-spacing"
+              label="KDS devices"
               v-model="kdsDevices"
               :min="0"
-              :max="10"
+              :max="99"
             />
           </div>
+          <p
+            v-if="showHighVolumeMessage"
+            class="stepper-sales-message type-body text-muted"
+          >
+            Managing a large operation? We provide tailored solutions and bulk
+            discounts for larger teams.
+
+            <!-- That's a lot of {{ highVolumeMessageLabel }}. We can help out with
+            that by -->
+            <a
+              href="#"
+              class="stepper-sales-link"
+              >Talk to an expert</a
+            >
+            to get started.
+          </p>
         </div>
 
         <div class="content-grid">
@@ -225,7 +246,7 @@
     }
   }
 
-  .sliders-grid {
+  .steppers-grid {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -233,8 +254,24 @@
 
     @include breakpoint(md) {
       flex-direction: row;
-      gap: 6.4rem;
-      margin: 0 0.2rem;
+      gap: 3.2rem;
+      margin: 0 0.1rem;
+      width: grid-width(5);
+    }
+  }
+
+  .stepper-sales-message {
+    margin: 0;
+    margin-top: 1.2rem;
+  }
+
+  .stepper-sales-link {
+    color: $color-neutral-000;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+
+    &:hover {
+      color: $color-neutral-300;
     }
   }
 
@@ -498,7 +535,7 @@
 
 <script setup lang="ts">
   import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-  import Slider from '@/components/Slider.vue'
+  import Stepper from '@/components/Stepper.vue'
   import Nav from '@/components/Nav.vue'
 
   const locations = ref(1)
@@ -510,6 +547,22 @@
     if (newValue < 1) {
       locations.value = 1
     }
+  })
+
+  const showHighVolumeMessage = computed(
+    () =>
+      locations.value > 10 || kioskDevices.value > 10 || kdsDevices.value > 10,
+  )
+
+  const highVolumeMessageLabel = computed(() => {
+    const parts: string[] = []
+    if (locations.value > 10) parts.push('locations')
+    if (kioskDevices.value > 10) parts.push('kiosk devices')
+    if (kdsDevices.value > 10) parts.push('KDS devices')
+    if (parts.length === 0) return 'locations/devices'
+    if (parts.length === 1) return parts[0]
+    if (parts.length === 2) return `${parts[0]} and ${parts[1]}`
+    return `${parts[0]}, ${parts[1]}, and ${parts[2]}`
   })
 
   // Pricing constants
