@@ -47,7 +47,7 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/style/colors.scss';
+  @import '~/style/colors.scss';
 
   .slider-container {
     display: flex;

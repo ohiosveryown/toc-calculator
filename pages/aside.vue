@@ -61,7 +61,7 @@
               v-if="showHighVolumeMessage"
               class="stepper-sales-message type-body text-muted"
             >
-              Managing a large operation? We can help.
+              Managing a large operation?
 
               <!-- That's a lot of {{ highVolumeMessageLabel }}. We can help out with
             that by -->
@@ -261,8 +261,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/style/grid.scss';
-  @import '@/style/colors.scss';
+  @import '~/style/grid.scss';
+  @import '~/style/colors.scss';
 
   .app {
     margin: 0 auto;
@@ -801,8 +801,7 @@
 
 <script setup lang="ts">
   import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-  import Stepper from '@/components/Stepper.vue'
-  import Nav from '@/components/Nav.vue'
+  // Stepper and Nav are auto-imported by Nuxt from components/
 
   const locations = ref(1)
   const kioskDevices = ref(0)

@@ -34,7 +34,7 @@
 <style lang="scss" scoped>
   @import '../style/colors.scss';
   @import '../style/type.scss';
-  @import '@/style/grid.scss';
+  @import '~/style/grid.scss';
 
   .testimonial-section {
     background-color: $color-neutral-1000;

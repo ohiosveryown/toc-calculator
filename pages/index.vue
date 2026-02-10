@@ -406,8 +406,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/style/grid.scss';
-  @import '@/style/colors.scss';
+  @import '~/style/grid.scss';
+  @import '~/style/colors.scss';
 
   .app {
     margin: 0 auto;
@@ -1023,8 +1023,7 @@
 
 <script setup lang="ts">
   import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-  import Slider from '@/components/Slider.vue'
-  import Dropdown from '@/components/Dropdown.vue'
+  // Slider and Dropdown are auto-imported by Nuxt from components/
 
   const locations = ref(1)
   const kioskDevices = ref(0)

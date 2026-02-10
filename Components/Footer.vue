@@ -3,7 +3,7 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/style/colors.scss';
+  @import '~/style/colors.scss';
   footer {
     // margin-top: 6.4rem;
     width: 100vw;
