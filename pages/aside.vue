@@ -61,8 +61,12 @@
               v-if="showHighVolumeMessage"
               class="stepper-sales-message type-body text-muted"
             >
-              Managing a large operation? We provide tailored solutions and bulk
-              discounts for larger teams.
+              Managing a large operation?
+
+              <!-- That's a lot of {{ highVolumeMessageLabel }}. We can help out with
+            that by -->
+
+              We provide tailored solutions and bulk discounts for larger teams.
 
               <a
                 href="#"
