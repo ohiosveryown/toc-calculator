@@ -8,7 +8,8 @@
       <p class="type-body text-muted">
         Don't let your profits get toasted. Square Plus includes essential tools
         like online ordering, SMS marketing, and staff management that others
-        charge extra for. F&B merchants save on average 24% with Square<sup>1</sup>.
+        charge extra for. F&B merchants save on average 24% with
+        Square<sup>1</sup>.
       </p>
     </header>
 
@@ -122,7 +123,39 @@
                   v-model="feature.checked"
                   class="custom-checkbox"
                 />
-                <p class="type-body text-muted">{{ feature.name }}</p>
+                <p class="type-body feature-name-with-icon">
+                  {{ feature.name }}
+                  <span
+                    v-if="feature.id === 'sms'"
+                    class="feature-info-icon"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g opacity="0.5">
+                        <path
+                          d="M11.9175 15.5832H10.0842V10.5415H11.9175V15.5832Z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M11.0009 5.95821C11.7602 5.95821 12.3759 6.57382 12.3759 7.33321C12.3759 8.0926 11.7602 8.70821 11.0009 8.70821C10.2415 8.70821 9.62585 8.0926 9.62585 7.33321C9.62585 6.57382 10.2415 5.95821 11.0009 5.95821Z"
+                          fill="currentColor"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M4.51884 4.51786C8.09864 0.938056 13.9031 0.938056 17.4829 4.51786C21.0627 8.09767 21.0627 13.9021 17.4829 17.4819C13.9031 21.0617 8.09865 21.0617 4.51884 17.4819C0.939032 13.9021 0.939033 8.09767 4.51884 4.51786ZM16.1866 5.81409C13.3228 2.95024 8.67891 2.95024 5.81506 5.81409C2.95122 8.67793 2.95122 13.3218 5.81506 16.1857C8.67891 19.0495 13.3228 19.0495 16.1866 16.1857C19.0505 13.3218 19.0505 8.67793 16.1866 5.81409Z"
+                          fill="currentColor"
+                        />
+                      </g>
+                    </svg>
+                  </span>
+                </p>
               </div>
               <p class="type-body value-cell">Included</p>
               <p class="type-body value-cell-right">{{ feature.cost }}</p>
@@ -177,8 +210,8 @@
                 <button class="btn-primary type-body-medium">
                   {{
                     showHighVolumeMessage
-                      ? 'Talk to an expert'
-                      : 'Get Started with Square Plus'
+                      ? 'Get started with Square Plus'
+                      : 'Get started with Square Plus'
                   }}
                 </button>
               </div>
@@ -516,6 +549,26 @@
     p {
       flex: 1;
     }
+
+    .feature-name-with-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .feature-info-icon {
+      display: inline-flex;
+      flex-shrink: 0;
+      vertical-align: middle;
+      line-height: 1;
+      transform: translateY(0.1rem);
+
+      svg {
+        // width: 1.6rem;
+        // height: 1.6rem;
+        display: block;
+      }
+    }
   }
 
   .custom-checkbox {
@@ -820,7 +873,7 @@
   >([
     {
       id: 'sms',
-      name: 'Text message marketing',
+      name: 'SMS marketing',
       cost: '+$50/month',
       checked: true,
     },
