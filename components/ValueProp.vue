@@ -99,7 +99,11 @@
     margin-top: 12rem;
     margin-bottom: 12rem;
     background-color: $color-neutral-1000;
+    padding: 0 2rem;
     width: 100%;
+    @include breakpoint(md) {
+      padding: 0;
+    }
   }
 
   .value-prop-layout {
@@ -114,7 +118,10 @@
 
   .value-prop-image-wrap {
     min-height: 480px;
-    width: grid-width(10);
+    margin: 0 auto;
+    @include breakpoint(mdl) {
+      width: grid-width(10);
+    }
   }
 
   .value-prop-image {
@@ -227,7 +234,7 @@
   .value-prop-testimonial {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 3.2rem;
     padding-top: 2rem;
     border-top: 1px solid $border-muted;
   }

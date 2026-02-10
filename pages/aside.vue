@@ -160,7 +160,10 @@
                 {{ formatCurrency(squarePrice) }}/month
               </p>
               <p class="value-cell-right type-subheading-200">
-                {{ formatCurrency(toastPrice) }}/month<sup class="total-footnote">1</sup>
+                {{ formatCurrency(toastPrice) }}/month<sup
+                  class="total-footnote"
+                  >1</sup
+                >
               </p>
             </div>
           </div>
@@ -283,11 +286,11 @@
     align-items: flex-start;
     gap: 2.4rem;
     margin: 6.4rem auto 6.1rem;
-    padding: 0 10.8rem;
-    max-width: 160rem;
+    padding: 0 2rem;
 
     @include breakpoint(md) {
       padding: 0 2rem;
+      max-width: 160rem;
       width: grid-width(11);
       h1 {
         max-width: 20ch;
@@ -314,11 +317,10 @@
     flex-direction: column;
     gap: 2.4rem;
     margin: 0 auto;
-    padding: 0 10.8rem;
-    max-width: 160rem;
+    padding: 0 2rem;
 
     @include breakpoint(md) {
-      padding: 0 2rem;
+      max-width: 160rem;
       width: grid-width(11);
     }
   }
@@ -542,7 +544,7 @@
 
   .content-grid {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: flex-start;
     gap: 2rem;
 
@@ -556,6 +558,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     @include breakpoint(md) {
       padding-right: grid-width(0.75);
