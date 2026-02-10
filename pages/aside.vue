@@ -17,17 +17,24 @@
       <div class="pricing-container">
         <div class="pricing-header">
           <header class="customization-header">
-            <h3 class="type-subheading-400">Customize you comparison</h3>
+            <h3 class="type-subheading-400">
+              See your setup with the Square Plus bundle
+            </h3>
             <!-- <p class="type-body text-muted">
               Have a Toast quote or a recent invoice? Drag and drop it anywhere
               on this page or upload it and we’ll map your existing costs
               directly to a Square Plus plan so you can see your exact savings1.
             </p> -->
-            <p class="type-body text-muted">
+            <!-- <p class="type-body text-muted">
               Don't let your profits get toasted. Square Plus includes essential
               tools like online ordering, SMS marketing, and staff management
               that others charge extra for. F&B merchants save on average 24%
-              with Square.
+              with Square<sup>1</sup>.
+            </p> -->
+            <p class="type-body text-muted">
+              Don't let your profits get toasted. Square Plus simplifies your
+              operations by bundling essential tools into one predictable
+              monthly price. Use the controls below to see how your plan fits.
             </p>
           </header>
 
@@ -61,7 +68,7 @@
               v-if="showHighVolumeMessage"
               class="stepper-sales-message type-body text-muted"
             >
-              Managing a large operation?
+              Managing a large operation? We can help.
 
               <!-- That's a lot of {{ highVolumeMessageLabel }}. We can help out with
             that by -->
@@ -153,7 +160,7 @@
                 {{ formatCurrency(squarePrice) }}/month
               </p>
               <p class="value-cell-right type-subheading-200">
-                {{ formatCurrency(toastPrice) }}/month
+                {{ formatCurrency(toastPrice) }}/month<sup class="total-footnote">1</sup>
               </p>
             </div>
           </div>
@@ -230,7 +237,8 @@
       </div>
     </section>
 
-    <ValueProp image-src="/img/value@2x.png" />
+    <!-- <ValueProp image-src="/img/value@2x.png" /> -->
+    <ValueProp video-src="/img/vid.mp4" />
 
     <Savings />
 
@@ -341,6 +349,13 @@
     h3 {
       color: $color-neutral-000;
     }
+
+    /* Prevent sup from adding extra top space to the line */
+    sup {
+      line-height: 0;
+      vertical-align: super;
+      font-size: 0.75em;
+    }
   }
 
   .steppers-grid {
@@ -361,11 +376,11 @@
     flex-direction: column;
     gap: 1.2rem;
     flex-shrink: 0;
-    align-self: flex-start;
     width: 100%;
 
     @include breakpoint(md) {
       width: grid-width(4);
+      align-self: stretch; /* Fill row height so sticky card has room to stick */
     }
   }
 
@@ -496,7 +511,7 @@
   .stepper-sales-message {
     margin-top: 2rem;
     @include breakpoint(md) {
-      max-width: 66ch;
+      max-width: 64ch;
     }
     // opacity fade-in when message appears
     &.stepper-sales-fade-enter-from {
@@ -533,6 +548,7 @@
 
     @include breakpoint(md) {
       flex-direction: row;
+      align-items: stretch; /* So aside-column is tall enough for sticky card */
     }
   }
 
@@ -579,6 +595,12 @@
     .value-cell,
     .value-cell-right {
       white-space: nowrap;
+    }
+
+    .total-footnote {
+      vertical-align: super;
+      line-height: 0;
+      font-size: 0.65em;
     }
   }
 
@@ -884,18 +906,24 @@
   })
 
   // Pricing constants
-  const SQUARE_BASE_PRICE = 114
-  const TOAST_BASE_PRICE = 424
+  const SQUARE_BASE_PRICE = 69
+  const TOAST_BASE_PRICE = 69
+
+  // Device pricing (Square includes these, Toast charges extra)
+  const SQUARE_KIOSK_PRICE = 0
+  const TOAST_KIOSK_PRICE = 50
+  const SQUARE_KDS_PRICE = 0
+  const TOAST_KDS_PRICE = 40
 
   const FEATURE_COSTS = {
     sms: 50,
-    online: 75,
-    loyalty: 50,
-    staff: 149,
+    online: 60,
+    loyalty: 45,
+    staff: 40,
     gift: 25,
     qr: 20,
     customer: 30,
-    email: 50,
+    email: 35,
   } as const
 
   type FeatureId = keyof typeof FEATURE_COSTS
@@ -917,19 +945,19 @@
     {
       id: 'online',
       name: 'Online ordering site',
-      cost: '+$75/month',
+      cost: '+$60/month',
       checked: true,
     },
     {
       id: 'loyalty',
       name: 'Loyalty program',
-      cost: '+$50/month',
+      cost: '+$45/month',
       checked: true,
     },
     {
       id: 'staff',
       name: 'Staff management',
-      cost: '+$149/month',
+      cost: '+$40/month',
       checked: true,
     },
     { id: 'gift', name: 'Gift cards', cost: '+$25/month', checked: true },
@@ -940,16 +968,23 @@
       cost: '+$30/month',
       checked: true,
     },
-    { id: 'email', name: 'Email marketing', cost: '+$50/month', checked: true },
+    { id: 'email', name: 'Email marketing', cost: '+$35/month', checked: true },
   ])
 
   // Computed pricing
   const squarePrice = computed(() => {
-    return SQUARE_BASE_PRICE * locations.value
+    return (
+      SQUARE_BASE_PRICE * locations.value +
+      SQUARE_KIOSK_PRICE * kioskDevices.value +
+      SQUARE_KDS_PRICE * kdsDevices.value
+    )
   })
 
   const toastPrice = computed(() => {
-    let cost = TOAST_BASE_PRICE * locations.value
+    let cost =
+      TOAST_BASE_PRICE * locations.value +
+      TOAST_KIOSK_PRICE * kioskDevices.value +
+      TOAST_KDS_PRICE * kdsDevices.value
 
     features.value.forEach((feature) => {
       if (feature.checked) {

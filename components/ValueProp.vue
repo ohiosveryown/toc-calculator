@@ -2,8 +2,35 @@
   <section class="value-prop-section">
     <div class="value-prop-layout">
       <div class="value-prop-image-wrap">
+        <div
+          v-if="videoSrc"
+          class="value-prop-video-wrap"
+        >
+          <video
+            ref="videoEl"
+            :src="videoSrc"
+            class="value-prop-image value-prop-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            @click="toggleVideo"
+          />
+          <div
+            class="value-prop-video-overlay"
+            @click="toggleVideo"
+          >
+            <!-- <button
+              type="button"
+              class="value-prop-play-btn"
+              aria-label="Play video"
+            >
+              <span class="value-prop-play-icon" />
+            </button> -->
+          </div>
+        </div>
         <img
-          v-if="imageSrc"
+          v-else-if="imageSrc"
           :src="imageSrc"
           alt=""
           class="value-prop-image"
@@ -100,6 +127,62 @@
 
   .value-prop-image-placeholder {
     background-color: $color-neutral-800;
+  }
+
+  .value-prop-video-wrap {
+    position: relative;
+    width: 100%;
+    min-height: 480px;
+    overflow: hidden;
+  }
+
+  .value-prop-video {
+    object-fit: cover;
+  }
+
+  .value-prop-video-overlay {
+    position: absolute;
+    inset: 0;
+    // background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .value-prop-play-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: scale(1.05);
+    }
+
+    &:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 4px;
+    }
+  }
+
+  .value-prop-play-icon {
+    width: 0;
+    height: 0;
+    margin-left: 6px;
+    border-style: solid;
+    border-width: 16px 0 16px 28px;
+    border-color: transparent transparent transparent rgba(255, 255, 255, 0.95);
   }
 
   .value-prop-content {
@@ -211,6 +294,10 @@
       min-height: 360px;
     }
 
+    .value-prop-video-wrap {
+      min-height: 360px;
+    }
+
     .value-prop-image,
     .value-prop-image-placeholder {
       min-height: 360px;
@@ -244,8 +331,25 @@
 </style>
 
 <script setup>
+  import { ref } from 'vue'
+
+  const videoEl = ref(null)
+
+  function toggleVideo() {
+    if (!videoEl.value) return
+    if (videoEl.value.paused) {
+      videoEl.value.play()
+    } else {
+      videoEl.value.pause()
+    }
+  }
+
   defineProps({
     imageSrc: {
+      type: String,
+      default: '',
+    },
+    videoSrc: {
       type: String,
       default: '',
     },

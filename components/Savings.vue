@@ -26,7 +26,7 @@
               card.savingsFormatted
             }}</span>
             <span class="text-muted savings-card-amount-label"
-              >in annual savings</span
+              >in annual savings<sup>{{ i + 2 }}</sup></span
             >
           </p>
           <p class="type-body-medium savings-card-resources">

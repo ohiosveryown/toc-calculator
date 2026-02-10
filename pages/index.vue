@@ -295,7 +295,7 @@
               <p class="type-body text-muted">Online ordering site</p>
             </div>
             <p class="type-body value-cell">Standard</p>
-            <p class="type-body value-cell-right">+$75/month</p>
+            <p class="type-body value-cell-right">+$60/month</p>
           </div>
 
           <div class="table-row">
@@ -308,7 +308,7 @@
               <p class="type-body text-muted">Loyalty program</p>
             </div>
             <p class="type-body value-cell">Standard</p>
-            <p class="type-body value-cell-right">+$50/month</p>
+            <p class="type-body value-cell-right">+$45/month</p>
           </div>
 
           <div class="table-row">
@@ -321,7 +321,7 @@
               <p class="type-body text-muted">Staff management</p>
             </div>
             <p class="type-body value-cell">Standard</p>
-            <p class="type-body value-cell-right">+$149/month</p>
+            <p class="type-body value-cell-right">+$40/month</p>
           </div>
 
           <div class="table-row">
@@ -373,7 +373,7 @@
               <p class="type-body text-muted">Email marketing</p>
             </div>
             <p class="type-body value-cell">Standard</p>
-            <p class="type-body value-cell-right">+$50/month</p>
+            <p class="type-body value-cell-right">+$35/month</p>
           </div>
         </div>
       </div>
@@ -1053,8 +1053,8 @@
   })
 
   // Base pricing per location
-  const SQUARE_BASE_PRICE = 114
-  const TOAST_BASE_PRICE = 424
+  const SQUARE_BASE_PRICE = 69
+  const TOAST_BASE_PRICE = 69
 
   // Device pricing (Square includes these, Toast charges extra)
   const SQUARE_KIOSK_PRICE = 0 // Included in Square Plus
@@ -1065,13 +1065,13 @@
   // Feature pricing (Toast additional costs, Square includes all)
   const FEATURE_COSTS = {
     smsMarketing: 50,
-    onlineOrdering: 75,
-    loyalty: 50,
-    staffManagement: 149,
+    onlineOrdering: 60,
+    loyalty: 45,
+    staffManagement: 40,
     giftCards: 25,
     qrCode: 20,
     customerDirectory: 30,
-    emailMarketing: 50,
+    emailMarketing: 35,
   }
 
   // Computed pricing
