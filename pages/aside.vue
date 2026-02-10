@@ -49,29 +49,6 @@
                 :max="99"
               />
             </div>
-            <div class="glpyhs-list-wrapper">
-              <TransitionGroup
-                tag="ul"
-                name="glyph"
-                class="glpyhs-list"
-              >
-                <li
-                  v-for="(position, i) in glyphItems"
-                  :key="position"
-                  :class="{
-                    'glyph-fifth-pulse':
-                      i === glyphItems.length - 1 && pulseLastGlyph,
-                  }"
-                >
-                  <img
-                    class="glpyh"
-                    :class="`glyph-rotate-${position % 8}`"
-                    :src="glyphSrcByPosition(position)"
-                    :alt="`Glyph ${position + 1}`"
-                  />
-                </li>
-              </TransitionGroup>
-            </div>
           </div>
           <p
             v-if="showHighVolumeMessage"
@@ -174,46 +151,71 @@
             </div>
           </div>
 
-          <div class="aside-card">
-            <div class="card-header">
-              <h4 class="type-subheading-200">
-                No more crumbs: save {{ savingsPercentage }}%.
-              </h4>
+          <div class="aside-column">
+            <div class="glpyhs-list-wrapper">
+              <TransitionGroup
+                tag="ul"
+                name="glyph"
+                class="glpyhs-list"
+              >
+                <li
+                  v-for="(position, i) in glyphItems"
+                  :key="position"
+                  :class="{
+                    'glyph-fifth-pulse':
+                      i === glyphItems.length - 1 && pulseLastGlyph,
+                  }"
+                >
+                  <img
+                    class="glpyh"
+                    :class="`glyph-rotate-${position % 8}`"
+                    :src="glyphSrcByPosition(position)"
+                    :alt="`Glyph ${position + 1}`"
+                  />
+                </li>
+              </TransitionGroup>
             </div>
+            <div class="aside-card">
+              <div class="card-header">
+                <h4 class="type-subheading-200">
+                  No more crumbs: save {{ savingsPercentage }}%.
+                </h4>
+              </div>
 
-            <div class="card-savings">
-              <div class="savings-item">
-                <p class="type-heading-700">
-                  {{ formatCurrency(annualSavings) }}
-                </p>
-                <p class="type-body text-muted">savings per year</p>
+              <div class="card-savings">
+                <div class="savings-item">
+                  <p class="type-heading-700">
+                    {{ formatCurrency(annualSavings) }}
+                  </p>
+                  <p class="type-body text-muted">savings per year</p>
+                </div>
+                <div class="savings-item">
+                  <p class="type-heading-700">
+                    {{ formatCurrency(monthlySavings) }}
+                  </p>
+                  <p class="type-body text-muted">savings per month</p>
+                </div>
               </div>
-              <div class="savings-item">
-                <p class="type-heading-700">
-                  {{ formatCurrency(monthlySavings) }}
-                </p>
-                <p class="type-body text-muted">savings per month</p>
-              </div>
-            </div>
 
-            <div class="card-cta">
-              <div class="cta-header">
-                <p class="type-body-medium">
-                  Don't let your profits get toasted.
-                </p>
-              </div>
-              <div class="cta-content">
-                <p class="type-body text-muted">
-                  Choose a platform that earns your business with transparent
-                  pricing and no contracts.
-                </p>
-                <button class="btn-primary type-body-medium">
-                  {{
-                    showHighVolumeMessage
-                      ? 'Get started with Square Plus'
-                      : 'Get started with Square Plus'
-                  }}
-                </button>
+              <div class="card-cta">
+                <div class="cta-header">
+                  <p class="type-body-medium">
+                    Don't let your profits get toasted.
+                  </p>
+                </div>
+                <div class="cta-content">
+                  <p class="type-body text-muted">
+                    Choose a platform that earns your business with transparent
+                    pricing and no contracts.
+                  </p>
+                  <button class="btn-primary type-body-medium">
+                    {{
+                      showHighVolumeMessage
+                        ? 'Get started with Square Plus'
+                        : 'Get started with Square Plus'
+                    }}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -326,32 +328,35 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
-    @include breakpoint(md) {
-      flex-direction: row;
-      align-items: center;
-      margin: 0 0.1rem;
-    }
   }
 
   .steppers {
     display: flex;
     gap: 3.2rem;
     flex-shrink: 0;
+  }
+
+  .aside-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    flex-shrink: 0;
+    align-self: flex-start;
+    width: 100%;
 
     @include breakpoint(md) {
-      margin-right: 3.2rem;
+      width: grid-width(4);
     }
   }
 
   .glpyhs-list-wrapper {
     overflow: hidden;
     position: relative;
-    margin-top: 3.6rem;
     padding: 0.2rem 0;
-    flex: 1 1 0%;
     min-width: 0;
     width: 100%;
+    /* Fixed height so aside card never moves when glyph count changes */
+    height: 4.4rem; /* 4rem glyph + 0.2rem padding top/bottom */
 
     &::after {
       content: '';
@@ -361,7 +366,6 @@
       bottom: 0;
       width: 32rem;
       height: calc(100% + 1rem);
-      // background: linear-gradient(to right, transparent, $color-neutral-1000);
       background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #fff 90%);
       pointer-events: none;
     }
@@ -631,16 +635,12 @@
     display: flex;
     flex-direction: column;
     gap: 4rem;
-    flex-shrink: 0;
-    align-self: flex-start;
     position: sticky;
     top: 2rem;
 
     @include breakpoint(md) {
       position: sticky;
       top: 2.2rem;
-      margin-top: 2.2rem;
-      width: grid-width(4);
     }
   }
 
@@ -792,10 +792,10 @@
 
   const GLYPH_IMAGE_COUNT = GLYPH_IMAGE_NAMES.length
 
-  // No per-category cap; total = sum of steppers, at least 1 (first glyph visible by default), at most number of images
+  // Show (raw - 1) glyphs: 0 when raw <= 1, 1 when raw = 2, etc., at most number of images
   const totalGlyphCount = computed(() => {
     const raw = locations.value + kioskDevices.value + kdsDevices.value
-    return Math.min(GLYPH_IMAGE_COUNT, Math.max(1, raw))
+    return Math.min(GLYPH_IMAGE_COUNT, Math.max(0, raw - 1))
   })
 
   const glyphItems = computed<number[]>(() =>
