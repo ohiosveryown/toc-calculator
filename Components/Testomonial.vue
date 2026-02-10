@@ -7,8 +7,7 @@
         <div class="testimonial-main">
           <div class="testimonial-quote-wrapper">
             <blockquote class="type-heading-600-serif testimonial-quote">
-              "It has everything that I need just in one package...I like
-              simplicity...I like that this is complete for my business."
+              {{ selectedQuote }}
             </blockquote>
           </div>
 
@@ -167,5 +166,12 @@
 </style>
 
 <script setup>
-  // No props or reactive data needed for static testimonial
+  import { ref } from 'vue'
+
+  const quotes = [
+    'It has everything that I need just in one package...I like simplicity...I like that this is complete for my business.',
+    "The bundle is killer. And just to know my monthly amount...it's really nice to not have 15 different bills come\u00a0in.",
+  ]
+
+  const selectedQuote = ref(quotes[~~(Math.random() * quotes.length)])
 </script>

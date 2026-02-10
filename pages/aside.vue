@@ -25,27 +25,51 @@
           </div>
 
           <div class="steppers-grid">
-            <Stepper
-              class="stepper-spacing"
-              label="Locations"
-              v-model="locations"
-              :min="1"
-              :max="99"
-            />
-            <Stepper
-              class="stepper-spacing"
-              label="Kiosk devices"
-              v-model="kioskDevices"
-              :min="0"
-              :max="99"
-            />
-            <Stepper
-              class="stepper-spacing"
-              label="KDS devices"
-              v-model="kdsDevices"
-              :min="0"
-              :max="99"
-            />
+            <div class="steppers">
+              <Stepper
+                class="stepper-spacing"
+                label="Locations"
+                v-model="locations"
+                :min="1"
+                :max="99"
+              />
+              <Stepper
+                class="stepper-spacing"
+                label="Kiosk devices"
+                v-model="kioskDevices"
+                :min="0"
+                :max="99"
+              />
+              <Stepper
+                class="stepper-spacing"
+                label="KDS devices"
+                v-model="kdsDevices"
+                :min="0"
+                :max="99"
+              />
+            </div>
+            <div class="glpyhs-list-wrapper">
+              <TransitionGroup
+                tag="ul"
+                name="glyph"
+                class="glpyhs-list"
+              >
+                <li
+                  v-for="item in glyphItems"
+                  :key="`${item.category}-${item.index}`"
+                  :class="{
+                    'glyph-fifth-pulse': shouldPulseGlyph(item),
+                  }"
+                >
+                  <img
+                    class="glpyh"
+                    :class="`glyph-rotate-${item.index % 8}`"
+                    :src="glyphSrcFor(item)"
+                    :alt="glyphAlt(item)"
+                  />
+                </li>
+              </TransitionGroup>
+            </div>
           </div>
           <p
             v-if="showHighVolumeMessage"
@@ -236,6 +260,7 @@
     display: flex;
     flex-direction: column;
     gap: 3.2rem;
+    width: 100%;
   }
 
   .customization-header {
@@ -247,17 +272,148 @@
   }
 
   .steppers-grid {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 6.4rem;
 
     @include breakpoint(md) {
       flex-direction: row;
-      gap: 3.2rem;
+      align-items: center;
       margin: 0 0.1rem;
-      width: grid-width(5);
     }
+  }
+
+  .steppers {
+    display: flex;
+    gap: 3.2rem;
+    flex-shrink: 0;
+
+    @include breakpoint(md) {
+      margin-right: 3.2rem;
+    }
+  }
+
+  .glpyhs-list-wrapper {
+    position: relative;
+    margin-top: 3.6rem;
+    flex: 1 1 0%;
+    min-width: 0;
+    width: 100%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -0.5rem;
+      right: 0;
+      bottom: 0;
+      width: 32rem;
+      height: calc(100% + 1rem);
+      // background: linear-gradient(to right, transparent, $color-neutral-1000);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #fff 90%);
+      pointer-events: none;
+    }
+  }
+
+  .glpyhs-list {
+    /* Snappy 0.25s spring with ~18% overshoot for a clear bounce */
+    --spring-easing: linear(
+      0,
+      0.01 3%,
+      0.08 8%,
+      0.28 15%,
+      0.58 24%,
+      0.88 34%,
+      1.18 45%,
+      1.06 58%,
+      1.01 72%,
+      0.999 88%,
+      1 100%
+    );
+    --spring-duration: 0.25s;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    margin-right: 1.2rem;
+  }
+
+  .glyph-enter-from,
+  .glyph-leave-to {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  .glyph-enter-active,
+  .glyph-leave-active {
+    transition:
+      opacity 0.25s ease-out,
+      transform var(--spring-duration) var(--spring-easing);
+  }
+
+  .glyph-enter-to,
+  .glyph-leave-from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .glyph-move {
+    transition: transform var(--spring-duration) var(--spring-easing);
+  }
+
+  .glyph-fifth-pulse {
+    animation: glyph-fifth-pulse 0.35s ease-out;
+  }
+
+  @keyframes glyph-fifth-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .glpyh.glyph-rotate-0 {
+    transform: rotate(-7deg);
+  }
+
+  .glpyh.glyph-rotate-1 {
+    transform: rotate(7deg);
+  }
+
+  .glpyh.glyph-rotate-2 {
+    transform: rotate(-3deg);
+  }
+
+  .glpyh.glyph-rotate-3 {
+    transform: rotate(2deg);
+  }
+
+  .glpyh.glyph-rotate-4 {
+    transform: rotate(5deg);
+  }
+
+  .glpyh.glyph-rotate-5 {
+    transform: rotate(-3deg);
+  }
+
+  .glpyh.glyph-rotate-6 {
+    transform: rotate(4deg);
+  }
+
+  .glpyh.glyph-rotate-7 {
+    transform: rotate(-5deg);
+  }
+
+  .glpyh {
+    max-width: 4rem;
+    max-height: 4rem;
+    min-width: 4rem;
+    min-height: 4rem;
+    object-fit: contain;
   }
 
   .stepper-sales-message {
@@ -541,6 +697,150 @@
   const locations = ref(1)
   const kioskDevices = ref(0)
   const kdsDevices = ref(0)
+
+  // Show one glyph at 2 locations, two at 3, etc., capped at 5 glyphs
+  const glyphCount = computed(() =>
+    Math.min(7, Math.max(0, locations.value - 0)),
+  )
+
+  // Pulse the 5th glyph when locations increase beyond 5 (6th, 7th, etc.)
+  const pulseFifthGlyph = ref(false)
+  watch(locations, (newVal, oldVal) => {
+    if (oldVal !== undefined && newVal > oldVal && newVal > 7) {
+      pulseFifthGlyph.value = true
+      setTimeout(() => {
+        pulseFifthGlyph.value = false
+      }, 350)
+    }
+  })
+
+  // Use location-1 for first glyph; add location-2@3x.png, location-3@3x.png, etc. for more
+  const glyphSrc = (index: number) => `/img/location-${index + 1}@3x.png`
+
+  // Kiosk glyphs: 1 device = 1 glyph, etc.; after 3 devices cap at 3 glyphs
+  const kioskGlyphCount = computed(() =>
+    kioskDevices.value <= 3 ? kioskDevices.value : 3,
+  )
+
+  const kioskGlyphSrc = (index: number) => `/img/kiosk-${index + 1}@3x.png`
+
+  const pulseFifthKioskGlyph = ref(false)
+  watch(kioskDevices, (newVal, oldVal) => {
+    if (oldVal !== undefined && newVal > oldVal && newVal > 3) {
+      pulseFifthKioskGlyph.value = true
+      setTimeout(() => {
+        pulseFifthKioskGlyph.value = false
+      }, 350)
+    }
+  })
+
+  // KDS glyphs: 1 device = 1 glyph, etc.; cap at 6 glyphs
+  const kdsGlyphCount = computed(() =>
+    kdsDevices.value <= 6 ? kdsDevices.value : 6,
+  )
+
+  const kdsGlyphSrc = (index: number) => `/img/kds-${index + 1}@3x.png`
+
+  const pulseSixthKdsGlyph = ref(false)
+  watch(kdsDevices, (newVal, oldVal) => {
+    if (oldVal !== undefined && newVal > oldVal && newVal > 6) {
+      pulseSixthKdsGlyph.value = true
+      setTimeout(() => {
+        pulseSixthKdsGlyph.value = false
+      }, 350)
+    }
+  })
+
+  type GlyphCategory = 'location' | 'kiosk' | 'kds'
+  type GlyphItem = { category: GlyphCategory; index: number }
+
+  // Order in which the user added glyphs (push on increment, remove last-of-category on decrement)
+  const glyphOrder = ref<GlyphCategory[]>([])
+
+  function buildInitialGlyphOrder(): GlyphCategory[] {
+    return [
+      ...Array(glyphCount.value).fill('location'),
+      ...Array(kioskGlyphCount.value).fill('kiosk'),
+      ...Array(kdsGlyphCount.value).fill('kds'),
+    ] as GlyphCategory[]
+  }
+
+  onMounted(() => {
+    glyphOrder.value = buildInitialGlyphOrder()
+  })
+
+  watch(glyphCount, (newVal, oldVal) => {
+    if (oldVal === undefined) return
+    const delta = newVal - oldVal
+    if (delta > 0) {
+      for (let i = 0; i < delta; i++) glyphOrder.value.push('location')
+    } else {
+      for (let i = 0; i < -delta; i++) {
+        const idx = glyphOrder.value.lastIndexOf('location')
+        if (idx !== -1) glyphOrder.value.splice(idx, 1)
+      }
+    }
+  })
+
+  watch(kioskGlyphCount, (newVal, oldVal) => {
+    if (oldVal === undefined) return
+    const delta = newVal - oldVal
+    if (delta > 0) {
+      for (let i = 0; i < delta; i++) glyphOrder.value.push('kiosk')
+    } else {
+      for (let i = 0; i < -delta; i++) {
+        const idx = glyphOrder.value.lastIndexOf('kiosk')
+        if (idx !== -1) glyphOrder.value.splice(idx, 1)
+      }
+    }
+  })
+
+  watch(kdsGlyphCount, (newVal, oldVal) => {
+    if (oldVal === undefined) return
+    const delta = newVal - oldVal
+    if (delta > 0) {
+      for (let i = 0; i < delta; i++) glyphOrder.value.push('kds')
+    } else {
+      for (let i = 0; i < -delta; i++) {
+        const idx = glyphOrder.value.lastIndexOf('kds')
+        if (idx !== -1) glyphOrder.value.splice(idx, 1)
+      }
+    }
+  })
+
+  const glyphItems = computed<GlyphItem[]>(() => {
+    return glyphOrder.value.map((category, position) => {
+      const index =
+        glyphOrder.value.slice(0, position + 1).filter((c) => c === category)
+          .length - 1
+      return { category, index }
+    })
+  })
+
+  const glyphSrcFor = (item: GlyphItem) => {
+    if (item.category === 'location') return glyphSrc(item.index)
+    if (item.category === 'kiosk') return kioskGlyphSrc(item.index)
+    return kdsGlyphSrc(item.index)
+  }
+
+  const glyphAlt = (item: GlyphItem) => {
+    const label =
+      item.category === 'location'
+        ? 'Location'
+        : item.category === 'kiosk'
+          ? 'Kiosk'
+          : 'KDS'
+    return `${label} ${item.index + 1}`
+  }
+
+  const shouldPulseGlyph = (item: GlyphItem) =>
+    (item.category === 'location' &&
+      item.index === 6 &&
+      pulseFifthGlyph.value) ||
+    (item.category === 'kiosk' &&
+      item.index === 2 &&
+      pulseFifthKioskGlyph.value) ||
+    (item.category === 'kds' && item.index === 5 && pulseSixthKdsGlyph.value)
 
   // Enforce minimum value of 1 for locations
   watch(locations, (newValue) => {
