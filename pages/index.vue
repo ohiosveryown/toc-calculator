@@ -10,7 +10,7 @@
         Don't let your profits get toasted. Square Plus includes essential tools
         like online ordering, loyalty, and staff management that others charge
         extra for. On average, total costs for F&B merchants are 24% lower with
-        Square.
+        Square<sup>1</sup>.
       </h2>
     </header>
 

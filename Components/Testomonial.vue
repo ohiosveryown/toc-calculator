@@ -173,5 +173,5 @@
     "The bundle is killer. And just to know my monthly amount...it's really nice to not have 15 different bills come\u00a0in.",
   ]
 
-  const selectedQuote = ref(quotes[~~(Math.random() * quotes.length)])
+  const selectedQuote = ref(quotes[Math.floor(Math.random() * quotes.length)])
 </script>

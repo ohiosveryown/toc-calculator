@@ -1,14 +1,14 @@
 <template>
   <div class="app">
     <header class="header-hero">
-      <span class="type-kicker">Kicker</span>
+      <span class="type-kicker">MAXIMIZE YOUR MARGINS</span>
       <h1 class="type-heading-800">
-        Cost comparison for food & beverage businesses
+        Compare total costs for your food & beverage business
       </h1>
       <p class="type-body text-muted">
         Don't let your profits get toasted. Square Plus includes essential tools
         like online ordering, SMS marketing, and staff management that others
-        charge extra for. F&B merchants save on average 24% with Square.
+        charge extra for. F&B merchants save on average 24% with Square<sup>1</sup>.
       </p>
     </header>
 
@@ -55,17 +55,18 @@
                 class="glpyhs-list"
               >
                 <li
-                  v-for="item in glyphItems"
-                  :key="`${item.category}-${item.index}`"
+                  v-for="(position, i) in glyphItems"
+                  :key="position"
                   :class="{
-                    'glyph-fifth-pulse': shouldPulseGlyph(item),
+                    'glyph-fifth-pulse':
+                      i === glyphItems.length - 1 && pulseLastGlyph,
                   }"
                 >
                   <img
                     class="glpyh"
-                    :class="`glyph-rotate-${item.index % 8}`"
-                    :src="glyphSrcFor(item)"
-                    :alt="glyphAlt(item)"
+                    :class="`glyph-rotate-${position % 8}`"
+                    :src="glyphSrcByPosition(position)"
+                    :alt="`Glyph ${position + 1}`"
                   />
                 </li>
               </TransitionGroup>
@@ -75,11 +76,14 @@
             v-if="showHighVolumeMessage"
             class="stepper-sales-message type-body text-muted"
           >
-            Managing a large operation? We provide tailored solutions and bulk
-            discounts for larger teams.
+            Managing a large operation? We can help.
 
             <!-- That's a lot of {{ highVolumeMessageLabel }}. We can help out with
             that by -->
+
+            <br />We provide tailored solutions and bulk discounts for larger
+            teams.
+
             <a
               href="#"
               class="stepper-sales-link"
@@ -171,7 +175,11 @@
                   pricing and no contracts.
                 </p>
                 <button class="btn-primary type-body-medium">
-                  Get Started with Square Plus
+                  {{
+                    showHighVolumeMessage
+                      ? 'Talk to an expert'
+                      : 'Get Started with Square Plus'
+                  }}
                 </button>
               </div>
             </div>
@@ -180,7 +188,11 @@
       </div>
     </section>
 
-    <Testomonial />
+    <ValueProp image-src="/img/value@2x.png" />
+
+    <Savings />
+
+    <!-- <Testomonial /> -->
 
     <section class="disclosure-section">
       <div class="disclosure-container">
@@ -228,12 +240,17 @@
       padding: 0 2rem;
       width: grid-width(10);
       h1 {
-        max-width: 17ch;
+        max-width: 20ch;
       }
       p {
         max-width: 76ch;
       }
     }
+  }
+
+  .type-kicker {
+    // font-weight: 600;
+    color: $text-body-muted;
   }
 
   .pricing-section {
@@ -295,8 +312,10 @@
   }
 
   .glpyhs-list-wrapper {
+    overflow: hidden;
     position: relative;
     margin-top: 3.6rem;
+    padding: 0.2rem 0;
     flex: 1 1 0%;
     min-width: 0;
     width: 100%;
@@ -418,7 +437,7 @@
 
   .stepper-sales-message {
     margin: 0;
-    margin-top: 1.2rem;
+    transform: translateY(-0.8rem);
   }
 
   .stepper-sales-link {
@@ -698,149 +717,58 @@
   const kioskDevices = ref(0)
   const kdsDevices = ref(0)
 
-  // Show one glyph at 2 locations, two at 3, etc., capped at 5 glyphs
-  const glyphCount = computed(() =>
-    Math.min(7, Math.max(0, locations.value - 0)),
+  // All glyph image names in public/img (order: location-1 first, then the rest)
+  const GLYPH_IMAGE_NAMES = [
+    'location-1',
+    'location-2',
+    'location-3',
+    'location-4',
+    'location-5',
+    'location-6',
+    'location-7',
+    'kiosk-1',
+    'kiosk-2',
+    'kiosk-3',
+    'kds-1',
+    'kds-2',
+    'kds-3',
+    'kds-4',
+    'kds-5',
+    'kds-6',
+  ] as const
+
+  const GLYPH_IMAGE_COUNT = GLYPH_IMAGE_NAMES.length
+
+  // No per-category cap; total = sum of steppers, at least 1 (first glyph visible by default), at most number of images
+  const totalGlyphCount = computed(() => {
+    const raw = locations.value + kioskDevices.value + kdsDevices.value
+    return Math.min(GLYPH_IMAGE_COUNT, Math.max(1, raw))
+  })
+
+  const glyphItems = computed<number[]>(() =>
+    Array.from({ length: totalGlyphCount.value }, (_, i) => i),
   )
 
-  // Pulse the 5th glyph when locations increase beyond 5 (6th, 7th, etc.)
-  const pulseFifthGlyph = ref(false)
-  watch(locations, (newVal, oldVal) => {
-    if (oldVal !== undefined && newVal > oldVal && newVal > 7) {
-      pulseFifthGlyph.value = true
-      setTimeout(() => {
-        pulseFifthGlyph.value = false
-      }, 350)
-    }
-  })
+  const glyphSrcByPosition = (position: number) => {
+    const name = GLYPH_IMAGE_NAMES[Math.min(position, GLYPH_IMAGE_COUNT - 1)]
+    return `/img/${name}@3x.png`
+  }
 
-  // Use location-1 for first glyph; add location-2@3x.png, location-3@3x.png, etc. for more
-  const glyphSrc = (index: number) => `/img/location-${index + 1}@3x.png`
-
-  // Kiosk glyphs: 1 device = 1 glyph, etc.; after 3 devices cap at 3 glyphs
-  const kioskGlyphCount = computed(() =>
-    kioskDevices.value <= 3 ? kioskDevices.value : 3,
+  const pulseLastGlyph = ref(false)
+  watch(
+    [locations, kioskDevices, kdsDevices],
+    ([newLoc, newKiosk, newKds], [oldLoc, oldKiosk, oldKds]) => {
+      if (oldLoc === undefined) return
+      const increased =
+        newLoc! > oldLoc! || newKiosk! > oldKiosk! || newKds! > oldKds!
+      if (increased && totalGlyphCount.value > 0) {
+        pulseLastGlyph.value = true
+        setTimeout(() => {
+          pulseLastGlyph.value = false
+        }, 350)
+      }
+    },
   )
-
-  const kioskGlyphSrc = (index: number) => `/img/kiosk-${index + 1}@3x.png`
-
-  const pulseFifthKioskGlyph = ref(false)
-  watch(kioskDevices, (newVal, oldVal) => {
-    if (oldVal !== undefined && newVal > oldVal && newVal > 3) {
-      pulseFifthKioskGlyph.value = true
-      setTimeout(() => {
-        pulseFifthKioskGlyph.value = false
-      }, 350)
-    }
-  })
-
-  // KDS glyphs: 1 device = 1 glyph, etc.; cap at 6 glyphs
-  const kdsGlyphCount = computed(() =>
-    kdsDevices.value <= 6 ? kdsDevices.value : 6,
-  )
-
-  const kdsGlyphSrc = (index: number) => `/img/kds-${index + 1}@3x.png`
-
-  const pulseSixthKdsGlyph = ref(false)
-  watch(kdsDevices, (newVal, oldVal) => {
-    if (oldVal !== undefined && newVal > oldVal && newVal > 6) {
-      pulseSixthKdsGlyph.value = true
-      setTimeout(() => {
-        pulseSixthKdsGlyph.value = false
-      }, 350)
-    }
-  })
-
-  type GlyphCategory = 'location' | 'kiosk' | 'kds'
-  type GlyphItem = { category: GlyphCategory; index: number }
-
-  // Order in which the user added glyphs (push on increment, remove last-of-category on decrement)
-  const glyphOrder = ref<GlyphCategory[]>([])
-
-  function buildInitialGlyphOrder(): GlyphCategory[] {
-    return [
-      ...Array(glyphCount.value).fill('location'),
-      ...Array(kioskGlyphCount.value).fill('kiosk'),
-      ...Array(kdsGlyphCount.value).fill('kds'),
-    ] as GlyphCategory[]
-  }
-
-  onMounted(() => {
-    glyphOrder.value = buildInitialGlyphOrder()
-  })
-
-  watch(glyphCount, (newVal, oldVal) => {
-    if (oldVal === undefined) return
-    const delta = newVal - oldVal
-    if (delta > 0) {
-      for (let i = 0; i < delta; i++) glyphOrder.value.push('location')
-    } else {
-      for (let i = 0; i < -delta; i++) {
-        const idx = glyphOrder.value.lastIndexOf('location')
-        if (idx !== -1) glyphOrder.value.splice(idx, 1)
-      }
-    }
-  })
-
-  watch(kioskGlyphCount, (newVal, oldVal) => {
-    if (oldVal === undefined) return
-    const delta = newVal - oldVal
-    if (delta > 0) {
-      for (let i = 0; i < delta; i++) glyphOrder.value.push('kiosk')
-    } else {
-      for (let i = 0; i < -delta; i++) {
-        const idx = glyphOrder.value.lastIndexOf('kiosk')
-        if (idx !== -1) glyphOrder.value.splice(idx, 1)
-      }
-    }
-  })
-
-  watch(kdsGlyphCount, (newVal, oldVal) => {
-    if (oldVal === undefined) return
-    const delta = newVal - oldVal
-    if (delta > 0) {
-      for (let i = 0; i < delta; i++) glyphOrder.value.push('kds')
-    } else {
-      for (let i = 0; i < -delta; i++) {
-        const idx = glyphOrder.value.lastIndexOf('kds')
-        if (idx !== -1) glyphOrder.value.splice(idx, 1)
-      }
-    }
-  })
-
-  const glyphItems = computed<GlyphItem[]>(() => {
-    return glyphOrder.value.map((category, position) => {
-      const index =
-        glyphOrder.value.slice(0, position + 1).filter((c) => c === category)
-          .length - 1
-      return { category, index }
-    })
-  })
-
-  const glyphSrcFor = (item: GlyphItem) => {
-    if (item.category === 'location') return glyphSrc(item.index)
-    if (item.category === 'kiosk') return kioskGlyphSrc(item.index)
-    return kdsGlyphSrc(item.index)
-  }
-
-  const glyphAlt = (item: GlyphItem) => {
-    const label =
-      item.category === 'location'
-        ? 'Location'
-        : item.category === 'kiosk'
-          ? 'Kiosk'
-          : 'KDS'
-    return `${label} ${item.index + 1}`
-  }
-
-  const shouldPulseGlyph = (item: GlyphItem) =>
-    (item.category === 'location' &&
-      item.index === 6 &&
-      pulseFifthGlyph.value) ||
-    (item.category === 'kiosk' &&
-      item.index === 2 &&
-      pulseFifthKioskGlyph.value) ||
-    (item.category === 'kds' && item.index === 5 && pulseSixthKdsGlyph.value)
 
   // Enforce minimum value of 1 for locations
   watch(locations, (newValue) => {
