@@ -826,7 +826,9 @@
 
 <script setup lang="ts">
   import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-  // Stepper and Nav are auto-imported by Nuxt from components/
+  definePageMeta({
+    layout: 'default',
+  })
 
   const locations = ref(1)
   const kioskDevices = ref(0)
