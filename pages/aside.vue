@@ -5,25 +5,31 @@
       <h1 class="type-heading-800">
         Compare total costs for your food & beverage business
       </h1>
-      <p class="type-body text-muted">
+      <!-- <p class="type-body text-muted">
         Don't let your profits get toasted. Square Plus includes essential tools
         like online ordering, SMS marketing, and staff management that others
         charge extra for. F&B merchants save on average 24% with
         Square<sup>1</sup>.
-      </p>
+      </p> -->
     </header>
 
     <section class="pricing-section">
       <div class="pricing-container">
         <div class="pricing-header">
-          <div class="customization-header">
+          <header class="customization-header">
             <h3 class="type-subheading-400">Customize you comparison</h3>
             <!-- <p class="type-body text-muted">
               Have a Toast quote or a recent invoice? Drag and drop it anywhere
               on this page or upload it and we’ll map your existing costs
               directly to a Square Plus plan so you can see your exact savings1.
             </p> -->
-          </div>
+            <p class="type-body text-muted">
+              Don't let your profits get toasted. Square Plus includes essential
+              tools like online ordering, SMS marketing, and staff management
+              that others charge extra for. F&B merchants save on average 24%
+              with Square.
+            </p>
+          </header>
 
           <div class="steppers-grid">
             <div class="steppers">
@@ -50,25 +56,26 @@
               />
             </div>
           </div>
-          <p
-            v-if="showHighVolumeMessage"
-            class="stepper-sales-message type-body text-muted"
-          >
-            Managing a large operation? We can help.
+          <Transition name="stepper-sales-fade">
+            <p
+              v-if="showHighVolumeMessage"
+              class="stepper-sales-message type-body text-muted"
+            >
+              Managing a large operation? We can help.
 
-            <!-- That's a lot of {{ highVolumeMessageLabel }}. We can help out with
+              <!-- That's a lot of {{ highVolumeMessageLabel }}. We can help out with
             that by -->
 
-            <br />We provide tailored solutions and bulk discounts for larger
-            teams.
+              We provide tailored solutions and bulk discounts for larger teams.
 
-            <a
-              href="#"
-              class="stepper-sales-link"
-              >Talk to an expert</a
-            >
-            to get started.
-          </p>
+              <a
+                href="#"
+                class="stepper-sales-link"
+                >Talk to an expert</a
+              >
+              to get started.
+            </p>
+          </Transition>
         </div>
 
         <div class="content-grid">
@@ -273,7 +280,7 @@
 
     @include breakpoint(md) {
       padding: 0 2rem;
-      width: grid-width(10);
+      width: grid-width(11);
       h1 {
         max-width: 20ch;
       }
@@ -304,19 +311,32 @@
 
     @include breakpoint(md) {
       padding: 0 2rem;
-      width: grid-width(10);
+      width: grid-width(11);
     }
   }
 
   .pricing-header {
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
+    // gap: 3.2rem;
+    position: relative;
     width: 100%;
+    @include breakpoint(md) {
+      // gap: 5.2rem;
+    }
   }
 
   .customization-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
     padding: 1.6rem 0 0;
+    @include breakpoint(md) {
+      margin-bottom: 3.2rem;
+      p {
+        max-width: 76ch;
+      }
+    }
 
     h3 {
       color: $color-neutral-000;
@@ -339,7 +359,7 @@
   .aside-column {
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
+    gap: 1.2rem;
     flex-shrink: 0;
     align-self: flex-start;
     width: 100%;
@@ -364,7 +384,7 @@
       top: -0.5rem;
       right: 0;
       bottom: 0;
-      width: 32rem;
+      width: 16rem;
       height: calc(100% + 1rem);
       background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #fff 90%);
       pointer-events: none;
@@ -388,9 +408,10 @@
     );
     --spring-duration: 0.25s;
     display: flex;
-    gap: 1.2rem;
+    gap: 1.3rem;
     align-items: center;
     margin-right: 1.2rem;
+    margin-left: 1.6rem;
   }
 
   .glyph-enter-from,
@@ -457,24 +478,41 @@
   }
 
   .glpyh.glyph-rotate-6 {
-    transform: rotate(4deg);
+    transform: rotate(22deg);
   }
 
   .glpyh.glyph-rotate-7 {
-    transform: rotate(-5deg);
+    transform: rotate(5deg);
   }
 
   .glpyh {
-    max-width: 4rem;
-    max-height: 4rem;
-    min-width: 4rem;
-    min-height: 4rem;
+    max-width: 3.6rem;
+    max-height: 3.6rem;
+    min-width: 3.6rem;
+    min-height: 3.6rem;
     object-fit: contain;
   }
 
   .stepper-sales-message {
-    margin: 0;
-    transform: translateY(-0.8rem);
+    margin-top: 2rem;
+    @include breakpoint(md) {
+      max-width: 66ch;
+    }
+    // opacity fade-in when message appears
+    &.stepper-sales-fade-enter-from {
+      opacity: 0;
+    }
+    &.stepper-sales-fade-enter-to {
+      opacity: 1;
+    }
+    &.stepper-sales-fade-enter-active {
+      transition: opacity 0.3s ease;
+    }
+    // position: absolute;
+    // top: 4rem;
+    // right: 0;
+    // margin: 0;
+    // transform: translateY(-0.8rem);
   }
 
   .stepper-sales-link {
@@ -504,7 +542,7 @@
     flex-direction: column;
 
     @include breakpoint(md) {
-      padding-right: grid-width(0.5);
+      padding-right: grid-width(0.75);
     }
   }
 

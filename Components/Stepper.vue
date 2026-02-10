@@ -1,6 +1,6 @@
 <template>
   <div class="stepper-container">
-    <label class="stepper-label type-subheading-200">{{ label }}</label>
+    <label class="stepper-label type-body-medium">{{ label }}</label>
     <div
       class="stepper-track"
       role="group"
@@ -127,6 +127,7 @@
     font-size: var(--font-size-200);
     font-weight: var(--font-weight-regular);
     line-height: 1;
+    transform: translateY(-0.1rem);
   }
 
   .stepper-input {
