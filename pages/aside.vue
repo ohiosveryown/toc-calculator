@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <header class="header-hero">
+    <header class="header-hero scroll-fade-in">
       <span class="type-kicker">MAXIMIZE YOUR MARGINS</span>
       <h1 class="type-heading-800">
         Compare total costs for your food & beverage business
@@ -13,7 +13,7 @@
       </p> -->
     </header>
 
-    <section class="pricing-section">
+    <section class="pricing-section scroll-fade-in">
       <div class="pricing-container">
         <div class="pricing-header">
           <header class="customization-header">
@@ -251,15 +251,21 @@
     </section>
 
     <!-- <ValueProp image-src="/img/value@2x.png" /> -->
-    <ValueProp video-src="/img/vid.mp4" />
+    <div class="scroll-fade-in">
+      <ValueProp video-src="/img/vid.mp4" />
+    </div>
 
-    <Savings />
+    <div class="scroll-fade-in">
+      <Savings />
+    </div>
 
-    <LeadForm />
+    <div class="scroll-fade-in">
+      <LeadForm />
+    </div>
 
     <!-- <Testomonial /> -->
 
-    <section class="disclosure-section">
+    <section class="disclosure-section scroll-fade-in">
       <div class="disclosure-container">
         <div class="disclosure-card">
           <div class="disclosure-content">
@@ -290,6 +296,16 @@
   .app {
     margin: 0 auto;
     background: $color-neutral-1000;
+  }
+
+  /* Scroll-triggered fade-in (0 → 1 opacity) via Intersection Observer */
+  .scroll-fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+
+    &.scroll-fade-in--visible {
+      opacity: 1;
+    }
   }
 
   .header-hero {
@@ -1138,11 +1154,34 @@
     }
   }
 
+  // Scroll fade-in: opacity 0 → 1 when elements enter viewport (Intersection Observer)
+  let scrollFadeObserver: IntersectionObserver | null = null
   onMounted(() => {
     window.addEventListener('keydown', handleKeyPress)
+
+    scrollFadeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('scroll-fade-in--visible')
+            scrollFadeObserver?.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px -40px 0px', // trigger when ~40px from bottom of viewport
+        threshold: 0.1,
+      },
+    )
+    document.querySelectorAll('.scroll-fade-in').forEach((el) => {
+      scrollFadeObserver?.observe(el)
+    })
   })
 
   onUnmounted(() => {
     window.removeEventListener('keydown', handleKeyPress)
+    scrollFadeObserver?.disconnect()
+    scrollFadeObserver = null
   })
 </script>

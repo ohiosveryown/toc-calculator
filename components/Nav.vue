@@ -80,7 +80,7 @@
 
         <!-- Shopping Cart Icon -->
         <button
-          class="nav__icon-button"
+          class="nav__icon-button cart"
           aria-label="Shopping cart"
         >
           <svg
@@ -265,6 +265,10 @@
       display: block;
       width: 100%;
       height: 100%;
+    }
+
+    @media (max-width: 999px) {
+      display: none;
     }
   }
 
