@@ -134,8 +134,14 @@
       <h2 class="carousel__heading">
         Start taking payments with Square, powered by dLocal
       </h2>
-      <div class="carousel__track" role="list">
-        <article class="carousel__item" role="listitem">
+      <div
+        class="carousel__track"
+        role="list"
+      >
+        <article
+          class="carousel__item"
+          role="listitem"
+        >
           <div class="carousel__item-inner">
             <div class="carousel__item-default">
               <div class="carousel__item-media">
@@ -174,7 +180,10 @@
             </div>
           </div>
         </article>
-        <article class="carousel__item" role="listitem">
+        <article
+          class="carousel__item"
+          role="listitem"
+        >
           <div class="carousel__item-inner">
             <div class="carousel__item-default">
               <div class="carousel__item-media">
@@ -360,7 +369,7 @@
 
   .features__content {
     @include breakpoint(mdl) {
-      width: grid-width(3);
+      width: grid-width(3.5);
     }
   }
 
