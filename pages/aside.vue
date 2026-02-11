@@ -169,28 +169,37 @@
           </div>
 
           <div class="aside-column">
-            <div class="glpyhs-list-wrapper">
-              <TransitionGroup
-                tag="ul"
-                name="glyph"
-                class="glpyhs-list"
+            <div
+              class="glpyhs-list-wrapper"
+              :class="{ 'glpyhs-list-wrapper--scrolled': glyphsScrolledLeft }"
+            >
+              <div
+                class="glpyhs-list-scroll"
+                ref="glyphScrollRef"
+                @scroll="onGlyphScroll"
               >
-                <li
-                  v-for="(position, i) in glyphItems"
-                  :key="position"
-                  :class="{
-                    'glyph-fifth-pulse':
-                      i === glyphItems.length - 1 && pulseLastGlyph,
-                  }"
+                <TransitionGroup
+                  tag="ul"
+                  name="glyph"
+                  class="glpyhs-list"
                 >
-                  <img
-                    class="glpyh"
-                    :class="`glyph-rotate-${position % 8}`"
-                    :src="glyphSrcByPosition(position)"
-                    :alt="`Glyph ${position + 1}`"
-                  />
-                </li>
-              </TransitionGroup>
+                  <li
+                    v-for="(position, i) in glyphItems"
+                    :key="position"
+                    :class="{
+                      'glyph-fifth-pulse':
+                        i === glyphItems.length - 1 && pulseLastGlyph,
+                    }"
+                  >
+                    <img
+                      class="glpyh"
+                      :class="`glyph-rotate-${position % 8}`"
+                      :src="glyphSrcByPosition(position)"
+                      :alt="`Glyph ${position + 1}`"
+                    />
+                  </li>
+                </TransitionGroup>
+              </div>
             </div>
             <div class="aside-card">
               <div class="card-header">
@@ -395,6 +404,27 @@
     /* Fixed height so aside card never moves when glyph count changes */
     height: 4.4rem; /* 4rem glyph + 0.2rem padding top/bottom */
 
+    /* Left edge fade – only visible when list is scrolled */
+    &::before {
+      content: '';
+      position: absolute;
+      top: -0.5rem;
+      left: 0;
+      bottom: 0;
+      width: 16rem;
+      height: calc(100% + 1rem);
+      background: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, #fff 90%);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+    }
+
+    &.glpyhs-list-wrapper--scrolled::before {
+      opacity: 1;
+    }
+
+    /* Right edge fade */
     &::after {
       content: '';
       position: absolute;
@@ -405,6 +435,21 @@
       height: calc(100% + 1rem);
       background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #fff 90%);
       pointer-events: none;
+      z-index: 1;
+    }
+  }
+
+  .glpyhs-list-scroll {
+    padding: 0.2rem 0;
+    overflow-x: auto;
+    // overflow-y: hidden;
+    height: 100%;
+    scroll-behavior: smooth;
+    /* Hide scrollbar while keeping scroll */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 
@@ -825,7 +870,7 @@
 </style>
 
 <script setup lang="ts">
-  import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+  import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
   definePageMeta({
     layout: 'default',
   })
@@ -856,10 +901,10 @@
 
   const GLYPH_IMAGE_COUNT = GLYPH_IMAGE_NAMES.length
 
-  // Show (raw - 1) glyphs: 0 when raw <= 1, 1 when raw = 2, etc., at most number of images
+  // Show (raw - 1) glyphs: 0 when raw <= 1, 1 when raw = 2, etc. (no cap; images loop 1–16)
   const totalGlyphCount = computed(() => {
     const raw = locations.value + kioskDevices.value + kdsDevices.value
-    return Math.min(GLYPH_IMAGE_COUNT, Math.max(0, raw - 1))
+    return Math.max(0, raw - 1)
   })
 
   const glyphItems = computed<number[]>(() =>
@@ -867,7 +912,7 @@
   )
 
   const glyphSrcByPosition = (position: number) => {
-    const name = GLYPH_IMAGE_NAMES[Math.min(position, GLYPH_IMAGE_COUNT - 1)]
+    const name = GLYPH_IMAGE_NAMES[position % GLYPH_IMAGE_COUNT]
     return `/img/${name}@3x.png`
   }
 
@@ -886,6 +931,34 @@
       }
     },
   )
+
+  // Keep glyph list scrolled to the end so the latest glyphs are visible
+  const glyphScrollRef = ref<HTMLElement | null>(null)
+  const glyphsScrolledLeft = ref(false)
+
+  function updateGlyphsScrolledLeft() {
+    const el = glyphScrollRef.value
+    glyphsScrolledLeft.value = el ? el.scrollLeft > 0 : false
+  }
+
+  function onGlyphScroll() {
+    updateGlyphsScrolledLeft()
+  }
+
+  function scrollGlyphsToEnd() {
+    nextTick(() => {
+      const el = glyphScrollRef.value
+      if (!el) return
+      el.scrollLeft = el.scrollWidth - el.clientWidth
+      updateGlyphsScrolledLeft()
+    })
+  }
+
+  watch([glyphItems], scrollGlyphsToEnd)
+  onMounted(() => {
+    scrollGlyphsToEnd()
+    updateGlyphsScrolledLeft()
+  })
 
   // Enforce minimum value of 1 for locations
   watch(locations, (newValue) => {

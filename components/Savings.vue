@@ -146,7 +146,7 @@
   const defaultCards = [
     {
       id: 'starting',
-      title: 'Starting out',
+      title: 'Getting started',
       imageSrc: '/img/small@3x.png',
       savings: 1872,
       locations: 1,
@@ -157,7 +157,7 @@
     },
     {
       id: 'scaling',
-      title: 'Scaling up',
+      title: 'Growing strong',
       imageSrc: '/img/medium@3x.png',
       savings: 2744,
       locations: 2,
@@ -168,7 +168,7 @@
     },
     {
       id: 'established',
-      title: 'Established',
+      title: 'Going further',
       imageSrc: '/img/large@3x.png',
       savings: 5616,
       locations: 3,
