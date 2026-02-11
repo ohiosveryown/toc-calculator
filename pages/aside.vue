@@ -795,7 +795,7 @@
     gap: 0.2rem;
 
     @include breakpoint(mdl) {
-      gap: 1rem;
+      gap: 0.4rem;
     }
 
     p:first-child {
@@ -861,7 +861,7 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    padding: 0 10.8rem;
+    padding: 0 1.2rem;
     max-width: 160rem;
 
     @include breakpoint(md) {
