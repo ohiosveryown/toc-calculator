@@ -63,14 +63,14 @@
 
         <div class="value-prop-testimonial">
           <blockquote class="type-heading-600-serif value-prop-quote">
-            {{ testimonial.quote }}
+            {{ testimonialWithBaseURL.quote }}
           </blockquote>
           <div class="value-prop-attribution">
             <div class="value-prop-avatar">
               <img
-                v-if="testimonial.avatarSrc"
-                :src="testimonial.avatarSrc"
-                :alt="testimonial.name"
+                v-if="testimonialWithBaseURL.avatarSrc"
+                :src="testimonialWithBaseURL.avatarSrc"
+                :alt="testimonialWithBaseURL.name"
                 class="avatar-img"
               />
               <div
@@ -79,9 +79,9 @@
               />
             </div>
             <div class="value-prop-author">
-              <p class="author-name">{{ testimonial.name }}</p>
-              <p class="author-role">{{ testimonial.role }}</p>
-              <p class="author-company">{{ testimonial.company }}</p>
+              <p class="author-name">{{ testimonialWithBaseURL.name }}</p>
+              <p class="author-role">{{ testimonialWithBaseURL.role }}</p>
+              <p class="author-company">{{ testimonialWithBaseURL.company }}</p>
             </div>
           </div>
         </div>
@@ -347,7 +347,10 @@
 </style>
 
 <script setup>
-  import { ref } from 'vue'
+  import { ref, computed } from 'vue'
+
+  const config = useRuntimeConfig()
+  const baseURL = config.app.baseURL
 
   const videoEl = ref(null)
 
@@ -360,7 +363,7 @@
     }
   }
 
-  defineProps({
+  const props = defineProps({
     imageSrc: {
       type: String,
       default: '',
@@ -402,8 +405,14 @@
         name: 'Ryan',
         role: 'Owner',
         company: 'FineDetailing',
-        avatarSrc: '/img/fine@3x.png',
+        avatarSrc: 'img/fine@3x.png',
       }),
     },
   })
+
+  // Compute the full avatar path with baseURL
+  const testimonialWithBaseURL = computed(() => ({
+    ...props.testimonial,
+    avatarSrc: props.testimonial.avatarSrc ? `${baseURL}${props.testimonial.avatarSrc}` : ''
+  }))
 </script>

@@ -1,7 +1,7 @@
 <template>
   <NuxtLink to="/aside">
     <img
-      src="/img/svt@2x.png"
+      :src="`${baseURL}img/svt@2x.png`"
       alt="Google"
     />
   </NuxtLink>
@@ -17,6 +17,9 @@
   definePageMeta({
     layout: 'blank',
   })
+
+  const config = useRuntimeConfig()
+  const baseURL = config.app.baseURL
 
   //   useSlideNavigation('/slides/two')
 </script>

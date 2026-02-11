@@ -251,7 +251,7 @@
     </section>
 
     <!-- <ValueProp image-src="/img/value@2x.png" /> -->
-    <ValueProp video-src="/img/vid.mp4" />
+    <ValueProp :video-src="`${baseURL}img/vid.mp4`" />
 
     <Savings />
 
@@ -950,9 +950,12 @@
     Array.from({ length: totalGlyphCount.value }, (_, i) => i),
   )
 
+  const config = useRuntimeConfig()
+  const baseURL = config.app.baseURL
+
   const glyphSrcByPosition = (position: number) => {
     const name = GLYPH_IMAGE_NAMES[position % GLYPH_IMAGE_COUNT]
-    return `/img/${name}@3x.png`
+    return `${baseURL}img/${name}@3x.png`
   }
 
   const pulseLastGlyph = ref(false)

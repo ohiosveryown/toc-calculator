@@ -148,11 +148,14 @@
 <script setup>
   import { computed } from 'vue'
 
+  const config = useRuntimeConfig()
+  const baseURL = config.app.baseURL
+
   const defaultCards = [
     {
       id: 'starting',
       title: 'Getting started',
-      imageSrc: '/img/small@3x.png',
+      imageSrc: `${baseURL}img/small@3x.png`,
       savings: 1872,
       locations: 1,
       kiosks: 2,
@@ -163,7 +166,7 @@
     {
       id: 'scaling',
       title: 'Growing strong',
-      imageSrc: '/img/medium@3x.png',
+      imageSrc: `${baseURL}img/medium@3x.png`,
       savings: 2744,
       locations: 2,
       kiosks: 4,
@@ -174,7 +177,7 @@
     {
       id: 'established',
       title: 'Going further',
-      imageSrc: '/img/large@3x.png',
+      imageSrc: `${baseURL}img/large@3x.png`,
       savings: 5616,
       locations: 3,
       kiosks: 6,

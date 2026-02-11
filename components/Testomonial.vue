@@ -14,7 +14,7 @@
           <div class="testimonial-attribution">
             <div class="testimonial-image">
               <img
-                src="/img/fine@3x.png"
+                :src="`${baseURL}img/fine@3x.png`"
                 alt="Ryan from FineDetailing"
                 class="avatar"
               />
@@ -167,6 +167,9 @@
 
 <script setup>
   import { ref } from 'vue'
+
+  const config = useRuntimeConfig()
+  const baseURL = config.app.baseURL
 
   const quotes = [
     'It has everything that I need just in one package...I like simplicity...I like that this is complete for my business.',
