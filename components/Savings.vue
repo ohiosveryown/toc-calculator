@@ -42,6 +42,7 @@
 </template>
 
 <style lang="scss" scoped>
+  @import '~/style/grid.scss';
   @import '../style/colors.scss';
   @import '../style/type.scss';
 
@@ -66,7 +67,10 @@
   .savings-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2.4rem;
+    gap: 8rem;
+    @include breakpoint(mdl) {
+      gap: 2.4rem;
+    }
   }
 
   .savings-card {

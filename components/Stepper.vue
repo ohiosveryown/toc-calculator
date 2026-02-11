@@ -61,14 +61,18 @@
 </template>
 
 <style lang="scss" scoped>
+  @import '~/style/grid.scss';
   @import '~/style/colors.scss';
 
   .stepper-container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    min-width: 16rem;
+    min-width: 12rem;
     width: 100%;
+    @include breakpoint(md) {
+      min-width: 16rem;
+    }
   }
 
   .stepper-label {

@@ -235,11 +235,12 @@
                     pricing and no contracts.
                   </p>
                   <button class="btn-primary type-body-medium">
-                    {{
-                      showHighVolumeMessage
-                        ? 'Get started with Square Plus'
-                        : 'Get started with Square Plus'
-                    }}
+                    <span class="btn-primary__label btn-primary__label--short"
+                      >Get started</span
+                    >
+                    <span class="btn-primary__label btn-primary__label--full"
+                      >Get started with Square Plus</span
+                    >
                   </button>
                 </div>
               </div>
@@ -350,8 +351,8 @@
     flex-direction: column;
     gap: 1.6rem;
     padding: 1.6rem 0 0;
+    margin-bottom: 3.2rem;
     @include breakpoint(md) {
-      margin-bottom: 3.2rem;
       p {
         max-width: 76ch;
       }
@@ -378,8 +379,11 @@
 
   .steppers {
     display: flex;
-    gap: 3.2rem;
+    gap: 1.2rem;
     flex-shrink: 0;
+    @include breakpoint(md) {
+      gap: 3.2rem;
+    }
   }
 
   .aside-column {
@@ -396,6 +400,7 @@
   }
 
   .glpyhs-list-wrapper {
+    display: none;
     overflow: hidden;
     position: relative;
     padding: 0.2rem 0;
@@ -403,6 +408,9 @@
     width: 100%;
     /* Fixed height so aside card never moves when glyph count changes */
     height: 4.4rem; /* 4rem glyph + 0.2rem padding top/bottom */
+    @include breakpoint(md) {
+      display: inherit;
+    }
 
     /* Left edge fade – only visible when list is scrolled */
     &::before {
@@ -612,9 +620,13 @@
 
   .table-header {
     display: flex;
-    gap: 5.4rem;
+    gap: 0.2rem;
     align-items: center;
     padding: 2rem 0;
+
+    @include breakpoint(lg) {
+      gap: 5.4rem;
+    }
 
     p:first-child {
       flex: 1;
@@ -630,10 +642,13 @@
 
   .table-row {
     display: flex;
-    gap: 4.7rem;
+    gap: 0rem;
     align-items: center;
     padding: 2rem 0;
     border-top: 1px solid $border-muted;
+    @include breakpoint(lg) {
+      gap: 4.7rem;
+    }
   }
 
   .table-row-total {
@@ -739,16 +754,18 @@
   .aside-card {
     background: $background-accent;
     border-radius: 1rem;
-    padding: 3rem;
+    padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 2.4rem;
     position: sticky;
     top: 2rem;
 
-    @include breakpoint(md) {
+    @include breakpoint(lg) {
       position: sticky;
       top: 2.2rem;
+      padding: 3rem;
+      gap: 4rem;
     }
   }
 
@@ -763,14 +780,23 @@
 
   .card-savings {
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1.2rem;
+    @include breakpoint(lg) {
+      flex-direction: row;
+      gap: 2rem;
+    }
   }
 
   .savings-item {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.2rem;
+
+    @include breakpoint(mdl) {
+      gap: 1rem;
+    }
 
     p:first-child {
       color: $color-neutral-000;
@@ -808,8 +834,19 @@
     cursor: pointer;
     transition: opacity 0.2s ease;
 
-    &:hover {
-      opacity: 0.9;
+    &__label--short {
+      display: inline;
+    }
+    &__label--full {
+      display: none;
+    }
+    @include breakpoint(lg) {
+      &__label--short {
+        display: none;
+      }
+      &__label--full {
+        display: inline;
+      }
     }
   }
 

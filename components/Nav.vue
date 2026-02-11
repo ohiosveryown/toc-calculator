@@ -61,11 +61,25 @@
           </svg>
         </button>
       </div>
+
+      <!-- Hamburger menu (visible when nav links are hidden) -->
+      <button
+        class="nav__menu-toggle"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span class="nav__menu-toggle-bar" />
+        <span class="nav__menu-toggle-bar" />
+        <span class="nav__menu-toggle-bar" />
+      </button>
     </div>
   </nav>
 </template>
 
 <style scoped lang="scss">
+  @import '~/style/grid.scss';
+
   .nav {
     width: 100%;
     height: 72px;
@@ -167,6 +181,44 @@
         line-height: 2.4rem;
       }
     }
+  }
+
+  .nav__links-right,
+  .nav__link {
+    display: none;
+    @include breakpoint(mdl) {
+      display: flex;
+    }
+  }
+
+  .nav__menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    @include breakpoint(mdl) {
+      display: none;
+    }
+  }
+
+  .nav__menu-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: #000;
+    border-radius: 1px;
   }
 </style>
 

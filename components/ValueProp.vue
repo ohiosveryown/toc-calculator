@@ -96,12 +96,14 @@
   @import '~/style/grid.scss';
 
   .value-prop-section {
-    margin-top: 12rem;
-    margin-bottom: 12rem;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
     background-color: $color-neutral-1000;
     padding: 0 2rem;
     width: 100%;
-    @include breakpoint(md) {
+    @include breakpoint(mdl) {
+      margin-top: 12rem;
+      margin-bottom: 12rem;
       padding: 0;
     }
   }
@@ -109,27 +111,31 @@
   .value-prop-layout {
     border-top: 1px solid $border-muted;
     padding-top: 6.4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100%;
-    max-width: 1440px;
+    // display: grid;
+    // grid-template-columns: 1fr 1fr;
+    // min-height: 100%;
+    // max-width: 1440px;
     margin: 0 auto;
+    @include breakpoint(mdl) {
+      display: flex;
+      align-items: flex-start;
+      max-width: 160rem;
+      width: grid-width(11);
+    }
   }
 
   .value-prop-image-wrap {
-    min-height: 480px;
-    margin: 0 auto;
     @include breakpoint(mdl) {
-      width: grid-width(10);
+      margin-right: grid-width(0.75);
+      width: grid-width(5.5);
     }
   }
 
   .value-prop-image {
-    width: 100%;
-    height: 100%;
-    min-height: 480px;
-    object-fit: cover;
     display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 
   .value-prop-image-placeholder {
@@ -198,6 +204,9 @@
     flex-direction: column;
     gap: 4rem;
     justify-content: center;
+    @include breakpoint(mdl) {
+      width: grid-width(5.5);
+    }
   }
 
   .value-prop-heading {
@@ -311,7 +320,7 @@
     }
 
     .value-prop-content {
-      padding: 4rem 3rem 4rem;
+      padding: 4rem 2rem 4rem;
     }
   }
 

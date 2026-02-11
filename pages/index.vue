@@ -247,7 +247,8 @@
                   transparent pricing and no contracts.
                 </p>
                 <button class="btn-primary type-body-medium">
-                  Get started with Square Plus
+                  <span class="btn-primary__label btn-primary__label--short">Get started</span>
+                  <span class="btn-primary__label btn-primary__label--full">Get started with Square Plus</span>
                 </button>
               </div>
             </div>
@@ -805,6 +806,21 @@
     width: fit-content;
     padding: 1rem 2rem;
     cursor: pointer;
+
+    &__label--short {
+      display: inline;
+    }
+    &__label--full {
+      display: none;
+    }
+    @include breakpoint(sm) {
+      &__label--short {
+        display: none;
+      }
+      &__label--full {
+        display: inline;
+      }
+    }
   }
 
   .btn-secondary {
