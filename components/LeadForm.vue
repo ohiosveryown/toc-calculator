@@ -1,7 +1,7 @@
 <template>
   <section class="passive-lead-form">
     <div class="lead-container">
-      <h2 class="type-heading-800">Keep more of what you make</h2>
+      <h2 class="type-heading-800">Keep more of what you&nbsp;make</h2>
       <div class="content">
         <p class="type-subheading-200">
           Learn how top-tier businesses manage their cash flow and keep their
@@ -45,33 +45,56 @@
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+    text-align: center;
 
     .content {
       display: flex;
       flex-direction: column;
       gap: 2.4rem;
+      align-items: center;
     }
 
     .input-container {
       display: flex;
       gap: 1.2rem;
+      justify-content: center;
+      width: 100%;
+      max-width: 48rem;
     }
 
     @include breakpoint(md) {
-      flex-direction: row;
+      gap: 4.2rem;
+      flex-direction: column;
       margin: 0 auto;
       padding: 11.2rem 0 4.8rem;
       max-width: 160rem;
       width: grid-width(11);
+      text-align: center;
+      align-items: center;
 
       h2 {
-        margin-right: grid-width(1);
-        width: grid-width(4.5);
+        // margin-right: grid-width(1);
+        // width: grid-width(4.5);
       }
 
-      .content {
-        width: grid-width(5);
+      .input-container {
+        max-width: none;
       }
+    }
+  }
+
+  .content {
+    align-items: center;
+
+    @include breakpoint(lg) {
+      width: grid-width(5);
+    }
+  }
+
+  .disclosure {
+    transform: translateY(-1rem);
+    @include breakpoint(lg) {
+      width: grid-width(8);
     }
   }
 
