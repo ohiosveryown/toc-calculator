@@ -49,13 +49,14 @@
   .savings-section {
     background-color: $color-neutral-1000;
     width: 100%;
-    padding: 8rem 6rem 10rem;
+    padding: 8rem 0rem 10rem;
   }
 
   .savings-container {
     border-top: 1px solid $border-muted;
     padding-top: 3rem;
-    max-width: 1440px;
+    max-width: 160rem;
+    width: grid-width(11);
     margin: 0 auto;
   }
 
@@ -69,7 +70,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 8rem;
     @include breakpoint(mdl) {
-      gap: 2.4rem;
+      gap: 3.6rem;
     }
   }
 
@@ -168,7 +169,7 @@
       kiosks: 4,
       kds: 4,
       description:
-        'Manage multiple locations and complex staff schedules. Scale your operations with advanced software tailored to your industry.',
+        'Manage multiple locations and complex staff schedules. Scale your operations with software tailored to your industry.',
     },
     {
       id: 'established',
@@ -179,7 +180,7 @@
       kiosks: 6,
       kds: 6,
       description:
-        'Connect your entire ecosystem with our robust API. Build custom workflows that handle high-volume transactions with ease.',
+        'Connect your entire ecosystem with our robust API. Build custom workflows that handle high-volume transactions.',
     },
   ]
 
