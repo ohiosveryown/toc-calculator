@@ -163,16 +163,16 @@
     font-family: var(--font-cash-sans-medium);
     font-size: 1.4rem;
     font-weight: var(--font-weight-medium);
-    padding: 1rem 2rem;
+    padding: 1rem 3.2rem;
     border-radius: 5rem;
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
     transition: opacity 0.2s ease;
 
-    &:hover {
-      opacity: 0.9;
-    }
+    // &:hover {
+    //   opacity: 0.9;
+    // }
 
     &--primary {
       background: $button-cta-fill-primary;
@@ -328,7 +328,7 @@
 </style>
 
 <script setup lang="ts">
-  const SCROLL_THRESHOLD = 80
+  const SCROLL_THRESHOLD = 900
 
   const hasScrolled = ref(false)
 
