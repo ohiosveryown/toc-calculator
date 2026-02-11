@@ -87,7 +87,7 @@
     gap: 0.8rem;
     width: 100%;
     min-height: 4.8rem;
-    padding: 0.8rem 1.2rem;
+    padding: 0.8rem 0.9rem;
     background: $color-neutral-1000;
     border: 1px solid $border-muted;
     border-radius: 10rem;

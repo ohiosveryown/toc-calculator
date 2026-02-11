@@ -73,7 +73,7 @@
               <!-- That's a lot of {{ highVolumeMessageLabel }}. We can help out with
             that by -->
 
-              We provide tailored solutions and bulk discounts for larger teams.
+              We offer tailored solutions and bulk discounts for larger teams.
 
               <a
                 href="#"
