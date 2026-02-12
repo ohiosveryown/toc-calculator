@@ -105,12 +105,13 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding: 4rem 1.6rem 12rem;
+    padding: 4rem 1.6rem 6rem;
 
     @include breakpoint(mdl) {
       padding-left: grid-width(0.5);
       padding-right: grid-width(0.5);
       padding-top: 3.2rem;
+      padding-bottom: 12rem;
     }
   }
 
@@ -160,10 +161,12 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    min-height: 28rem;
+    margin-bottom: 2rem;
+    height: 40rem;
     background: $color-neutral-900;
 
     @include breakpoint(mdl) {
+      margin-bottom: 0;
       margin-right: 2rem;
       width: grid-width(5);
       height: 80rem;

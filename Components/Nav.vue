@@ -23,7 +23,7 @@
           v-for="link in leftLinks"
           :key="link.text"
           :to="link.href"
-          class="nav__link"
+          class="nav__link nav__links--left"
         >
           {{ link.text }}
         </NuxtLink>
@@ -66,6 +66,8 @@
 </template>
 
 <style scoped lang="scss">
+  @import '@/style/grid.scss';
+
   .nav {
     width: 100%;
     height: 72px;
@@ -166,6 +168,14 @@
         font-size: 1.6rem; // Scale down on mobile
         line-height: 2.4rem;
       }
+    }
+  }
+
+  .nav__links--left,
+  .nav__links-right {
+    display: none;
+    @include breakpoint(mdl) {
+      display: flex;
     }
   }
 </style>
