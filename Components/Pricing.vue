@@ -90,8 +90,8 @@
 
   .pricing__container {
     margin: 0 auto;
+    max-width: 200rem;
     padding: 0 grid-width(0.5);
-    max-width: 100%;
   }
 
   .pricing__top-border {
@@ -108,7 +108,7 @@
 
     @include breakpoint(mdl) {
       margin-bottom: 5.6rem;
-      max-width: grid-width(4.5);
+      max-width: grid-width(6);
     }
   }
 

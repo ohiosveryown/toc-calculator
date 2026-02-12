@@ -46,6 +46,8 @@
   @import '@/style/colors.scss';
 
   .container-props-horizontal {
+    margin: 0 auto;
+    max-width: 200rem;
     padding: 0rem grid-width(0.5) 0;
 
     @include breakpoint(mdl) {

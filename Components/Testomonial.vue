@@ -36,6 +36,8 @@
   @import '@/style/colors.scss';
 
   .testimonial {
+    display: flex;
+    justify-content: center;
     background-color: $background-accent;
     padding: 6rem grid-width(0.5);
 
@@ -54,7 +56,7 @@
       flex-direction: row;
       align-items: stretch;
       gap: $gutter;
-      max-width: 100%;
+      max-width: 176rem;
     }
   }
 

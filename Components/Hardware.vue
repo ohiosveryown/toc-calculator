@@ -106,6 +106,8 @@
     flex-direction: column;
     align-items: stretch;
     padding: 4rem 1.6rem 6rem;
+    margin: 0 auto;
+    max-width: 200rem;
 
     @include breakpoint(mdl) {
       padding-left: grid-width(0.5);

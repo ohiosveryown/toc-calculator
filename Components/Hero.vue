@@ -46,15 +46,21 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    padding: 0rem grid-width(0.5);
+    min-height: 84dvh;
     background-image: url('/1143_JeJu_0011@2x.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     overflow: hidden;
 
+    h1 {
+      padding-top: 6.4rem;
+    }
+
     @include breakpoint(mdl) {
-      min-height: 85rem;
       padding: 0rem grid-width(0.5);
+      min-height: 85rem;
       h1 {
         max-width: 14ch;
         padding: 12rem 0 3.2rem;
@@ -90,7 +96,11 @@
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
-    margin: auto 0 8rem 0.8rem;
+    margin: auto 0 4rem 0.8rem;
+    @include breakpoint(mdl) {
+      margin-top: auto;
+      margin-bottom: 8rem;
+    }
   }
 
   .section-header__value-prop {

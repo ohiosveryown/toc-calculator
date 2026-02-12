@@ -49,6 +49,8 @@
   @import '@/style/colors.scss';
 
   .container-props-vertical {
+    margin: 0 auto;
+    max-width: 200rem;
     padding: 4.8rem grid-width(0.5) 0;
     @include breakpoint(mdl) {
       padding-top: 11.2rem;
@@ -95,7 +97,7 @@
     @include breakpoint(mdl) {
       margin-top: 4rem;
       margin-bottom: 4.8rem;
-      padding-bottom: 24rem;
+      padding-bottom: 12rem;
     }
   }
 
