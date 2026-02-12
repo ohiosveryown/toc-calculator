@@ -40,7 +40,7 @@
         </div>
         <div class="hero-two__img hero-two__img--bottom-right">
           <img
-            src="/img/hero/fig-03@3x.png"
+            src="/img/hero/fig-03-3@3x.png"
             alt="Restaurant team"
             loading="eager"
           />
@@ -50,12 +50,11 @@
       <!-- Central content -->
       <div class="hero-two__center">
         <h1 class="hero-two__title type-hero">
-          Grow with a modern point of sale – and payments that perfectly
-          integrate.
+          {{ t('hero.title') }}
         </h1>
         <div class="hero-two__actions">
-          <Button variant="primary-light">Get started</Button>
-          <Button variant="primary">Contact sales</Button>
+          <Button variant="primary-light">{{ t('hero.getStarted') }}</Button>
+          <Button variant="primary">{{ t('hero.contactSales') }}</Button>
         </div>
       </div>
 
@@ -65,33 +64,33 @@
           <span class="hero-two__value-prop-icon">
             <IconCreditCard />
           </span>
-          <span class="hero-two__value-prop-text"
-            >Payments and point of sale, unified</span
-          >
+          <span class="hero-two__value-prop-text">{{
+            t('hero.valueProp1')
+          }}</span>
         </li>
         <li class="hero-two__value-prop">
           <span class="hero-two__value-prop-icon">
             <IconLineChart />
           </span>
-          <span class="hero-two__value-prop-text"
-            >Pricing that adjusts as your business grows</span
-          >
+          <span class="hero-two__value-prop-text">{{
+            t('hero.valueProp2')
+          }}</span>
         </li>
         <li class="hero-two__value-prop">
           <span class="hero-two__value-prop-icon">
-            <IconPieChart />
+            <IconTiles />
           </span>
-          <span class="hero-two__value-prop-text"
-            >Free point of sale, inventory, and reporting tools</span
-          >
+          <span class="hero-two__value-prop-text">{{
+            t('hero.valueProp3')
+          }}</span>
         </li>
         <li class="hero-two__value-prop">
           <span class="hero-two__value-prop-icon">
-            <IconReceipt />
+            <IconLink />
           </span>
-          <span class="hero-two__value-prop-text"
-            >Sell in person or online with checkout links</span
-          >
+          <span class="hero-two__value-prop-text">{{
+            t('hero.valueProp4')
+          }}</span>
         </li>
       </ul>
     </div>
@@ -116,7 +115,7 @@
     overflow: hidden;
 
     @include breakpoint(mdl) {
-      min-height: 90rem;
+      min-height: 84rem;
     }
   }
 
@@ -150,7 +149,7 @@
 
   .hero-two__img--top-left {
     width: 14rem;
-    height: 14rem;
+    height: 17rem;
     top: 4rem;
     left: grid-width(0.5);
 
@@ -171,8 +170,8 @@
   .hero-two__img--top-right {
     width: 12rem;
     height: 10rem;
-    top: 6rem;
-    right: grid-width(0.5);
+    top: 1.2rem;
+    right: grid-width(1);
 
     @include breakpoint(md) {
       width: 16rem;
@@ -190,9 +189,11 @@
 
   .gracias {
     z-index: var(--z1);
-    right: 0;
-    top: 0;
+    right: grid-width(0.75);
+    width: 4rem;
+    top: 0.2rem;
     @include breakpoint(mdl) {
+      width: 6.4rem;
       top: 3.2rem;
       right: grid-width(1.75);
     }
@@ -215,10 +216,10 @@
   }
 
   .hero-two__img--bottom-left {
-    width: 14rem;
-    height: 14rem;
-    bottom: 12rem;
-    left: grid-width(0.5);
+    width: 10rem;
+    height: 10rem;
+    bottom: 22rem;
+    left: grid-width(2.5);
 
     @include breakpoint(md) {
       width: 18rem;
@@ -236,11 +237,13 @@
 
   .prices {
     z-index: var(--z1);
-    left: 0;
-    bottom: 0;
+    left: grid-width(2);
+    bottom: 30rem;
+    width: 4rem;
     @include breakpoint(mdl) {
       bottom: 12.88rem;
       left: grid-width(1.8);
+      width: 6.4rem;
     }
   }
 
@@ -266,15 +269,16 @@
   }
 
   .hero-two__img--bottom-right {
-    width: 16rem;
-    height: 16rem;
-    bottom: 12rem;
-    right: grid-width(0.5);
+    width: 10rem;
+    height: 10rem;
+    bottom: 20rem;
+    right: grid-width(2);
 
     @include breakpoint(md) {
       width: 20rem;
       height: 20rem;
       bottom: 14rem;
+      right: grid-width(0.5);
     }
 
     @include breakpoint(mdl) {
@@ -295,12 +299,17 @@
     padding: 18rem 0 2rem;
     margin: 0 auto;
     gap: 2.3rem;
+    transform: translateY(0rem);
 
-    @include breakpoint(mdl) {
+    @include breakpoint(md) {
+      transform: translateY(-4rem);
+    }
+
+    @include breakpoint(lg) {
       //   padding-top: 12rem;
       //   padding-bottom: 3.2rem;
       padding: auto 0;
-      transform: translateY(5.6rem);
+      transform: translateY(4rem);
     }
   }
 
@@ -310,6 +319,11 @@
     max-width: 14ch;
 
     @include breakpoint(mdl) {
+      max-width: none;
+      width: grid-width(10);
+    }
+
+    @include breakpoint(lg) {
       max-width: none;
       width: grid-width(6.75);
     }
@@ -328,9 +342,9 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
+    gap: 1rem;
     margin-top: auto;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     padding: 0 0.4rem;
 
     @include breakpoint(md) {
@@ -343,6 +357,7 @@
 
     @include breakpoint(mdl) {
       margin-bottom: 4rem;
+      padding: 0 4rem;
       justify-content: space-between;
     }
   }
@@ -359,15 +374,15 @@
     align-items: center;
     justify-content: center;
     color: $color-neutral-1000;
-    opacity: 0.95;
+    opacity: 0.72;
   }
 
   .hero-two__value-prop-text {
     font-family: var(--font-cash-sans);
-    font-size: var(--font-size-100);
+    font-size: 1.5rem;
     line-height: var(--line-height-100);
     color: $color-neutral-1000;
-    opacity: 0.95;
+    opacity: 0.72;
   }
 
   .btn {
@@ -375,3 +390,7 @@
     padding: 1.5rem 2.4rem !important;
   }
 </style>
+
+<script setup lang="ts">
+  const { t } = useLocale()
+</script>

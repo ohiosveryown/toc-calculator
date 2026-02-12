@@ -2,7 +2,7 @@
   <section class="hardware">
     <div class="hardware__inner">
       <h2 class="hardware__heading">
-        Start taking payments with Square, powered by dLocal
+        {{ t('hardware.heading') }}
       </h2>
       <div
         class="hardware__grid"
@@ -23,7 +23,7 @@
                 loading="lazy"
               />
             </div>
-            <p class="hardware__card-label">Kushki UltraP (with printer)</p>
+            <p class="hardware__card-label">{{ t('hardware.kushkiWithPrinter') }}</p>
           </div>
           <div class="hardware__card-hover">
             <div class="hardware__card-bg">
@@ -41,11 +41,11 @@
                 class="hardware__card-divider"
                 aria-hidden="true"
               ></div>
-              <p class="hardware__card-title">Kushki UltraP (with printer)</p>
+              <p class="hardware__card-title">{{ t('hardware.kushkiWithPrinter') }}</p>
               <ul class="hardware__card-list">
-                <li>Smart POS on Android OS</li>
-                <li>Free 5G data connectivity for the first 10 months*</li>
-                <li>Magnetic stripe, Chip & Pin, and NFC</li>
+                <li>{{ t('hardware.smartPos') }}</li>
+                <li>{{ t('hardware.free5G') }}</li>
+                <li>{{ t('hardware.magneticChipNfc') }}</li>
               </ul>
             </div>
           </div>
@@ -65,7 +65,7 @@
                 loading="lazy"
               />
             </div>
-            <p class="hardware__card-label">Kushki Ultra (without Printer)</p>
+            <p class="hardware__card-label">{{ t('hardware.kushkiWithoutPrinter') }}</p>
           </div>
           <div class="hardware__card-hover">
             <div class="hardware__card-bg">
@@ -83,11 +83,11 @@
                 class="hardware__card-divider"
                 aria-hidden="true"
               ></div>
-              <p class="hardware__card-title">Kushki Ultra (without Printer)</p>
+              <p class="hardware__card-title">{{ t('hardware.kushkiWithoutPrinter') }}</p>
               <ul class="hardware__card-list">
-                <li>Smart POS on Android OS</li>
-                <li>Free 5G data connectivity for the first 10 months*</li>
-                <li>Magnetic stripe, Chip & Pin, and NFC</li>
+                <li>{{ t('hardware.smartPos') }}</li>
+                <li>{{ t('hardware.free5G') }}</li>
+                <li>{{ t('hardware.magneticChipNfc') }}</li>
               </ul>
             </div>
           </div>
@@ -320,3 +320,7 @@
     }
   }
 </style>
+
+<script setup lang="ts">
+const { t } = useLocale()
+</script>

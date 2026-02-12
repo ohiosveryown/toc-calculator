@@ -2,11 +2,11 @@
   <section class="lead-gen">
     <div class="lead-gen__container">
       <h2 class="lead-gen__heading type-hero">
-        Bring your point of sale and your payments together
+        {{ t('leadGen.heading') }}
       </h2>
       <div class="lead-gen__actions">
-        <Button variant="primary-light">Get started</Button>
-        <Button variant="primary">Contact sales</Button>
+        <Button variant="primary-light">{{ t('leadGen.getStarted') }}</Button>
+        <Button variant="primary">{{ t('leadGen.contactSales') }}</Button>
       </div>
     </div>
   </section>
@@ -61,4 +61,5 @@
 
 <script setup>
   import Button from '@/components/Button.vue'
+  const { t } = useLocale()
 </script>

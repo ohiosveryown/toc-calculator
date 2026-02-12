@@ -1,14 +1,11 @@
 <template>
   <div class="app">
-    <HeroTwo />
-    <!-- <Hero /> -->
+    <Hero v-if="!darkVariant" />
+    <HeroTwo v-else />
     <PropsVertical />
     <PropsHorizontal />
     <Hardware />
-    <Testomonial
-      image-src="/img/quote.png"
-      quote="Trusted by millions. Square powers payments and point of sale for businesses of all sizes in Mexico and around the world."
-    />
+    <Testomonial image-src="/img/quote.png" />
     <MobileApp />
     <Pricing />
     <FAQ />
@@ -148,6 +145,10 @@
     -->
   </div>
 </template>
+
+<script setup lang="ts">
+const { darkVariant } = useDesignAlt()
+</script>
 
 <style lang="scss" scoped>
   @import '@/style/grid.scss';

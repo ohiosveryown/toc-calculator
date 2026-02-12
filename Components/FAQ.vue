@@ -6,7 +6,7 @@
         aria-hidden="true"
       ></div>
       <div class="faq__layout">
-        <h2 class="faq__heading type-heading-600-serif text-heading">FAQ</h2>
+        <h2 class="faq__heading type-heading-600-serif text-heading">{{ t('faq.heading') }}</h2>
         <div class="faq__accordion">
           <div
             v-for="(item, index) in items"
@@ -22,7 +22,7 @@
               @click="toggle(index)"
             >
               <span class="faq__question-text type-body-medium text-heading">{{
-                item.question
+                item.questionKey ? t(item.questionKey) : item.question
               }}</span>
               <span
                 class="faq__icon"
@@ -39,9 +39,9 @@
               :hidden="openIndex !== index"
             >
               <div
-                v-if="item.answerHtml"
+                v-if="item.answerKey || item.answerHtml"
                 class="faq__answer-body type-body-100 text-muted"
-                v-html="item.answerHtml"
+                v-html="item.answerKey ? t(item.answerKey) : item.answerHtml"
               />
             </div>
           </div>
@@ -53,6 +53,7 @@
 
 <script setup>
   import { ref } from 'vue'
+  const { t } = useLocale()
 
   const openIndex = ref(0)
 
@@ -61,29 +62,19 @@
   }
 
   const items = [
-    {
-      question: 'How do I start accepting payments with Square?',
-      answerHtml: `
-      <ul>
-        <li>Go to <a href="https://squareup.com/mx/es" target="_blank" rel="noopener noreferrer" class="faq__link">https://squareup.com/mx/es</a> and select Mexico as your country.</li>
-        <li>Once you're in your Dashboard, look for the black setup banner and click "Start" to begin identity verification with dLocal.</li>
-        <li>Complete the process by uploading the required documentation and add your CLABE to receive deposits.</li>
-        <li>Once approved, you can start accepting card payments with Square, powered by dLocal.</li>
-      </ul>
-    `,
-    },
-    { question: 'How do I connect my devices?' },
-    { question: 'How do I take my first payment?' },
-    { question: 'Why is Square hardware different in other countries?' },
-    { question: 'How much does Square POS software cost?' },
-    { question: 'How do dynamic processing fees work?' },
-    { question: 'What happens if a customer files a chargeback?' },
-    { question: 'How can I issue a refund?' },
-    { question: 'How do I get an invoice for processing fees?' },
-    { question: 'When and where do I receive my money?' },
-    { question: 'What types of cards can I accept with Square?' },
-    { question: 'Which printers work best with Square?' },
-    { question: 'Need more help?' },
+    { questionKey: 'faq.q1', answerKey: 'faq.a1' },
+    { questionKey: 'faq.q2' },
+    { questionKey: 'faq.q3' },
+    { questionKey: 'faq.q4' },
+    { questionKey: 'faq.q5' },
+    { questionKey: 'faq.q6' },
+    { questionKey: 'faq.q7' },
+    { questionKey: 'faq.q8' },
+    { questionKey: 'faq.q9' },
+    { questionKey: 'faq.q10' },
+    { questionKey: 'faq.q11' },
+    { questionKey: 'faq.q12' },
+    { questionKey: 'faq.q13' },
   ]
 </script>
 

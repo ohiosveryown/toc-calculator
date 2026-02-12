@@ -7,17 +7,16 @@
       />
       <header class="pricing__header">
         <h2 class="pricing__title type-heading-600-serif text-heading">
-          Pricing that adapts as your business grows
+          {{ t('pricing.title') }}
         </h2>
         <p class="pricing__description type-body-100 text-muted">
-          One simple rate for all cards, with automatic discounts as your
-          monthly sales increase. No monthly fees. No contracts. No surprises.
+          {{ t('pricing.description') }}
         </p>
         <Button
           variant="primary"
           class="pricing__cta"
         >
-          Get started
+          {{ t('pricing.getStarted') }}
         </Button>
       </header>
 
@@ -38,8 +37,9 @@
             {{ tier.range }}
           </p>
           <div class="pricing-card__fees">
-            <span class="pricing-card__fees-label type-body-medium text-heading"
-              >Processing fees:</span
+            <span
+              class="pricing-card__fees-label type-body-medium text-heading"
+              >{{ t('pricing.processingFees') }}</span
             >
             <span class="pricing-card__fees-value type-body-100 text-muted">{{
               tier.fee
@@ -50,13 +50,10 @@
 
       <footer class="pricing__footer">
         <h4 class="pricing__footer-title type-body-100-medium">
-          Direct and transparent pricing
+          {{ t('pricing.footerTitle') }}
         </h4>
         <p class="pricing__footer-disclaimer type-body-100 text-muted">
-          Your processing rate automatically adjusts based on your monthly sales
-          volume. Discounted rates apply starting the following month once a
-          tier is reached. <br />The money will be settled the next business day
-          through the linked bank account<sup>1</sup>.
+          {{ t('pricing.footerDisclaimer') }}<sup>1</sup>.
         </p>
       </footer>
     </div>
@@ -65,13 +62,33 @@
 
 <script setup>
   import Button from '@/components/Button.vue'
+  const { locale, t } = useLocale()
 
-  const tiers = [
-    { name: 'Tier 1', range: 'Less than $30,000', fee: '3.45% + IVA' },
-    { name: 'Tier 2', range: '$30,000 - $100,000', fee: '3.20% + IVA' },
-    { name: 'Tier 3', range: '$100,000 - $300,000', fee: '2.99% + IVA' },
-    { name: 'Tier 3', range: '$300,000 or More', fee: '2.79% + IVA' },
-  ]
+  const tiers = computed(() => {
+    locale.value // react to locale change
+    return [
+      {
+        name: t('pricing.tier1'),
+        range: t('pricing.range1'),
+        fee: t('pricing.fee'),
+      },
+      {
+        name: t('pricing.tier2'),
+        range: t('pricing.range2'),
+        fee: t('pricing.fee2'),
+      },
+      {
+        name: t('pricing.tier3'),
+        range: t('pricing.range3'),
+        fee: t('pricing.fee3'),
+      },
+      {
+        name: t('pricing.tier3'),
+        range: t('pricing.range4'),
+        fee: t('pricing.fee4'),
+      },
+    ]
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -196,5 +213,9 @@
       vertical-align: super;
       line-height: 0;
     }
+  }
+
+  .pricing__cta {
+    padding: 1.2rem 3.2rem;
   }
 </style>

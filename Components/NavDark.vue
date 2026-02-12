@@ -20,28 +20,31 @@
         </div>
 
         <NuxtLink
+          style="opacity: 0.2"
           v-for="link in leftLinks"
-          :key="link.text"
+          :key="link.key"
           :to="link.href"
           class="nav__link nav__links--left"
         >
-          {{ link.text }}
+          {{ t(link.key) }}
         </NuxtLink>
       </div>
 
       <!-- Right Links -->
       <div class="nav__links-right">
         <NuxtLink
+          style="opacity: 0.2"
           v-for="link in rightLinks"
-          :key="link.text"
+          :key="link.key"
           :to="link.href"
           class="nav__link"
         >
-          {{ link.text }}
+          {{ t(link.key) }}
         </NuxtLink>
 
         <!-- Shopping Cart Icon -->
         <button
+          style="opacity: 0.2"
           class="nav__icon-button"
           aria-label="Shopping cart"
         >
@@ -184,16 +187,17 @@
 </style>
 
 <script setup lang="ts">
+  const { t } = useLocale()
   const leftLinks = [
-    { text: 'Business types', href: '/' },
-    { text: 'Products', href: '/' },
-    { text: 'Pricing', href: '/' },
-    { text: 'Hardware', href: '/' },
-    { text: "What's New", href: '/' },
+    { key: 'nav.businessTypes', href: '/' },
+    { key: 'nav.products', href: '/' },
+    { key: 'nav.pricing', href: '/' },
+    { key: 'nav.hardware', href: '/' },
+    { key: 'nav.whatsNew', href: '/' },
   ]
 
   const rightLinks = [
-    { text: 'Sign in', href: '/' },
-    { text: 'Support', href: '/' },
+    { key: 'nav.signIn', href: '/' },
+    { key: 'nav.support', href: '/' },
   ]
 </script>

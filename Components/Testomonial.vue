@@ -10,7 +10,7 @@
       </div>
       <div class="testimonial__content-col">
         <p class="testimonial__quote type-heading-600-serif text-heading">
-          {{ quote }}
+          {{ quote ?? t('testimonial.quote') }}
         </p>
       </div>
     </div>
@@ -18,11 +18,11 @@
 </template>
 
 <script setup>
+  const { t } = useLocale()
   defineProps({
     quote: {
       type: String,
-      default:
-        'Trusted by millions. Square powers payments and point of sale for businesses of all sizes in Mexico and around the world.',
+      default: undefined,
     },
     imageSrc: {
       type: String,

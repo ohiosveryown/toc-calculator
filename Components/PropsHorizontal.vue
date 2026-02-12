@@ -3,7 +3,7 @@
     <div class="props-horizontal__layout">
       <header class="props-horizontal__heading-col">
         <h2 class="type-heading-600-serif text-heading">
-          Solutions designed to boost your business
+          {{ t('propsHorizontal.heading') }}
         </h2>
       </header>
       <div class="props-horizontal__cards-col">
@@ -15,11 +15,9 @@
               loading="lazy"
             />
           </div>
-          <h3 class="type-body-medium">Stay focused on what matters</h3>
+          <h3 class="type-body-medium">{{ t('propsHorizontal.stayFocusedTitle') }}</h3>
           <p class="type-body-100 text-muted">
-            Cut down on steps and mistakes with software designed to be easy to
-            use and intuitive to learn. With one system controlling your
-            business, you'll get to spend more time with your customers.
+            {{ t('propsHorizontal.stayFocusedBody') }}
           </p>
         </article>
         <article class="prop-card">
@@ -30,16 +28,19 @@
               loading="lazy"
             />
           </div>
-          <h3 class="type-body-medium">Reach customers wherever they are</h3>
+          <h3 class="type-body-medium">{{ t('propsHorizontal.reachCustomersTitle') }}</h3>
           <p class="type-body-100 text-muted">
-            Accept payments from anywhere in the country by sending customers a
-            secure payment link.
+            {{ t('propsHorizontal.reachCustomersBody') }}
           </p>
         </article>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+const { t } = useLocale()
+</script>
 
 <style lang="scss" scoped>
   @import '@/style/grid.scss';

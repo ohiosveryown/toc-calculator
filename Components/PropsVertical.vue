@@ -2,17 +2,15 @@
   <div class="container-props-vertical">
     <header>
       <h2 class="type-heading-600-serif">
-        Run your business with all your tools — together
+        {{ t('propsVertical.heading') }}
       </h2>
     </header>
 
     <section class="prop-section">
       <div class="prop-section__content">
-        <h3 class="type-body-medium">Do more with one system</h3>
+        <h3 class="type-body-medium">{{ t('propsVertical.doMoreTitle') }}</h3>
         <p class="type-body-100 text-muted">
-          Accept card payments and manage sales on a single platform. Your free
-          point of sale helps you sell, manage payments, track performance, and
-          more, so you can save time on day-to-day operations.
+          {{ t('propsVertical.doMoreBody') }}
         </p>
       </div>
       <div class="prop-section__media">
@@ -26,11 +24,9 @@
 
     <section class="prop-section">
       <div class="prop-section__content">
-        <h3 class="type-body-medium">Pay less as you grow</h3>
+        <h3 class="type-body-medium">{{ t('propsVertical.payLessTitle') }}</h3>
         <p class="type-body-100 text-muted">
-          Your rates adjust automatically based on your monthly sales — no
-          contracts or surprises — so the price you pay keeps up with your
-          business.
+          {{ t('propsVertical.payLessBody') }}
         </p>
       </div>
       <div class="prop-section__media">
@@ -43,6 +39,10 @@
     </section>
   </div>
 </template>
+
+<script setup lang="ts">
+const { t } = useLocale()
+</script>
 
 <style lang="scss" scoped>
   @import '@/style/grid.scss';

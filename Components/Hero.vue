@@ -1,11 +1,11 @@
 <template>
   <header class="section-header">
     <h1 class="type-hero">
-      Grow with a modern point of sale — and payments that perfectly integrate.
+      {{ t('hero.title') }}
     </h1>
     <div class="section-header__actions">
-      <Button variant="primary-light">Get started</Button>
-      <Button variant="primary">Contact sales</Button>
+      <Button variant="primary-light">{{ t('hero.getStarted') }}</Button>
+      <Button variant="primary">{{ t('hero.contactSales') }}</Button>
     </div>
 
     <ul class="section-header__value-props">
@@ -13,29 +13,42 @@
         <span class="section-header__value-prop-icon">
           <IconCreditCard />
         </span>
-        <span class="section-header__value-prop-text"
-          >Payments and point of sale, unified</span
-        >
+        <span class="section-header__value-prop-text">{{
+          t('hero.valueProp1')
+        }}</span>
       </li>
       <li class="section-header__value-prop">
         <span class="section-header__value-prop-icon">
           <IconLineChart />
         </span>
-        <span class="section-header__value-prop-text"
-          >Pricing that adjusts as your business grows</span
-        >
+        <span class="section-header__value-prop-text">{{
+          t('hero.valueProp2')
+        }}</span>
       </li>
       <li class="section-header__value-prop">
         <span class="section-header__value-prop-icon">
-          <IconPieChart />
+          <IconTiles />
         </span>
-        <span class="section-header__value-prop-text"
-          >Free point of sale, inventory, and reporting tools</span
-        >
+        <span class="section-header__value-prop-text">{{
+          t('hero.valueProp3')
+        }}</span>
+      </li>
+
+      <li class="section-header__value-prop">
+        <span class="section-header__value-prop-icon">
+          <IconLink />
+        </span>
+        <span class="section-header__value-prop-text">{{
+          t('hero.valueProp4')
+        }}</span>
       </li>
     </ul>
   </header>
 </template>
+
+<script setup lang="ts">
+  const { t } = useLocale()
+</script>
 
 <style lang="scss" scoped>
   @import '@/style/grid.scss';
@@ -73,8 +86,7 @@
       inset: 0;
       background: linear-gradient(
         to left,
-        rgba(0, 0, 0, 0.35) 0%,
-        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 0.75) 100%
       );
       z-index: 0;

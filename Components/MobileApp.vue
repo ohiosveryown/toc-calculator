@@ -11,16 +11,16 @@
         </div>
         <div class="mobile-app__copy">
           <h2 class="mobile-app__title type-heading-700-serif">
-            Try Square on your mobile device
+            {{ t('mobileApp.title') }}
           </h2>
           <p class="mobile-app__subtitle type-body-100">
-            Download and explore the app to get started.
+            {{ t('mobileApp.subtitle') }}
           </p>
         </div>
       </div>
 
       <div class="mobile-app__right">
-        <p class="mobile-app__scan-label type-auxiliary">Scan to get started</p>
+        <p class="mobile-app__scan-label type-auxiliary">{{ t('mobileApp.scanLabel') }}</p>
         <div class="mobile-app__qr-row">
           <div class="mobile-app__qr-block">
             <img
@@ -34,7 +34,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              iOS
+              {{ t('mobileApp.ios') }}
             </a>
           </div>
           <div class="mobile-app__qr-block">
@@ -49,7 +49,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              Android
+              {{ t('mobileApp.android') }}
             </a>
           </div>
         </div>
@@ -202,3 +202,7 @@
     // }
   }
 </style>
+
+<script setup lang="ts">
+const { t } = useLocale()
+</script>
