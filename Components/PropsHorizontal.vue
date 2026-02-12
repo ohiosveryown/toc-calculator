@@ -46,7 +46,7 @@
   @import '@/style/colors.scss';
 
   .container-props-horizontal {
-    padding: 8rem grid-width(0.5) 0;
+    padding: 0rem grid-width(0.5) 0;
 
     @include breakpoint(mdl) {
       padding-top: 0rem;

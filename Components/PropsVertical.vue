@@ -49,7 +49,7 @@
   @import '@/style/colors.scss';
 
   .container-props-vertical {
-    padding: 8rem grid-width(0.5) 0;
+    padding: 4.8rem grid-width(0.5) 0;
     @include breakpoint(mdl) {
       padding-top: 11.2rem;
     }
@@ -79,13 +79,21 @@
     }
   }
 
+  .prop-section:nth-of-type(odd) {
+    padding-top: 2rem;
+    @include breakpoint(mdl) {
+      padding-top: 4.8rem;
+    }
+  }
+
   .prop-section:nth-of-type(even) {
-    margin-bottom: 8rem;
-    margin-top: 4rem;
-    padding-bottom: 4rem;
+    margin-bottom: 4.8rem;
+    margin-top: 1rem;
+    padding-bottom: 8rem;
     border-top: none;
     border-bottom: 1px solid $border-muted;
     @include breakpoint(mdl) {
+      margin-top: 4rem;
       margin-bottom: 4.8rem;
       padding-bottom: 24rem;
     }
