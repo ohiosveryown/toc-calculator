@@ -8,6 +8,7 @@
       image-src="/img/quote.png"
       quote="Trusted by millions. Square powers payments and point of sale for businesses of all sizes in Mexico and around the world."
     />
+    <MobileApp />
     <Pricing />
     <FAQ />
 

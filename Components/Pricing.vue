@@ -95,7 +95,7 @@
   }
 
   .pricing__top-border {
-    border-top: 1px solid $border-muted;
+    // border-top: 1px solid $border-muted;
     margin-bottom: 4rem;
   }
 

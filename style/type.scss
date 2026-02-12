@@ -67,6 +67,16 @@
   letter-spacing: var(--letter-spacing-tight-4);
 }
 
+
+.type-heading-700-serif {
+  font-family: var(--font-exact-block);
+  font-size: var(--font-size-700);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-600);
+  letter-spacing: var(--letter-spacing-tight-3);
+}
+
+
 // Heading 600 - Serif
 .type-heading-600-serif {
   font-family: var(--font-exact-block);
