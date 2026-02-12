@@ -17,7 +17,7 @@
       </div>
       <div class="prop-section__media">
         <img
-          src="/cc-img@3x.webp"
+          src="/img/01-2@2x.png"
           alt="Card payment input with Mastercard"
           loading="lazy"
         />
@@ -35,7 +35,7 @@
       </div>
       <div class="prop-section__media">
         <img
-          src="/cc-img@3x.webp"
+          src="/img/02@2x.png"
           alt="Business owner on laptop and phone"
           loading="lazy"
         />

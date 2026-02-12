@@ -1,6 +1,7 @@
 <template>
   <div class="app">
-    <Hero />
+    <HeroTwo />
+    <!-- <Hero /> -->
     <PropsVertical />
     <PropsHorizontal />
     <Hardware />
@@ -11,6 +12,8 @@
     <MobileApp />
     <Pricing />
     <FAQ />
+    <LeadGen />
+    <Footnotes />
 
     <!-- <header class="section-header">
       <h1 class="type-hero">

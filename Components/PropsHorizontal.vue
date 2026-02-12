@@ -10,7 +10,7 @@
         <article class="prop-card">
           <div class="prop-card__media">
             <img
-              src="/cc-img@3x.webp"
+              src="/img/03@2x.png"
               alt="Busy commercial kitchen or restaurant"
               loading="lazy"
             />
@@ -25,7 +25,7 @@
         <article class="prop-card">
           <div class="prop-card__media">
             <img
-              src="/cc-img@3x.webp"
+              src="/img/04-3@2x.png"
               alt="Invoice and payment options on tablet"
               loading="lazy"
             />
