@@ -9,6 +9,7 @@
       quote="Trusted by millions. Square powers payments and point of sale for businesses of all sizes in Mexico and around the world."
     />
     <Pricing />
+    <FAQ />
 
     <!-- <header class="section-header">
       <h1 class="type-hero">

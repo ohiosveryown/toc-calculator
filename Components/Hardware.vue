@@ -138,7 +138,7 @@
       line-height: var(--line-height-700);
       letter-spacing: var(--letter-spacing-tight-4);
       margin-bottom: 4rem;
-      width: grid-width(4);
+      width: grid-width(5);
     }
   }
 

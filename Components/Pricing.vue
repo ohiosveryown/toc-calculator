@@ -108,7 +108,7 @@
 
     @include breakpoint(mdl) {
       padding-top: 8rem;
-      padding-bottom: 11.2rem;
+      padding-bottom: 8rem;
     }
   }
 
@@ -133,7 +133,7 @@
 
     @include breakpoint(mdl) {
       margin-bottom: 5.6rem;
-      max-width: grid-width(4);
+      max-width: grid-width(4.5);
     }
   }
 
