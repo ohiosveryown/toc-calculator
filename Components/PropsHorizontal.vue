@@ -10,7 +10,7 @@
         <article class="prop-card">
           <div class="prop-card__media">
             <img
-              src="/img/03@2x.png"
+              :src="`${baseURL}img/03@2x.png`"
               alt="Busy commercial kitchen or restaurant"
               loading="lazy"
             />
@@ -23,7 +23,7 @@
         <article class="prop-card">
           <div class="prop-card__media">
             <img
-              src="/img/04-3@2x.png"
+              :src="`${baseURL}img/04-3@2x.png`"
               alt="Invoice and payment options on tablet"
               loading="lazy"
             />
@@ -40,6 +40,8 @@
 
 <script setup lang="ts">
 const { t } = useLocale()
+const config = useRuntimeConfig()
+const baseURL = config.app.baseURL
 </script>
 
 <style lang="scss" scoped>

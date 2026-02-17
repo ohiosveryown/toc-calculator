@@ -16,7 +16,7 @@
           <div class="hardware__card-default">
             <div class="hardware__card-media">
               <img
-                src="/img/kushki-2@2x.png"
+                :src="`${baseURL}img/kushki-2@2x.png`"
                 alt=""
                 width="400"
                 height="300"
@@ -28,7 +28,7 @@
           <div class="hardware__card-hover">
             <div class="hardware__card-bg">
               <img
-                src="/img/kushki-1@2x.png"
+                :src="`${baseURL}img/kushki-1@2x.png`"
                 alt=""
                 width="640"
                 height="360"
@@ -58,7 +58,7 @@
           <div class="hardware__card-default">
             <div class="hardware__card-media small-device">
               <img
-                src="/img/kushki-3@2x.png"
+                :src="`${baseURL}img/kushki-3@2x.png`"
                 alt=""
                 width="400"
                 height="300"
@@ -70,7 +70,7 @@
           <div class="hardware__card-hover">
             <div class="hardware__card-bg">
               <img
-                src="/img/kushki-1@2x.png"
+                :src="`${baseURL}img/kushki-1@2x.png`"
                 alt=""
                 width="640"
                 height="360"
@@ -323,4 +323,6 @@
 
 <script setup lang="ts">
 const { t } = useLocale()
+const config = useRuntimeConfig()
+const baseURL = config.app.baseURL
 </script>

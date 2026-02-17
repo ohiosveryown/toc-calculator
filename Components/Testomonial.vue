@@ -3,7 +3,7 @@
     <div class="testimonial__layout">
       <div class="testimonial__media-col">
         <img
-          :src="imageSrc"
+          :src="fullImageSrc"
           alt=""
           loading="lazy"
         />
@@ -19,16 +19,21 @@
 
 <script setup>
   const { t } = useLocale()
-  defineProps({
+  const config = useRuntimeConfig()
+  const baseURL = config.app.baseURL
+  
+  const props = defineProps({
     quote: {
       type: String,
       default: undefined,
     },
     imageSrc: {
       type: String,
-      default: '/img/testimonial@2x.jpg',
+      default: 'img/testimonial@2x.jpg',
     },
   })
+  
+  const fullImageSrc = computed(() => `${baseURL}${props.imageSrc}`)
 </script>
 
 <style lang="scss" scoped>

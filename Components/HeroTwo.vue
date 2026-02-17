@@ -5,42 +5,42 @@
       <div class="hero-two__images">
         <div class="hero-two__img hero-two__img--top-left">
           <img
-            src="/img/hero/fig-01@3x.png"
+            :src="`${baseURL}img/hero/fig-01@3x.png`"
             alt="Cafe barista"
             loading="eager"
           />
         </div>
 
         <img
-          src="/img/hero/glpyh-02@3x.png"
+          :src="`${baseURL}img/hero/glpyh-02@3x.png`"
           alt=""
           class="glyph gracias"
         />
 
         <div class="hero-two__img hero-two__img--top-right">
           <img
-            src="/img/hero/fig-04@3x.png"
+            :src="`${baseURL}img/hero/fig-04@3x.png`"
             alt="Retail display"
             loading="eager"
           />
         </div>
 
         <img
-          src="/img/hero/glpyh-01@3x.png"
+          :src="`${baseURL}img/hero/glpyh-01@3x.png`"
           alt=""
           class="glyph prices"
         />
 
         <div class="hero-two__img hero-two__img--bottom-left">
           <img
-            src="/img/hero/fig-02@3x.png"
+            :src="`${baseURL}img/hero/fig-02@3x.png`"
             alt="Art and commerce"
             loading="eager"
           />
         </div>
         <div class="hero-two__img hero-two__img--bottom-right">
           <img
-            src="/img/hero/fig-03-3@3x.png"
+            :src="`${baseURL}img/hero/fig-03-3@3x.png`"
             alt="Restaurant team"
             loading="eager"
           />
@@ -393,4 +393,6 @@
 
 <script setup lang="ts">
   const { t } = useLocale()
+  const config = useRuntimeConfig()
+  const baseURL = config.app.baseURL
 </script>

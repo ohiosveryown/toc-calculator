@@ -5,7 +5,7 @@
     <PropsVertical />
     <PropsHorizontal />
     <Hardware />
-    <Testomonial image-src="/img/quote.png" />
+    <Testomonial image-src="img/quote.png" />
     <MobileApp />
     <Pricing />
     <FAQ />

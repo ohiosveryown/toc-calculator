@@ -4,7 +4,7 @@
       <div class="mobile-app__left">
         <div class="mobile-app__visual">
           <img
-            src="/img/mobile-app-hand@2x.png"
+            :src="`${baseURL}img/mobile-app-hand@2x.png`"
             alt="Hand holding mobile device with Square app"
             class="mobile-app__image"
           />
@@ -24,7 +24,7 @@
         <div class="mobile-app__qr-row">
           <div class="mobile-app__qr-block">
             <img
-              src="/img/qr-ios.svg"
+              :src="`${baseURL}img/qr-ios.svg`"
               alt="QR code for iOS App Store"
               class="mobile-app__qr"
             />
@@ -39,7 +39,7 @@
           </div>
           <div class="mobile-app__qr-block">
             <img
-              src="/img/qr-android.svg"
+              :src="`${baseURL}img/qr-android.svg`"
               alt="QR code for Android Play Store"
               class="mobile-app__qr"
             />
@@ -205,4 +205,6 @@
 
 <script setup lang="ts">
 const { t } = useLocale()
+const config = useRuntimeConfig()
+const baseURL = config.app.baseURL
 </script>

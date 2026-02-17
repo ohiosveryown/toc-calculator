@@ -15,7 +15,7 @@
       </div>
       <div class="prop-section__media">
         <img
-          src="/img/01-2@2x.png"
+          :src="`${baseURL}img/01-2@2x.png`"
           alt="Card payment input with Mastercard"
           loading="lazy"
         />
@@ -31,7 +31,7 @@
       </div>
       <div class="prop-section__media">
         <img
-          src="/img/02@2x.png"
+          :src="`${baseURL}img/02@2x.png`"
           alt="Business owner on laptop and phone"
           loading="lazy"
         />
@@ -42,6 +42,8 @@
 
 <script setup lang="ts">
 const { t } = useLocale()
+const config = useRuntimeConfig()
+const baseURL = config.app.baseURL
 </script>
 
 <style lang="scss" scoped>
