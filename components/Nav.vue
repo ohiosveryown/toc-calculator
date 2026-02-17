@@ -37,7 +37,10 @@
     </div>
   </nav>
 
-  <nav class="nav">
+  <nav
+    class="nav"
+    :class="{ 'nav--hero': hero }"
+  >
     <div class="nav__container">
       <!-- Left Links -->
       <div class="nav__links-left">
@@ -52,7 +55,7 @@
           >
             <path
               d="M18.3232 0C20.3546 0 22.0005 1.64594 22 3.67676V18.3232C22 20.3541 20.3541 22 18.3232 22H3.67676C1.64644 22 0 20.3541 0 18.3232V3.67676C0 1.64594 1.64644 0 3.67676 0H18.3232ZM5.16602 4.00098C4.52507 4.00098 4.00586 4.52019 4.00586 5.16113V16.8398C4.00586 17.4808 4.52507 18 5.16602 18H16.8447C17.485 17.9998 18.0039 17.4807 18.0039 16.8398V5.16113C18.0039 4.52032 17.485 4.00119 16.8447 4.00098H5.16602ZM13.334 8.00098C13.7028 8.00104 13.9999 8.30059 14 8.66992V13.332C13.9998 13.7013 13.7028 14.0009 13.334 14.001H8.66504C8.2973 14.0008 7.9992 13.7013 7.99902 13.332V8.66992C7.99914 8.30063 8.29726 8.00111 8.66504 8.00098H13.334Z"
-              fill="black"
+              :fill="hero ? '#fff' : 'black'"
             />
           </svg>
         </div>
@@ -91,7 +94,7 @@
             viewBox="0 0 24 24"
           >
             <path
-              fill="#000"
+              :fill="hero ? '#fff' : '#000'"
               fill-rule="evenodd"
               d="M7 14c-.55 0-1 .45-1 1s.45 1 1 1h13v2H7c-1.65 0-3-1.35-3-3 0-1.17.68-2.18 1.67-2.67L4 4H2V2h6v2h12l-2 10zm9.36-2 1.2-6H6.44l1.2 6zM7.5 22a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"
               clip-rule="evenodd"
@@ -124,6 +127,19 @@
     height: 72px;
     background-color: white;
     position: relative;
+    z-index: var(--z1);
+
+    &.nav--hero {
+      background-color: transparent;
+
+      .nav__link {
+        color: #fff;
+      }
+
+      .nav__menu-toggle-bar {
+        background-color: #fff;
+      }
+    }
   }
 
   // Scroll-reveal nav (fixed bar that appears on scroll)
@@ -236,6 +252,10 @@
     }
   }
 
+  .nav.nav--hero:not(.nav--scroll) .nav__link {
+    color: #fff;
+  }
+
   .nav:not(.nav--scroll)
     .nav__links-left:has(.nav__link:hover)
     .nav__link:not(:hover),
@@ -332,6 +352,8 @@
 </style>
 
 <script setup lang="ts">
+  defineProps<{ hero?: boolean }>()
+
   const SCROLL_THRESHOLD = 900
 
   const hasScrolled = ref(false)

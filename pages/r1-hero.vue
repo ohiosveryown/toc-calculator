@@ -1,20 +1,22 @@
 <template>
   <div class="app">
-    <header class="header-hero scroll-fade-in">
-      <span class="type-kicker">MAXIMIZE YOUR MARGINS</span>
-      <h1 class="type-heading-800">
-        Compare total costs for your food & beverage business
-      </h1>
-      <p
-        style="display: none"
-        class="type-body text-muted"
-      >
-        Don't let your profits get toasted. Square Plus includes essential tools
-        like online ordering, SMS marketing, and staff management that others
-        charge extra for. F&B merchants save on average 24% with
-        Square<sup>1</sup>.
-      </p>
-    </header>
+    <HeroBg />
+
+    <!-- <header class="header-hero scroll-fade-in">
+        <span class="type-kicker">MAXIMIZE YOUR MARGINS</span>
+        <h1 class="type-heading-800">
+          Compare total costs for your food & beverage business
+        </h1>
+        <p
+          style="display: none"
+          class="type-body text-muted"
+        >
+          Don't let your profits get toasted. Square Plus includes essential tools
+          like online ordering, SMS marketing, and staff management that others
+          charge extra for. F&B merchants save on average 24% with
+          Square<sup>1</sup>.
+        </p>
+      </header> -->
 
     <section class="pricing-section scroll-fade-in">
       <div class="pricing-container">
@@ -24,16 +26,16 @@
               See your setup with the Square Plus bundle
             </h3>
             <!-- <p class="type-body text-muted">
-                Have a Toast quote or a recent invoice? Drag and drop it anywhere
-                on this page or upload it and we’ll map your existing costs
-                directly to a Square Plus plan so you can see your exact savings1.
-              </p> -->
+                  Have a Toast quote or a recent invoice? Drag and drop it anywhere
+                  on this page or upload it and we’ll map your existing costs
+                  directly to a Square Plus plan so you can see your exact savings1.
+                </p> -->
             <!-- <p class="type-body text-muted">
-                Don't let your profits get toasted. Square Plus includes essential
-                tools like online ordering, SMS marketing, and staff management
-                that others charge extra for. F&B merchants save on average 24%
-                with Square<sup>1</sup>.
-              </p> -->
+                  Don't let your profits get toasted. Square Plus includes essential
+                  tools like online ordering, SMS marketing, and staff management
+                  that others charge extra for. F&B merchants save on average 24%
+                  with Square<sup>1</sup>.
+                </p> -->
             <p class="type-body text-muted">
               Don't let your profits get toasted. Square Plus simplifies your
               operations by bundling essential tools into one predictable
@@ -177,7 +179,7 @@
               Managing a large operation? We can help.
 
               <!-- That's a lot of {{ highVolumeMessageLabel }}. We can help out with
-              that by -->
+                that by -->
 
               We offer tailored solutions and bulk discounts for larger teams.
 
@@ -254,7 +256,7 @@
                   </span>
                 </p>
               </div>
-              <p class="type-body value-cell">Included</p>
+              <p class="type-body value-cell">$0/month</p>
               <p class="type-body value-cell-right">{{ feature.cost }}</p>
             </div>
 
@@ -326,19 +328,19 @@
             </div>
 
             <!-- <div class="table-row table-row-total">
-              <div class="feature-cell">
-                <p class="type-subheading-200">Total cost</p>
-              </div>
-              <p class="value-cell type-subheading-200">
-                {{ formatCurrency(squarePrice) }}/month
-              </p>
-              <p class="value-cell-right type-subheading-200">
-                {{ formatCurrency(toastPrice) }}/month<sup
-                  class="total-footnote"
-                  >1</sup
-                >
-              </p>
-            </div> -->
+                <div class="feature-cell">
+                  <p class="type-subheading-200">Total cost</p>
+                </div>
+                <p class="value-cell type-subheading-200">
+                  {{ formatCurrency(squarePrice) }}/month
+                </p>
+                <p class="value-cell-right type-subheading-200">
+                  {{ formatCurrency(toastPrice) }}/month<sup
+                    class="total-footnote"
+                    >1</sup
+                  >
+                </p>
+              </div> -->
           </div>
 
           <div class="aside-column">
@@ -422,7 +424,7 @@
                 </div>
               </div>
             </div>
-            <Marquee :savings-percentage="savingsPercentage" />
+            <!-- <Marquee :savings-percentage="savingsPercentage" /> -->
           </div>
         </div>
       </div>
@@ -448,8 +450,8 @@
         <div class="disclosure-card">
           <div class="disclosure-content">
             <!-- <div class="disclosure-heading">
-                <h4 class="type-subheading-300">Disclosures</h4>
-              </div> -->
+                  <h4 class="type-subheading-300">Disclosures</h4>
+                </div> -->
             <p class="text-muted">
               Total cost of ownership for Toast is based on publicly available
               rates and research as of January 8, 2026. Since Toast doesn't
