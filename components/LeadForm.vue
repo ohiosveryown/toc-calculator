@@ -123,7 +123,7 @@
 
   .btn-primary {
     font-family: var(--font-cash-sans-medium);
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: var(--font-weight-medium);
     padding: 1rem 3.2rem;
     border-radius: 5rem;
