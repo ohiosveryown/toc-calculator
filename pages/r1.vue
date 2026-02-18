@@ -1340,7 +1340,12 @@
   }
 
   function selectAddHardware(option: string) {
-    if (!activeDeviceTypes.value.includes(option)) {
+    if (activeDeviceTypes.value.includes(option)) {
+      activeDeviceTypes.value = activeDeviceTypes.value.filter((t) => t !== option)
+      if (option === 'Kiosks') kioskDevices.value = 0
+      else if (option === 'KDS devices') kdsDevices.value = 0
+      else if (option === 'Handheld') handheldDevices.value = 0
+    } else {
       activeDeviceTypes.value = [...activeDeviceTypes.value, option]
       if (option === 'Kiosks') kioskDevices.value = 1
       else if (option === 'KDS devices') kdsDevices.value = 1

@@ -39,7 +39,8 @@
             <p class="type-body text-muted">
               Build your ideal bundle and watch your savings scale. See how
               Square's all-in-one pricing keeps more of your hard-earned crumbs
-              compared to Toast. Learn more about Square hardware here.
+              compared to Toast. Learn more about Square
+              <span class="link">hardware here</span>.
             </p>
           </header>
 
@@ -1598,6 +1599,13 @@
       width: 100%;
     }
   }
+
+  .link {
+    // color: #000000;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
 </style>
 
 <script setup lang="ts">
@@ -1625,7 +1633,14 @@
   }
 
   function selectAddHardware(option: string) {
-    if (!activeDeviceTypes.value.includes(option)) {
+    if (activeDeviceTypes.value.includes(option)) {
+      activeDeviceTypes.value = activeDeviceTypes.value.filter(
+        (t) => t !== option,
+      )
+      if (option === 'Kiosks') kioskDevices.value = 0
+      else if (option === 'KDS devices') kdsDevices.value = 0
+      else if (option === 'Handheld') handheldDevices.value = 0
+    } else {
       activeDeviceTypes.value = [...activeDeviceTypes.value, option]
       if (option === 'Kiosks') kioskDevices.value = 1
       else if (option === 'KDS devices') kdsDevices.value = 1
