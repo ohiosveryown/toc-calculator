@@ -1227,7 +1227,7 @@
   /* Frame around aside card with scrolling marquee on all four sides */
   .aside-card-frame {
     position: relative;
-    padding: 2.8rem;
+    padding: 2.4rem;
     width: 100%;
   }
 
@@ -1236,11 +1236,12 @@
     overflow: hidden;
     user-select: none;
     pointer-events: none;
-    font-family: var(--font-cash-sans-medium);
+    // font-family: var(--font-cash-sans-medium);
+    font-family: var(--font-cash-mono);
     font-size: 1.3rem;
     // font-weight: 600;
     line-height: var(--line-height-auxiliary);
-    letter-spacing: var(--letter-spacing-wide);
+    letter-spacing: 0.05rem;
     text-transform: uppercase;
     color: $color-neutral-500;
 
