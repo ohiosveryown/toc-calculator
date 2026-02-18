@@ -23,7 +23,7 @@
         <div class="pricing-header">
           <header class="customization-header">
             <h3 class="type-subheading-400">
-              See your setup with the Square Plus bundle
+              Customize your Square Plus setup
             </h3>
             <!-- <p class="type-body text-muted">
                   Have a Toast quote or a recent invoice? Drag and drop it anywhere
@@ -37,9 +37,9 @@
                   with Square<sup>1</sup>.
                 </p> -->
             <p class="type-body text-muted">
-              Don't let your profits get toasted. Square Plus simplifies your
-              operations by bundling essential tools into one predictable
-              monthly price. Use the controls below to see how your plan fits.
+              Build your ideal bundle and watch your savings scale. See how
+              Square's all-in-one pricing keeps more of your hard-earned crumbs
+              compared to Toast. Learn more about Square hardware here.
             </p>
           </header>
 
@@ -256,7 +256,7 @@
                   </span>
                 </p>
               </div>
-              <p class="type-body value-cell">$0/month</p>
+              <p class="type-body value-cell">$0</p>
               <p class="type-body value-cell-right">{{ feature.cost }}</p>
             </div>
 
@@ -376,55 +376,117 @@
                 </TransitionGroup>
               </div>
             </div>
-            <div class="aside-card">
-              <div class="card-header">
-                <h4 class="type-subheading-200">
-                  <!-- No more crumbs: save {{ savingsPercentage }}%. -->
-                  See the savings difference.
-                </h4>
-              </div>
-
-              <div class="card-savings">
-                <div class="savings-item savings-item-square">
-                  <p class="type-body-medium">Square</p>
-                  <p class="type-heading-700">
-                    {{ formatCurrency(squarePrice) }}
-                  </p>
-                  <p class="type-body text-muted">per month</p>
-                </div>
-                <div class="savings-item">
-                  <p class="type-body-medium">Toast</p>
-                  <p class="type-heading-700">
-                    {{ formatCurrency(toastPrice) }}
-                  </p>
-                  <p class="type-body text-muted">per month</p>
+            <div class="aside-card-frame">
+              <div
+                class="aside-card-marquee aside-card-marquee--top"
+                aria-hidden="true"
+              >
+                <div class="aside-card-marquee__track">
+                  <span
+                    v-for="n in 8"
+                    :key="'top-' + n"
+                    class="aside-card-marquee__segment"
+                    >{{ asideMarqueeText }}</span
+                  >
                 </div>
               </div>
-
-              <div class="card-cta">
-                <div class="cta-header">
-                  <p class="type-body-medium">
-                    Don't let your profits get toasted. <br />Save
-                    {{ savingsPercentage }}% with Square Plus.
-                  </p>
+              <div
+                class="aside-card-marquee aside-card-marquee--right"
+                aria-hidden="true"
+              >
+                <div
+                  class="aside-card-marquee__track aside-card-marquee__track--vertical"
+                >
+                  <span
+                    v-for="n in 8"
+                    :key="'right-' + n"
+                    class="aside-card-marquee__segment"
+                    >{{ asideMarqueeText }}</span
+                  >
                 </div>
-                <div class="cta-content">
-                  <p class="type-body text-muted">
-                    Choose a platform that earns your business with transparent
-                    pricing and no contracts.
-                  </p>
-                  <button class="btn-primary type-body-medium">
-                    <span class="btn-primary__label btn-primary__label--short"
-                      >Get started</span
-                    >
-                    <span class="btn-primary__label btn-primary__label--full"
-                      >Get started with Square Plus</span
-                    >
-                  </button>
+              </div>
+              <div
+                class="aside-card-marquee aside-card-marquee--bottom"
+                aria-hidden="true"
+              >
+                <div
+                  class="aside-card-marquee__track aside-card-marquee__track--reverse"
+                >
+                  <span
+                    v-for="n in 8"
+                    :key="'bottom-' + n"
+                    class="aside-card-marquee__segment"
+                    >{{ asideMarqueeText }}</span
+                  >
+                </div>
+              </div>
+              <div
+                class="aside-card-marquee aside-card-marquee--left"
+                aria-hidden="true"
+              >
+                <div
+                  class="aside-card-marquee__track aside-card-marquee__track--vertical aside-card-marquee__track--vertical-down"
+                >
+                  <span
+                    v-for="n in 8"
+                    :key="'left-' + n"
+                    class="aside-card-marquee__segment"
+                    >{{ asideMarqueeText }}</span
+                  >
+                </div>
+              </div>
+              <div class="aside-card">
+                <div class="card-header">
+                  <span class="savings-badge savings-badge--above-header">
+                    {{ formatCurrency(monthlySavings) }} in savings
+                  </span>
+                  <h4 class="type-subheading-300">
+                    <!-- No more crumbs: save {{ savingsPercentage }}%. -->
+                    See the monthly difference
+                  </h4>
+                </div>
+
+                <div class="card-savings">
+                  <div class="savings-item savings-item-square">
+                    <p class="company">Square Plus</p>
+                    <p class="type-heading-700">
+                      {{ formatCurrency(squarePrice) }}
+                    </p>
+                    <p class="per-month text-muted">per month</p>
+                  </div>
+                  <div class="savings-item">
+                    <p class="company">Toast</p>
+                    <p class="type-heading-700">
+                      {{ formatCurrency(toastPrice) }}
+                    </p>
+                    <p class="per-month text-muted">per month</p>
+                  </div>
+                </div>
+
+                <div class="card-cta">
+                  <!-- <div class="cta-header">
+                    <p class="type-body-medium">
+                      Don't let your profits get toasted. <br />Save
+                      {{ savingsPercentage }}% with Square Plus.
+                    </p>
+                  </div> -->
+                  <div class="cta-content">
+                    <p class="type-body">
+                      Choose a platform that earns your business with
+                      transparent pricing and no contracts.
+                    </p>
+                    <button class="btn-primary type-body-medium">
+                      <span class="btn-primary__label btn-primary__label--short"
+                        >Get started</span
+                      >
+                      <span class="btn-primary__label btn-primary__label--full"
+                        >Get started with Square Plus</span
+                      >
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <!-- <Marquee :savings-percentage="savingsPercentage" /> -->
           </div>
         </div>
       </div>
@@ -747,6 +809,7 @@
     height: 4.4rem; /* 4rem glyph + 0.2rem padding top/bottom */
     @include breakpoint(md) {
       display: inherit;
+      transform: translateY(-1rem);
     }
 
     /* Left edge fade – only visible when list is scrolled */
@@ -1156,8 +1219,193 @@
     color: $color-neutral-000;
   }
 
+  /* Frame around aside card with scrolling marquee on all four sides */
+  .aside-card-frame {
+    position: relative;
+    padding: 2.8rem;
+    width: 100%;
+  }
+
+  .aside-card-marquee {
+    position: absolute;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+    font-family: var(--font-cash-sans-medium);
+    font-size: 1.3rem;
+    // font-weight: 600;
+    line-height: var(--line-height-auxiliary);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    color: $color-neutral-500;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Horizontal strips: fade at left and right edges */
+    &--top,
+    &--bottom {
+      &::before,
+      &::after {
+        top: 0;
+        bottom: 0;
+        width: 8rem;
+      }
+
+      &::before {
+        left: 0;
+        background: linear-gradient(
+          to right,
+          $color-neutral-1000 10%,
+          transparent 100%
+        );
+      }
+
+      &::after {
+        right: 0;
+        background: linear-gradient(
+          to left,
+          $color-neutral-1000 10%,
+          transparent 100%
+        );
+      }
+    }
+
+    /* Vertical strips: fade at top and bottom edges */
+    &--right,
+    &--left {
+      &::before,
+      &::after {
+        left: 0;
+        right: 0;
+        height: 8rem;
+      }
+
+      &::before {
+        bottom: 0;
+        background: linear-gradient(
+          to top,
+          $color-neutral-1000 10%,
+          transparent 100%
+        );
+      }
+
+      &::after {
+        top: 0;
+        background: linear-gradient(
+          to bottom,
+          $color-neutral-1000 10%,
+          transparent 100%
+        );
+      }
+    }
+
+    &--top {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2.5rem;
+    }
+
+    &--right {
+      top: 2.5rem;
+      right: 0;
+      bottom: 2.5rem;
+      width: 2.5rem;
+    }
+
+    &--bottom {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2.5rem;
+    }
+
+    &--left {
+      top: 2.5rem;
+      left: 0;
+      bottom: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+
+  .aside-card-marquee__track {
+    display: flex;
+    width: max-content;
+    white-space: nowrap;
+    animation: aside-marquee-h 18s linear infinite;
+
+    &--reverse {
+      animation: aside-marquee-h-reverse 18s linear infinite;
+    }
+
+    &--vertical {
+      flex-direction: column;
+      height: max-content;
+      width: auto;
+      white-space: nowrap;
+      animation: aside-marquee-v 18s linear infinite;
+
+      &.aside-card-marquee__track--vertical-down {
+        animation: aside-marquee-v-down 18s linear infinite;
+      }
+    }
+  }
+
+  .aside-card-marquee__segment {
+    flex-shrink: 0;
+  }
+
+  .aside-card-marquee--right .aside-card-marquee__segment,
+  .aside-card-marquee--left .aside-card-marquee__segment {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    display: inline-block;
+  }
+
+  @keyframes aside-marquee-h {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-12.5%);
+    }
+  }
+
+  @keyframes aside-marquee-h-reverse {
+    from {
+      transform: translateX(-12.5%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes aside-marquee-v {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-12.5%);
+    }
+  }
+
+  @keyframes aside-marquee-v-down {
+    from {
+      transform: translateY(-12.5%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
   .aside-card {
-    background: $background-accent;
     border-radius: 1rem;
     padding: 3rem 2rem;
     display: flex;
@@ -1165,20 +1413,24 @@
     gap: 2.4rem;
     position: sticky;
     top: 2rem;
+    background: $background-accent;
 
     @include breakpoint(lg) {
       position: sticky;
       top: 2.2rem;
       padding: 3rem;
-      gap: 4rem;
+      gap: 2.4rem;
     }
   }
 
   .card-header {
+    display: flex;
+    flex-direction: column;
     padding-bottom: 3rem;
     border-bottom: 1px solid $border-muted;
 
     h4 {
+      margin-top: -0.4rem;
       color: $color-neutral-000;
     }
   }
@@ -1208,6 +1460,36 @@
     }
   }
 
+  .company {
+    font-family: var(--font-cash-sans-medium);
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .savings-badge {
+    display: inline-block;
+    width: fit-content;
+    margin-left: -0.1rem;
+    padding: 0.4rem 0.8rem;
+    background: $color-neutral-800;
+    color: $color-neutral-000;
+    border-radius: 5rem;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-cash-sans-medium);
+    font-size: 1.3rem;
+    letter-spacing: 0.25px;
+
+    &--spacer {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    &--above-header {
+      display: block;
+      margin-bottom: 1.2rem;
+    }
+  }
+
   .savings-item-square {
     @include breakpoint(mdl) {
       margin-right: 6.4rem;
@@ -1233,6 +1515,7 @@
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+    margin-top: 1.2rem;
   }
 
   .btn-primary {
@@ -1628,6 +1911,10 @@
     if (toastPrice.value === 0) return 0
     return Math.round((monthlySavings.value / toastPrice.value) * 100)
   })
+
+  const asideMarqueeText = computed(
+    () => `NO MORE CRUMBS • SAVE ${savingsPercentage.value}% •\u00A0`,
+  )
 
   // Format currency
   const formatCurrency = (amount: number) => {
