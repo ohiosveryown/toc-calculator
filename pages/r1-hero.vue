@@ -202,7 +202,7 @@
                 class="type-body-medium text-center"
                 style="transform: translateX(0.4rem)"
               >
-                Square
+                Square Plus
               </p>
               <p
                 class="type-body-medium text-center"
@@ -1431,11 +1431,11 @@
   .card-header {
     display: flex;
     flex-direction: column;
-    padding-bottom: 3rem;
+    padding-bottom: 2.4rem;
     border-bottom: 1px solid $border-muted;
 
     h4 {
-      margin-top: -0.4rem;
+      //   margin-top: -0.4rem;
       color: $color-neutral-000;
     }
   }
@@ -1505,6 +1505,9 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    // margin-top: 0.3rem;
+    // padding-top: 0.3rem;
+    // border-top: 1px solid $border-muted;
   }
 
   .cta-header {
