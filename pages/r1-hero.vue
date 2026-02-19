@@ -37,9 +37,10 @@
                   with Square<sup>1</sup>.
                 </p> -->
             <p class="type-body text-muted">
-              Build your ideal bundle and watch your savings scale. See how
-              Square's all-in-one pricing keeps more of your hard-earned crumbs
-              compared to Toast. Learn more about Square
+              Scale your operation without the contract traps. Build your bundle
+              below to see how owning your hardware outright increases your
+              total annual savings. No leases, no "locked-in" financing—just the
+              tools you need to grow on your own terms. Learn more about Square
               <span class="link">hardware here</span>.
             </p>
           </header>
@@ -504,6 +505,11 @@
                         >Get started with Square Plus</span
                       >
                     </button>
+                    <small
+                      >Estimates are for illustrative purposes only. Competitor
+                      pricing via Merchant Maverick as of [Month 2025]. Actual
+                      costs may vary.</small
+                    >
                   </div>
                 </div>
               </div>
@@ -535,6 +541,18 @@
             <!-- <div class="disclosure-heading">
                   <h4 class="type-subheading-300">Disclosures</h4>
                 </div> -->
+
+            <p class="text-muted">
+              This calculator provides estimates for illustrative purposes only.
+              Results are based on the information you provide and publicly
+              available competitor pricing sourced from Merchant Maverick as of
+              [Month Day, Year]. Pricing, features, and terms are subject to
+              change without notice. Actual costs will vary based on your
+              business needs, transaction volume, and selected plan. For the
+              most accurate comparison, upload your current bill or contact the
+              provider directly. Please consult with your business advisor on
+              the best solution for you.
+            </p>
             <p class="text-muted">
               Total cost of ownership for Toast is based on publicly available
               rates and research as of January 8, 2026. Since Toast doesn't
@@ -555,6 +573,11 @@
 <style lang="scss" scoped>
   @import '~/style/grid.scss';
   @import '~/style/colors.scss';
+
+  small {
+    color: $color-neutral-300;
+    font-size: 1.25rem;
+  }
 
   .app {
     margin: 0 auto;
