@@ -74,6 +74,7 @@
   .savings-heading {
     color: $color-neutral-000;
     margin: 0 0 4rem;
+    text-wrap: pretty;
     @include breakpoint(mdl) {
       margin: 0;
     }
