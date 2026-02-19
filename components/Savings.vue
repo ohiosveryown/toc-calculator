@@ -1,41 +1,43 @@
 <template>
   <section class="savings-section">
     <div class="savings-container">
-      <h2 class="type-heading-600-serif savings-heading">
-        Keep the whole loaf as you grow
-      </h2>
+      <div class="savings-layout">
+        <h2 class="type-heading-600-serif savings-heading">
+          Keep the whole loaf as you grow
+        </h2>
 
-      <div class="savings-cards">
-        <article
-          v-for="(card, i) in cards"
-          :key="i"
-          class="savings-card"
-        >
-          <div class="savings-card-image-wrap">
-            <img
-              :src="card.imageSrc"
-              :alt="card.title"
-              class="savings-card-image"
-            />
-          </div>
-          <h3 class="type-body savings-card-title">
-            {{ card.title }}
-          </h3>
-          <p class="savings-card-amount">
-            <span class="type-heading-700 savings-card-amount-value">{{
-              card.savingsFormatted
-            }}</span>
-            <span class="text-muted savings-card-amount-label"
-              >in annual savings<sup>{{ i + 1 }}</sup></span
-            >
-          </p>
-          <p class="type-body-medium savings-card-resources">
-            {{ card.resources }}
-          </p>
-          <p class="type-body text-muted savings-card-desc">
-            {{ card.description }}
-          </p>
-        </article>
+        <div class="savings-cards">
+          <article
+            v-for="(card, i) in cards"
+            :key="i"
+            class="savings-card"
+          >
+            <div class="savings-card-image-wrap">
+              <img
+                :src="card.imageSrc"
+                :alt="card.title"
+                class="savings-card-image"
+              />
+            </div>
+            <h3 class="type-body savings-card-title">
+              {{ card.title }}
+            </h3>
+            <p class="savings-card-amount">
+              <span class="type-heading-500 savings-card-amount-value">{{
+                card.savingsFormatted
+              }}</span>
+              <span class="text-muted savings-card-amount-label"
+                >in annual savings<sup>{{ i + 1 }}</sup></span
+              >
+            </p>
+            <p class="type-body-medium savings-card-resources">
+              {{ card.resources }}
+            </p>
+            <p class="type-body text-muted savings-card-desc">
+              {{ card.description }}
+            </p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -60,9 +62,21 @@
     margin: 0 auto;
   }
 
+  .savings-layout {
+    @include breakpoint(mdl) {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+
   .savings-heading {
     color: $color-neutral-000;
     margin: 0 0 4rem;
+    @include breakpoint(mdl) {
+      margin: 0;
+    }
   }
 
   .savings-cards {
@@ -70,7 +84,8 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 8rem;
     @include breakpoint(mdl) {
-      gap: 3.6rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14rem;
     }
   }
 
@@ -104,7 +119,7 @@
     flex-wrap: wrap;
     align-items: baseline;
     gap: 1rem;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.2rem;
   }
 
   .savings-card-amount-label {
@@ -116,7 +131,7 @@
   }
 
   .savings-card-resources {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     color: $color-neutral-000;
   }
 
