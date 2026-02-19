@@ -820,6 +820,7 @@
     width: 100%;
 
     @include breakpoint(md) {
+      margin-top: -0.8rem;
       gap: 0rem;
       width: grid-width(4);
       align-self: stretch; /* Fill row height so sticky card has room to stick */
@@ -830,14 +831,15 @@
     display: none;
     overflow: hidden;
     position: relative;
+    margin: 0 auto;
     padding: 0.2rem 0;
     min-width: 0;
-    width: 100%;
+    width: 96%;
     /* Fixed height so aside card never moves when glyph count changes */
     height: 4.4rem; /* 4rem glyph + 0.2rem padding top/bottom */
     @include breakpoint(md) {
       display: inherit;
-      transform: translateY(-2.4rem);
+      transform: translateY(1.2rem);
     }
 
     &.glpyhs-list-wrapper--marquee-hidden {
@@ -1299,7 +1301,7 @@
         left: 0;
         background: linear-gradient(
           to right,
-          $color-neutral-1000 10%,
+          $color-neutral-1000 40%,
           transparent 100%
         );
       }
@@ -1308,7 +1310,7 @@
         right: 0;
         background: linear-gradient(
           to left,
-          $color-neutral-1000 10%,
+          $color-neutral-1000 40%,
           transparent 100%
         );
       }
@@ -1344,6 +1346,7 @@
     }
 
     &--top {
+      display: none;
       top: 0;
       left: 0;
       right: 0;
@@ -1351,6 +1354,7 @@
     }
 
     &--right {
+      display: none;
       top: 2.5rem;
       right: 0;
       bottom: 2.5rem;
@@ -1362,9 +1366,12 @@
       left: 0;
       right: 0;
       height: 2.5rem;
+
+      bottom: -0.6rem;
     }
 
     &--left {
+      display: none;
       top: 2.5rem;
       left: 0;
       bottom: 2.5rem;
