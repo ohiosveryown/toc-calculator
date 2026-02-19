@@ -418,9 +418,7 @@
                 class="aside-card-marquee aside-card-marquee--bottom"
                 aria-hidden="true"
               >
-                <div
-                  class="aside-card-marquee__track aside-card-marquee__track--reverse"
-                >
+                <div class="aside-card-marquee__track">
                   <span
                     v-for="n in 8"
                     :key="'bottom-' + n"
