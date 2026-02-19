@@ -688,7 +688,7 @@
     flex-wrap: wrap;
     margin-bottom: 2.4rem;
     @include breakpoint(md) {
-      gap: 1.6rem;
+      //   gap: 2rem;
       flex-wrap: nowrap;
       margin-bottom: 0;
     }
