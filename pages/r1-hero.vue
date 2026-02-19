@@ -837,7 +837,7 @@
     height: 4.4rem; /* 4rem glyph + 0.2rem padding top/bottom */
     @include breakpoint(md) {
       display: inherit;
-      transform: translateY(-2rem);
+      transform: translateY(-2.4rem);
     }
 
     &.glpyhs-list-wrapper--marquee-hidden {
