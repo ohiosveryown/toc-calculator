@@ -76,7 +76,7 @@
                 v-if="activeDeviceTypes.includes('Handheld')"
                 class="stepper-spacing"
                 label="Handheld"
-                image="/img/stepper-kiosk@2x.png"
+                image="/img/handheld@2x.png"
                 v-model="handheldDevices"
                 :min="0"
                 :max="99"
@@ -347,7 +347,10 @@
           <div class="aside-column">
             <div
               class="glpyhs-list-wrapper"
-              :class="{ 'glpyhs-list-wrapper--scrolled': glyphsScrolledLeft }"
+              :class="{
+                'glpyhs-list-wrapper--scrolled': glyphsScrolledLeft,
+                'glpyhs-list-wrapper--marquee-hidden': !asideMarqueeVisible,
+              }"
             >
               <div
                 class="glpyhs-list-scroll"
@@ -377,7 +380,12 @@
                 </TransitionGroup>
               </div>
             </div>
-            <div class="aside-card-frame">
+            <div
+              class="aside-card-frame"
+              :class="{
+                'aside-card-frame--marquee-hidden': !asideMarqueeVisible,
+              }"
+            >
               <div
                 class="aside-card-marquee aside-card-marquee--top"
                 aria-hidden="true"
@@ -438,17 +446,22 @@
               </div>
               <div class="aside-card">
                 <div class="card-header">
-                  <span class="savings-badge savings-badge--above-header">
-                    {{ formatCurrency(monthlySavings) }} in savings
-                  </span>
                   <h4 class="type-subheading-300">
                     <!-- No more crumbs: save {{ savingsPercentage }}%. -->
-                    See the monthly difference
+                    <!-- See your monthly difference -->
+                    Save {{ formatCurrency(monthlySavings) }} per month
+                    with&nbsp;Square&nbsp;Plus
                   </h4>
+                  <!-- <span class="savings-badge savings-badge--above-header">
+                    {{ formatCurrency(monthlySavings) }} in savings
+                  </span> -->
                 </div>
 
                 <div class="card-savings">
                   <div class="savings-item savings-item-square">
+                    <!-- <span class="savings-badge savings-badge--above-header">
+                      {{ formatCurrency(monthlySavings) }} in savings
+                    </span> -->
                     <p class="company">Square Plus</p>
                     <p class="type-heading-700">
                       {{ formatCurrency(squarePrice) }}
@@ -456,6 +469,12 @@
                     <p class="per-month text-muted">per month</p>
                   </div>
                   <div class="savings-item">
+                    <!-- <span
+                      style="opacity: 0"
+                      class="savings-badge savings-badge--above-header"
+                    >
+                      {{ formatCurrency(monthlySavings) }} in savings
+                    </span> -->
                     <p class="company">Toast</p>
                     <p class="type-heading-700">
                       {{ formatCurrency(toastPrice) }}
@@ -472,6 +491,9 @@
                     </p>
                   </div> -->
                   <div class="cta-content">
+                    <!-- <span class="savings-badge savings-badge--above-header">
+                      {{ formatCurrency(monthlySavings) }} in savings
+                    </span> -->
                     <p class="type-body">
                       Choose a platform that earns your business with
                       transparent pricing and no contracts.
@@ -798,6 +820,7 @@
     width: 100%;
 
     @include breakpoint(md) {
+      gap: 0rem;
       width: grid-width(4);
       align-self: stretch; /* Fill row height so sticky card has room to stick */
     }
@@ -814,7 +837,11 @@
     height: 4.4rem; /* 4rem glyph + 0.2rem padding top/bottom */
     @include breakpoint(md) {
       display: inherit;
-      transform: translateY(-1rem);
+      transform: translateY(-2rem);
+    }
+
+    &.glpyhs-list-wrapper--marquee-hidden {
+      transform: translateY(0.6rem);
     }
 
     /* Left edge fade – only visible when list is scrolled */
@@ -1227,11 +1254,17 @@
   /* Frame around aside card with scrolling marquee on all four sides */
   .aside-card-frame {
     position: relative;
-    padding: 2.4rem;
+    /* Extra padding = gap between card and 2.5rem marquee strips; bottom/right slightly larger so gap matches top/left */
+    padding: 3rem 3.2rem 3.2rem 3rem;
     width: 100%;
+
+    &.aside-card-frame--marquee-hidden .aside-card-marquee {
+      display: none;
+    }
   }
 
   .aside-card-marquee {
+    display: inherit;
     position: absolute;
     overflow: hidden;
     user-select: none;
@@ -1523,8 +1556,18 @@
   .cta-content {
     display: flex;
     flex-direction: column;
-    gap: 2.4rem;
-    margin-top: 1.2rem;
+    gap: 1.8rem;
+    // margin-top: 1.2rem;
+
+    p {
+      margin-top: -0.4rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .savings-badge {
+      margin-left: -0.3rem;
+      margin-bottom: 0rem;
+    }
   }
 
   .btn-primary {
@@ -1936,8 +1979,10 @@
   })
 
   const asideMarqueeText = computed(
-    () => `NO MORE CRUMBS • SAVE ${savingsPercentage.value}% •\u00A0`,
+    () => `NO MORE CRUMBS • SAVE ${savingsPercentage.value}% per month •\u00A0`,
   )
+
+  const asideMarqueeVisible = ref(true)
 
   // Format currency
   const formatCurrency = (amount: number) => {
@@ -1949,6 +1994,9 @@
     if (event.key === 'ArrowLeft') {
       // Left arrow - navigate to index page
       navigateTo('/')
+    }
+    if (event.shiftKey && event.key === 'M') {
+      asideMarqueeVisible.value = !asideMarqueeVisible.value
     }
   }
 
