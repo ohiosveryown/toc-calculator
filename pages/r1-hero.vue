@@ -882,7 +882,6 @@
   .glpyhs-list-scroll {
     padding: 0.2rem 0;
     overflow-x: auto;
-    // overflow-y: hidden;
     height: 100%;
     scroll-behavior: smooth;
     /* Hide scrollbar while keeping scroll */
