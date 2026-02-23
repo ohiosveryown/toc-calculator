@@ -1,6 +1,13 @@
 <template>
   <div class="stepper-img-container">
-    <label class="stepper-img-label type-body-medium">{{ label }}</label>
+    <div class="stepper-img-header">
+      <label class="stepper-img-label type-body-medium">{{ label }}</label>
+      <span
+        v-if="price"
+        class="stepper-img-price"
+        >x {{ price }}</span
+      >
+    </div>
     <!-- Gray wrapper: image + original stepper container -->
     <div
       class="stepper-img-shell"
@@ -89,9 +96,25 @@
     }
   }
 
+  .stepper-img-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 1.4rem 0 0.6rem;
+  }
+
   .stepper-img-label {
-    display: block;
     color: $color-neutral-000;
+  }
+
+  .stepper-img-price {
+    flex-shrink: 0;
+    color: $color-neutral-400;
+    font-family: var(--font-cash-sans);
+    font-size: var(--font-size-auxiliary);
+    font-weight: var(--font-weight-regular);
+    // text-decoration: underline;
   }
 
   /* Gray outer container: wraps image + stepper */
@@ -245,6 +268,8 @@
     /** Image URL for the circular thumbnail (e.g. /img/locations@2x.png) */
     image: string
     modelValue: number
+    /** Optional price string shown top-right (e.g. "$110") */
+    price?: string
     min?: number
     max?: number
     step?: number

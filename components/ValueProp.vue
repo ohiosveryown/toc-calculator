@@ -43,7 +43,8 @@
 
       <div class="value-prop-content">
         <h2 class="type-heading-600-serif value-prop-heading">
-          Built for growth. <br />Not for billable add-ons.
+          Your time is money — so get <br />
+          more of both
         </h2>
 
         <ul class="value-prop-list">
@@ -62,7 +63,7 @@
         </ul>
 
         <div class="value-prop-testimonial">
-          <blockquote class="type-heading-600-serif value-prop-quote">
+          <blockquote class="type-heading-500-serif value-prop-quote">
             {{ testimonial.quote }}
           </blockquote>
           <div class="value-prop-attribution">
@@ -221,6 +222,9 @@
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+    @include breakpoint(md) {
+      gap: 4.8rem;
+    }
   }
 
   .value-prop-item {
@@ -373,24 +377,19 @@
       type: Array,
       default: () => [
         {
+          title: 'Automate your ops',
+          description:
+            'Spend more time doing what you love: serving your customers and perfecting your craft.',
+        },
+        {
+          title: 'Ditch your contracts',
+          description:
+            'Own your hardware, and forget hidden fees. Enjoy transparent, all-in-one pricing.',
+        },
+        {
           title: 'Grow on your terms',
           description:
-            "Scale with flexible tools designed to fit your business today—and wherever you're headed tomorrow.",
-        },
-        {
-          title: 'Reclaim your time',
-          description:
-            'We automate the complex ops so you can get back to what matters: your customers and your craft.',
-        },
-        {
-          title: 'A partner you can bank on',
-          description:
-            'No guesswork. Just radical transparency and 24/7 support from a team that actually has your back.',
-        },
-        {
-          title: 'Value without the fine print',
-          description:
-            "The industry's best total cost of ownership. No hidden fees, no locked-in contracts, no surprises.",
+            "Scale with flexible tools designed to fit your business today — and wherever you're headed tomorrow.",
         },
       ],
     },
@@ -398,10 +397,10 @@
       type: Object,
       default: () => ({
         quote:
-          '"The bundle is killer. And just to know my monthly amount...it\'s really nice to not have 15 different bills come in."',
-        name: 'Ryan',
-        role: 'Owner',
-        company: 'FineDetailing',
+          '“I think Square is worth every cent. There’s obviously the point of sale, but also the staff scheduling, the customer feedback, the Dashboard analytics. The ability to segment your customers, look into data.”',
+        name: 'Mat Pond',
+        role: 'Owner, The Epicurean Trader',
+        company: 'San Francisco, CA',
         avatarSrc: '/img/fine@3x.png',
       }),
     },

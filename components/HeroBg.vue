@@ -5,16 +5,19 @@
       aria-hidden="true"
     /> -->
     <div class="hero-bg__content">
-      <span class="hero-bg__kicker type-kicker">MAXIMIZE YOUR MARGINS</span>
+      <span
+        v-if="kicker"
+        class="hero-bg__kicker type-kicker"
+        >{{ kicker }}</span
+      >
       <h1 class="hero-bg__headline type-heading-900">
-        Compare total costs for your food & beverage business
+        {{ headline }}
       </h1>
-      <p class="hero-bg__body type-body text-muted">
-        Don't let your profits get toasted. Square Plus includes essential tools
-        like online ordering, SMS marketing, and staff management that others
-        charge extra for. F&B merchants save on average 24% with
-        Square<sup>1</sup>.
-      </p>
+      <p
+        v-if="body"
+        class="hero-bg__body type-body text-muted"
+        v-html="body"
+      ></p>
     </div>
   </section>
 </template>
@@ -85,3 +88,18 @@
     }
   }
 </style>
+
+<script setup lang="ts">
+  withDefaults(
+    defineProps<{
+      kicker?: string
+      headline?: string
+      body?: string
+    }>(),
+    {
+      kicker: 'MAXIMIZE YOUR MARGINS',
+      headline: 'Compare total costs for your food & beverage business',
+      body: "Don't let your profits get toasted. Square Plus includes essential tools like online ordering, SMS marketing, and staff management that others charge extra for. F&B merchants save on average 24% with Square<sup>1</sup>.",
+    },
+  )
+</script>

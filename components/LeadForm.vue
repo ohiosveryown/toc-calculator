@@ -1,7 +1,9 @@
 <template>
   <section class="passive-lead-form">
     <div class="lead-container">
-      <h2 class="type-heading-800">Keep more of what you&nbsp;make</h2>
+      <h2 class="type-heading-800">
+        Join the 450K+ businesses who run their restaurants with Square
+      </h2>
       <div class="content">
         <p class="type-subheading-200">
           Learn how top-tier businesses manage their cash flow and keep their
