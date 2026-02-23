@@ -11,8 +11,7 @@
         <div class="pricing-header">
           <header class="customization-header">
             <h3 class="type-subheading-400">
-              Calculate the costs for running your food & beverage business with
-              Square
+              What do you need to run your business?
             </h3>
           </header>
 
@@ -26,7 +25,7 @@
                 :min="1"
                 :max="99"
               />
-              <div class="add-hardware-wrap stepper-spacing">
+              <!-- <div class="add-hardware-wrap stepper-spacing">
                 <label
                   class="add-hardware-label type-body-medium"
                   for="monthly-sales"
@@ -50,8 +49,8 @@
                     @input="onMonthlySalesInput"
                   />
                 </div>
-              </div>
-              <span class="vertical-divider" />
+              </div> -->
+              <!-- <span class="vertical-divider" /> -->
               <StepperImg
                 v-if="activeDeviceTypes.includes('Kiosks')"
                 class="stepper-spacing"

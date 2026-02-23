@@ -70,7 +70,7 @@
       margin: 0 auto;
       padding: 11.2rem 0 4.8rem;
       max-width: 160rem;
-      width: grid-width(11);
+      width: grid-width(10);
       text-align: center;
       align-items: center;
 
