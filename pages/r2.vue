@@ -3,7 +3,7 @@
     <HeroBg
       kicker="COMPARE YOUR COSTS"
       headline="See how much you’d save with Square "
-      body="On average, food & beverage sellers save 24% with Square. Compare the cost of Square Plus and everything it includes — like online ordering, SMS marketing, and staff management — to Toast, who charges for these essential tools. Customize your Square Plus setup to see how our all-in-one pricing helps you keep more profit in your pocket."
+      body="On average, food & beverage sellers save 24% with Square<sup>1</sup>."
     />
 
     <section class="pricing-section scroll-fade-in">
@@ -25,39 +25,13 @@
                 :min="1"
                 :max="99"
               />
-              <!-- <div class="add-hardware-wrap stepper-spacing">
-                <label
-                  class="add-hardware-label type-body-medium"
-                  for="monthly-sales"
-                  >Monthly sales</label
-                >
-                <div class="add-hardware-select-wrap monthly-sales-input-wrap">
-                  <span
-                    class="monthly-sales-prefix type-body"
-                    aria-hidden="true"
-                    >$</span
-                  >
-                  <input
-                    id="monthly-sales"
-                    :value="monthlySales"
-                    type="text"
-                    inputmode="numeric"
-                    class="monthly-sales-input type-body"
-                    placeholder="e.g. 10,000"
-                    aria-label="Monthly sales"
-                    @keypress="allowNumbersOnly"
-                    @input="onMonthlySalesInput"
-                  />
-                </div>
-              </div> -->
-              <!-- <span class="vertical-divider" /> -->
               <StepperImg
                 v-if="activeDeviceTypes.includes('Kiosks')"
                 class="stepper-spacing"
                 label="Kiosk"
                 image="/img/stepper-kiosk@2x.png"
+                tooltip="Kiosk devices are used for in-person payments at the counter."
                 v-model="kioskDevices"
-                price="$349"
                 :min="0"
                 :max="99"
               />
@@ -66,8 +40,8 @@
                 class="stepper-spacing"
                 label="KDS"
                 image="/img/stepper-kds@2x.png"
+                tooltip="KDS devices are used for kitchen display systems."
                 v-model="kdsDevices"
-                price="$329"
                 :min="0"
                 :max="99"
               />
@@ -76,8 +50,8 @@
                 class="stepper-spacing"
                 label="Handheld"
                 image="/img/handheld@2x.png"
+                tooltip="Handheld devices are used for in-person payments at the counter."
                 v-model="handheldDevices"
-                price="$110"
                 :min="0"
                 :max="99"
               />
@@ -86,9 +60,7 @@
                 ref="addHardwareRef"
                 class="add-hardware-wrap stepper-spacing"
               >
-                <label class="add-hardware-label type-body-medium"
-                  >Add hardware</label
-                >
+                <label class="add-hardware-label type-body">Add hardware</label>
                 <div class="add-hardware-select-wrap">
                   <button
                     type="button"
@@ -200,15 +172,47 @@
               <p class="type-body-medium">Feature</p>
               <p
                 class="type-body-medium text-center"
-                style="transform: translateX(0.4rem)"
+                style="transform: translateX(0.8rem)"
               >
                 Square Plus
+                <svg
+                  class="header-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="#000"
+                    d="M17.492 3.75H6.508A2.757 2.757 0 0 0 3.75 6.507v10.985a2.76 2.76 0 0 0 2.758 2.758h10.984a2.76 2.76 0 0 0 2.758-2.758V6.507a2.757 2.757 0 0 0-2.758-2.757m-.242 12.63a.87.87 0 0 1-.87.87H7.621a.87.87 0 0 1-.87-.87V7.62a.87.87 0 0 1 .87-.87h8.76a.87.87 0 0 1 .869.87z"
+                  />
+                  <path
+                    fill="#000"
+                    d="M10.247 14.239a.5.5 0 0 1-.5-.502v-3.496a.5.5 0 0 1 .5-.502h3.506a.5.5 0 0 1 .5.502v3.496a.5.5 0 0 1-.5.502z"
+                  />
+                </svg>
               </p>
               <p
                 class="type-body-medium text-center"
-                style="transform: translateX(1rem)"
+                style="transform: translateX(1.6rem)"
               >
                 Toast
+                <svg
+                  class="header-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="#000"
+                    fill-rule="evenodd"
+                    d="M19.994 15.027c0 .114 0 .236-.014.353 0 1.112-.01 2.246-.25 3.337-.254 1.148-1.666 1.062-2.514 1.055-1.61-.018-3.202-.406-4.808-.45-1.14-.031-2.277.183-3.403.318-1.022.125-2.131.47-3.154.325-1.255-.186-1.613-1.847-1.72-2.963-.17-1.804-.275-3.247.35-5.493.21-.745.533-1.302.974-1.915l-.327-.35a2.4 2.4 0 0 1-.51-.783c-.435-1.18.552-2.24 1.41-2.781.844-.51 1.746-.912 2.687-1.194a11.52 11.52 0 0 1 8.567.784c.95.51 1.906 1.28 2.309 2.364.306.827.372 1.97-.494 2.434a.5.5 0 0 1-.284.013c.741.19.973 1.091 1.049 1.795.104 1.044.15 2.096.136 3.148zm-1.189-4.948.008.002zm-.647 6.83a1.8 1.8 0 0 0 .129-.434 15.3 15.3 0 0 0 .125-4.125c-.09-.856-.302-2.06-1.126-2.46 1.338-.788-.094-2.367-.831-2.827-2.368-1.472-5.872-1.586-8.379-.438C7.36 6.949 6.05 7.9 6.575 9.024c.139.296.385.413.59.63-.02-.02-.427.41-.702 1.124a7.5 7.5 0 0 0-.448 1.533 16 16 0 0 0-.25 2.58c.01.96.145 2.097.914 2.764.692.602 1.759.15 2.524-.022 1.022-.232 2.062-.435 3.111-.403l3.53.432c.788.067 1.918.17 2.318-.752z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
               </p>
             </div>
 
@@ -260,21 +264,6 @@
               <p class="type-body value-cell">$0</p>
               <p class="type-body value-cell-right">{{ feature.cost }}</p>
             </div>
-            <section class="fee-calculator">
-              <h3 class="type-subheading-200">
-                Food & beverage businesses like yours can also save on
-                processing fees
-              </h3>
-              <p class="type-body text-muted">
-                Check out our
-                <a
-                  href="#"
-                  class="fee-calculator-link"
-                  >fee calculator</a
-                >
-                to learn more.
-              </p>
-            </section>
           </div>
 
           <div class="aside-column">
@@ -377,11 +366,12 @@
               </div>
               <div class="aside-card">
                 <div class="card-header">
-                  <span class="savings-badge savings-badge--above-header">
+                  <!-- <span class="savings-badge savings-badge--above-header">
                     {{ formatCurrency(monthlySavings) }} saved
-                  </span>
+                  </span> -->
                   <h4 class="type-subheading-300">
-                    Maximize your margins — every single month
+                    Maximize your margins — save
+                    {{ formatCurrency(monthlySavings) }} every single month
                   </h4>
                 </div>
 
@@ -407,9 +397,9 @@
                     <!-- <span class="savings-badge savings-badge--above-header">
                         {{ formatCurrency(monthlySavings) }} in savings
                       </span> -->
-                    <p class="type-body">
-                      Choose a platform that earns your business with
-                      transparent pricing and no contracts.
+                    <p class="aside-body type-body">
+                      Go with the one offering transparent pricing and no
+                      contracts.
                     </p>
                     <button class="btn-primary type-body-medium">
                       <span class="btn-primary__label btn-primary__label--short"
@@ -434,6 +424,10 @@
     </section>
 
     <div class="scroll-fade-in">
+      <Processing />
+    </div>
+
+    <div class="scroll-fade-in">
       <ValueProp video-src="/img/vid.mp4" />
     </div>
 
@@ -446,38 +440,6 @@
     </div>
 
     <!-- <Testomonial /> -->
-
-    <section class="disclosure-section scroll-fade-in">
-      <div class="disclosure-container">
-        <div class="disclosure-card">
-          <div class="disclosure-content">
-            <!-- <div class="disclosure-heading">
-                    <h4 class="type-subheading-300">Disclosures</h4>
-                  </div> -->
-
-            <p class="text-muted">
-              This calculator provides estimates for illustrative purposes only.
-              Results are based on the information you provide and publicly
-              available competitor pricing sourced from Merchant Maverick as of
-              [Month Day, Year]. Pricing, features, and terms are subject to
-              change without notice. Actual costs will vary based on your
-              business needs, transaction volume, and selected plan. For the
-              most accurate comparison, upload your current bill or contact the
-              provider directly. Please consult with your business advisor on
-              the best solution for you.
-            </p>
-            <p class="text-muted">
-              Total cost of ownership for Toast is based on publicly available
-              rates and research as of January 8, 2026. Since Toast doesn't
-              publicly display all add-on pricing, some figures are estimates
-              based on industry standards. Actual costs may vary based on your
-              contract terms, hardware needs, or location. Contact Toast
-              directly for a personalized quote.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 
   <Footer />
@@ -596,7 +558,7 @@
     flex-direction: column;
     gap: 1.6rem;
     padding: 1.6rem 0 0;
-    margin-bottom: 3.2rem;
+    margin-bottom: 2.4rem;
     @include breakpoint(md) {
       p {
         max-width: 76ch;
@@ -835,6 +797,11 @@
       width: grid-width(4);
       align-self: stretch; /* Fill row height so sticky card has room to stick */
     }
+  }
+
+  .aside-body {
+    text-wrap: balance;
+    line-height: 1.32 !important;
   }
 
   .glpyhs-list-wrapper {
@@ -1094,6 +1061,12 @@
     align-items: center;
     padding: 2rem 0;
 
+    .header-icon {
+      vertical-align: middle;
+      margin-top: -0.32rem;
+      margin-left: 0.12rem;
+    }
+
     @include breakpoint(lg) {
       gap: 5.4rem;
     }
@@ -1282,7 +1255,7 @@
     pointer-events: none;
     // font-family: var(--font-cash-sans-medium);
     font-family: var(--font-cash-mono);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     // font-weight: 600;
     line-height: var(--line-height-auxiliary);
     letter-spacing: 0.05rem;
@@ -1393,7 +1366,7 @@
     display: flex;
     width: max-content;
     white-space: nowrap;
-    animation: aside-marquee-h 18s linear infinite;
+    animation: aside-marquee-h 24s linear infinite;
 
     &--reverse {
       animation: aside-marquee-h-reverse 18s linear infinite;
@@ -1496,7 +1469,8 @@
     gap: 1.2rem;
     @include breakpoint(lg) {
       flex-direction: row;
-      gap: 2rem;
+      // gap: 4rem;
+      // justify-content: space-between;
     }
   }
 
@@ -1547,7 +1521,10 @@
 
   .savings-item-square {
     @include breakpoint(mdl) {
-      margin-right: 6.4rem;
+      margin-right: 4rem;
+    }
+    @include breakpoint(xl) {
+      background: blue;
     }
   }
 
@@ -1949,12 +1926,12 @@
       checked: boolean
     }>
   >([
-    {
-      id: 'sms',
-      name: 'SMS marketing',
-      cost: '+$50/month',
-      checked: true,
-    },
+    // {
+    //   id: 'sms',
+    //   name: 'SMS marketing',
+    //   cost: '+$50/month',
+    //   checked: true,
+    // },
     {
       id: 'online',
       name: 'Online ordering site',
@@ -2039,7 +2016,8 @@
   })
 
   const asideMarqueeText = computed(
-    () => `Build your bundle • stack your savings • don’t get burnt •\u00A0`,
+    () =>
+      `Build your bundle • save ${savingsPercentage.value}% every month • stack your savings • don’t get burnt •\u00A0`,
   )
 
   const asideMarqueeVisible = ref(true)

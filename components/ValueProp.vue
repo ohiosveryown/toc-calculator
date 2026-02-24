@@ -212,7 +212,7 @@
 
   .value-prop-heading {
     color: $color-neutral-000;
-    margin: 0;
+    margin: 0 0 4rem;
   }
 
   .value-prop-list {
@@ -247,8 +247,9 @@
   .value-prop-testimonial {
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
-    padding-top: 2rem;
+    gap: 4rem;
+    margin-top: 4rem;
+    padding-top: 3.2rem;
     border-top: 1px solid $border-muted;
   }
 
@@ -397,11 +398,11 @@
       type: Object,
       default: () => ({
         quote:
-          '“I think Square is worth every cent. There’s obviously the point of sale, but also the staff scheduling, the customer feedback, the Dashboard analytics. The ability to segment your customers, look into data.”',
-        name: 'Mat Pond',
-        role: 'Owner, The Epicurean Trader',
-        company: 'San Francisco, CA',
-        avatarSrc: '/img/fine@3x.png',
+          "“We used to subscribe to multiple operating systems that do the same thing. They were expensive and took up staff time. In 13 years of business, Square is the most complete ecosystem we've used.”",
+        name: 'Frankie DiCarlantonio',
+        role: "CEO, Scaffidi's Restaurant & Tavern",
+        company: 'Steubenville, OH',
+        avatarSrc: '/img/scaffidis@3x.png',
       }),
     },
   })

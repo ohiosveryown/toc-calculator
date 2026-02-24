@@ -1,13 +1,13 @@
 <template>
   <section class="passive-lead-form">
     <div class="lead-container">
-      <h2 class="type-heading-800">
+      <h2 class="type-heading-700-serif">
         Join the 450K+ businesses who run their restaurants with Square
       </h2>
       <div class="content">
         <p class="type-subheading-200">
           Learn how top-tier businesses manage their cash flow and keep their
-          margins high with Square. No hidden costs, just growth.
+          margins high with Square.
         </p>
         <div class="input-container">
           <input
@@ -56,6 +56,12 @@
       align-items: center;
     }
 
+    h2 {
+      @include breakpoint(md) {
+        max-width: 32ch;
+      }
+    }
+
     .input-container {
       display: flex;
       gap: 1.2rem;
@@ -68,7 +74,7 @@
       gap: 4.2rem;
       flex-direction: column;
       margin: 0 auto;
-      padding: 11.2rem 0 4.8rem;
+      padding: 9.6rem 0;
       max-width: 160rem;
       width: grid-width(10);
       text-align: center;
@@ -96,7 +102,7 @@
   .disclosure {
     transform: translateY(-1rem);
     @include breakpoint(lg) {
-      width: grid-width(8);
+      width: grid-width(12);
     }
   }
 
