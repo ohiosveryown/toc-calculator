@@ -3,15 +3,14 @@
     <div class="processing__card">
       <div class="processing__left">
         <h2 class="processing__headline type-subheading">
-          Monthly sales more than $250K? You may qualify for lower processing
-          fees.
+          You may qualify for lower processing fees.
         </h2>
         <a
           href="#"
           class="processing__cta"
           @click.prevent
         >
-          Talk to our team to learn more
+          Talk to our team
         </a>
       </div>
       <p class="processing__body type-body text-muted">
