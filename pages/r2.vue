@@ -611,6 +611,7 @@
 
   .add-hardware-label {
     display: block;
+    padding-left: 0.6rem;
     color: $color-neutral-000;
   }
 
