@@ -3,7 +3,7 @@
     <HeroBg
       kicker="COMPARE YOUR COSTS"
       headline="See how much you’d save with Square "
-      body="On average, food & beverage sellers save 24% with Square1. Compare the cost of Square Plus and everything it includes — like online ordering, SMS marketing, and staff management — to Toast, who charges for these essential tools. Customize your Square Plus setup to see how our all-in-one pricing helps you keep more profit in your pocket."
+      body="On average, food & beverage sellers save 24% with Square. Compare the cost of Square Plus and everything it includes — like online ordering, SMS marketing, and staff management — to Toast, who charges for these essential tools. Customize your Square Plus setup to see how our all-in-one pricing helps you keep more profit in your pocket."
     />
 
     <section class="pricing-section scroll-fade-in">
