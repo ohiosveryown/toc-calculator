@@ -381,7 +381,7 @@
                   </span> -->
                   <h4 class="type-subheading-300">
                     Save
-                    <span class="savings-shimmer">{{
+                    <span class="savings-underline">{{
                       formatCurrency(monthlySavings)
                     }}</span>
                     every single month
@@ -1499,35 +1499,52 @@
     }
   }
 
-  /* Delay between iterations: animation runs in first ~40% of timeline, then holds (delay) until repeat */
-  @keyframes savings-shimmer {
+  /* Delay between iterations: total duration = action + delay. All keyframe
+     changes happen in the first (action/total) of the timeline; 50–100% = pause.
+     e.g. 5s total = ~2.5s draw/clip + ~2.5s delay. Adjust total duration below. */
+  @keyframes savings-underline-draw-clip {
     0% {
-      background-position: 200% 0;
+      clip-path: inset(0 100% 0 0);
+      -webkit-clip-path: inset(0 100% 0 0);
     }
-    40% {
-      background-position: -200% 0;
+    16% {
+      clip-path: inset(0 0 0 0);
+      -webkit-clip-path: inset(0 0 0 0);
     }
+    41% {
+      clip-path: inset(0 0 0 0);
+      -webkit-clip-path: inset(0 0 0 0);
+    }
+    50%,
     100% {
-      background-position: -200% 0;
+      clip-path: inset(0 0 0 100%);
+      -webkit-clip-path: inset(0 0 0 100%);
     }
   }
 
-  .savings-shimmer {
+  .savings-underline {
+    position: relative;
     display: inline-block;
-    /* Use explicit color so gradient stays visible when text is transparent for background-clip */
-    background: linear-gradient(
-      90deg,
-      $color-neutral-000 0%,
-      $color-neutral-000 35%,
-      rgba(255, 255, 255, 0.6) 50%,
-      $color-neutral-000 65%,
-      $color-neutral-000 100%
-    );
-    background-size: 200% 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: savings-shimmer 5s ease-in-out infinite;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0.25rem;
+      right: 0;
+      bottom: -0.8rem;
+      height: 0.35em;
+      background-color: currentColor;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8'%3E%3Cpath d='M0 4 Q25 2 50 4 T100 5 T150 4 T200 4' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      mask-repeat: repeat-x;
+      mask-size: auto 100%;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8'%3E%3Cpath d='M0 4 Q25 2 50 4 T100 5 T150 4 T200 4' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      -webkit-mask-repeat: repeat-x;
+      -webkit-mask-size: auto 100%;
+      opacity: 0.9;
+      clip-path: inset(0 100% 0 0);
+      -webkit-clip-path: inset(0 100% 0 0);
+      animation: savings-underline-draw-clip 5s ease-in-out infinite;
+    }
   }
 
   .card-savings {
