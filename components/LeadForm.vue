@@ -1,14 +1,14 @@
 <template>
   <section class="passive-lead-form">
     <div class="lead-container">
-      <h2 class="type-heading-700-serif">
+      <h2 class="type-heading-800">
         Join the 450K+ businesses who run their restaurants with Square
       </h2>
       <div class="content">
-        <p class="type-subheading-200">
+        <!-- <p class="type-subheading-200">
           Learn how top-tier businesses manage their cash flow and keep their
           margins high with Square.
-        </p>
+        </p> -->
         <div class="input-container">
           <input
             type="text"
@@ -37,7 +37,8 @@
     gap: 2.4rem;
     margin: 0 auto;
     padding: 0 2rem;
-    background: $background-accent;
+    background: #000;
+    color: #fff;
     @include breakpoint(md) {
       padding: 0;
     }
@@ -58,7 +59,7 @@
 
     h2 {
       @include breakpoint(md) {
-        max-width: 32ch;
+        max-width: 48ch;
       }
     }
 
@@ -95,7 +96,7 @@
     align-items: center;
 
     @include breakpoint(lg) {
-      width: grid-width(5);
+      width: grid-width(6.5);
     }
   }
 
@@ -110,8 +111,8 @@
     width: 100%;
     padding: 1.2rem 1.6rem;
     border-radius: 0.8rem;
-    background: $color-neutral-1000;
-    border: 1px solid $border-muted;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.32);
     font-family: inherit;
     font-size: 1.6rem;
     color: $color-neutral-200;

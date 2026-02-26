@@ -61,7 +61,15 @@
         class="stepper-img-thumb"
         aria-hidden="true"
       >
+        <!-- Inline SVG markup -->
+        <div
+          v-if="isInlineSvg"
+          class="stepper-img-svg"
+          v-html="image"
+        />
+        <!-- Image URL (including data:image/svg+xml) -->
         <img
+          v-else
           :src="image"
           alt=""
           class="stepper-img-image"
@@ -241,7 +249,7 @@
   .stepper-img-shell {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.1rem;
     width: 100%;
     min-width: fit-content;
     // padding: 0.2rem 0.2rem 0.2rem 1rem;
@@ -256,6 +264,20 @@
     height: 3.4rem;
     border-radius: 50%;
     overflow: hidden;
+  }
+
+  .stepper-img-svg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    :deep(svg) {
+      width: 2.4rem;
+      height: 2.4rem;
+      display: block;
+    }
   }
 
   .stepper-img-image {
@@ -381,11 +403,11 @@
 </style>
 
 <script setup lang="ts">
-  import { ref, watch } from 'vue'
+  import { ref, watch, computed } from 'vue'
 
   interface Props {
     label: string
-    /** Image URL for the circular thumbnail (e.g. /img/locations@2x.png) */
+    /** Image URL for the circular thumbnail (e.g. /img/locations@2x.png), or inline SVG markup (e.g. `<svg>...</svg>`) */
     image: string
     modelValue: number
     /** Optional price string shown top-right (e.g. "$110") */
@@ -405,6 +427,12 @@
     max: 10,
     step: 1,
     showContactSales: false,
+  })
+
+  /** True when image prop is inline SVG markup (e.g. `<svg>...</svg>`) */
+  const isInlineSvg = computed(() => {
+    const s = props.image?.trim() ?? ''
+    return s.toLowerCase().startsWith('<svg')
   })
 
   const emit = defineEmits<{

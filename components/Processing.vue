@@ -2,7 +2,8 @@
   <section class="processing">
     <div class="processing__card">
       <div class="processing__left">
-        <h2 class="processing__headline type-subheading">
+        <span class="kicker type-body-medium text-muted">Square Pro</span>
+        <h2 class="processing__headline type-heading-500">
           You may qualify for lower processing fees.
         </h2>
         <a
@@ -48,10 +49,12 @@
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+    // border: 1px solid $border-muted;
+    // box-shadow: 5px 5px 50px #0000001a;
 
     @include breakpoint(md) {
       flex-direction: row;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
       gap: 4rem;
       padding: 4rem 4.8rem;
@@ -61,12 +64,12 @@
   .processing__left {
     display: flex;
     flex-direction: column;
-    gap: 2.4rem;
+    gap: 0.6rem;
     flex-shrink: 0;
 
     @include breakpoint(md) {
       min-width: 0;
-      width: grid-width(4.5);
+      width: grid-width(4);
     }
   }
 
@@ -80,12 +83,13 @@
     margin: 0;
 
     @include breakpoint(md) {
-      width: grid-width(7.5);
+      width: grid-width(8);
       padding-top: 0.2rem;
     }
   }
 
   .processing__cta {
+    margin-top: 1.6rem;
     font-family: var(--font-cash-sans-medium);
     font-size: 1.6rem;
     font-weight: var(--font-weight-medium);
@@ -94,9 +98,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: $button-cta-fill-secondary;
-    color: $button-cta-text-secondary;
-    border: 1px solid $button-cta-stroke-secondary;
+    background: $button-cta-fill-primary;
+    color: $button-cta-text-primary;
+    border: 1px solid $button-cta-fill-primary;
     border-radius: 5rem;
     padding: 1.2rem 2rem;
     cursor: pointer;

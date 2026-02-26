@@ -2,27 +2,27 @@
   <section class="testimonial-section">
     <div class="testimonial-container">
       <div class="testimonial-content">
-        <p class="type-auxiliary text-muted eyebrow">Hear from sellers</p>
+        <!-- <p class="type-auxiliary text-muted eyebrow">Hear from sellers</p> -->
 
         <div class="testimonial-main">
           <div class="testimonial-quote-wrapper">
             <blockquote class="type-heading-600-serif testimonial-quote">
-              {{ selectedQuote }}
+              {{ testimonial.quote }}
             </blockquote>
           </div>
 
           <div class="testimonial-attribution">
             <div class="testimonial-image">
               <img
-                src="/img/fine@3x.png"
-                alt="Ryan from FineDetailing"
+                :src="testimonial.avatarSrc"
+                :alt="testimonial.name"
                 class="avatar"
               />
             </div>
             <div class="testimonial-author">
-              <p class="author-name">Ryan</p>
-              <p class="author-role">Owner</p>
-              <p class="author-company">FineDetailing</p>
+              <p class="author-name">{{ testimonial.name }}</p>
+              <p class="author-role">{{ testimonial.role }}</p>
+              <p class="author-company">{{ testimonial.company }}</p>
             </div>
           </div>
         </div>
@@ -40,13 +40,16 @@
     background-color: $color-neutral-1000;
     display: flex;
     align-items: center;
-    padding: 12rem 6rem 18rem;
     width: 100%;
+    padding: 10rem 6rem 18rem;
+    @include breakpoint(md) {
+      padding: 0rem 6rem 18rem;
+    }
   }
 
   .testimonial-container {
     width: 100%;
-    max-width: 1440px;
+    // max-width: 1440px;
     margin: 0 auto;
   }
 
@@ -67,7 +70,10 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    width: grid-width(8);
+    @include breakpoint(md) {
+      margin-left: grid-width(6);
+      width: grid-width(6);
+    }
   }
 
   .testimonial-quote-wrapper {
@@ -81,6 +87,7 @@
     white-space: pre-wrap;
     margin: 0;
     width: 100%;
+    text-wrap: balance;
   }
 
   .testimonial-attribution {
@@ -166,12 +173,12 @@
 </style>
 
 <script setup>
-  import { ref } from 'vue'
-
-  const quotes = [
-    'It has everything that I need just in one package...I like simplicity...I like that this is complete for my business.',
-    "The bundle is killer. And just to know my monthly amount...it's really nice to not have 15 different bills come\u00a0in.",
-  ]
-
-  const selectedQuote = ref(quotes[Math.floor(Math.random() * quotes.length)])
+  const testimonial = {
+    quote:
+      "“We used to subscribe to multiple operating systems that do the same thing. They were expensive and took up staff time. In 13 years of business, Square is the most complete ecosystem we've used.”",
+    name: 'Frankie DiCarlantonio',
+    role: "CEO, Scaffidi's Restaurant & Tavern",
+    company: 'Steubenville, OH',
+    avatarSrc: '/img/scaffidis@3x.png',
+  }
 </script>

@@ -20,16 +20,24 @@
               <StepperImg
                 class="stepper-spacing"
                 label="Locations"
-                image="/img/stepper-location@2x.png"
+                :image="LOCATIONS_SVG"
                 v-model="locations"
                 :min="1"
+                :max="99"
+              />
+              <StepperImg
+                class="stepper-spacing"
+                label="Employees"
+                :image="EMPLOYEES_SVG"
+                v-model="employees"
+                :min="0"
                 :max="99"
               />
               <StepperImg
                 v-if="activeDeviceTypes.includes('Kiosks')"
                 class="stepper-spacing"
                 label="Kiosk"
-                image="/img/stepper-kiosk@2x.png"
+                :image="KIOSK_SVG"
                 tooltip="Kiosk devices are used for in-person payments at the counter."
                 v-model="kioskDevices"
                 :min="0"
@@ -39,7 +47,7 @@
                 v-if="activeDeviceTypes.includes('KDS devices')"
                 class="stepper-spacing"
                 label="KDS"
-                image="/img/stepper-kds@2x.png"
+                :image="KDS_SVG"
                 tooltip="KDS devices are used for kitchen display systems."
                 v-model="kdsDevices"
                 :min="0"
@@ -49,7 +57,7 @@
                 v-if="activeDeviceTypes.includes('Handheld')"
                 class="stepper-spacing"
                 label="Handheld"
-                image="/img/handheld@2x.png"
+                :image="HANDHELD_SVG"
                 tooltip="Handheld devices are used for in-person payments at the counter."
                 v-model="handheldDevices"
                 :min="0"
@@ -230,7 +238,7 @@
                 <p class="type-body feature-name-with-icon">
                   {{ feature.name }}
                   <span
-                    v-if="feature.id === 'sms'"
+                    v-if="feature.id === 'sms' || feature.id === 'payroll'"
                     class="feature-info-icon"
                     aria-hidden="true"
                   >
@@ -261,7 +269,9 @@
                   </span>
                 </p>
               </div>
-              <p class="type-body value-cell">$0</p>
+              <p class="type-body value-cell">
+                {{ feature.id === 'payroll' ? '$35/month' : '$0' }}
+              </p>
               <p class="type-body value-cell-right">{{ feature.cost }}</p>
             </div>
           </div>
@@ -370,8 +380,12 @@
                     {{ formatCurrency(monthlySavings) }} saved
                   </span> -->
                   <h4 class="type-subheading-300">
-                    Maximize your margins — save
-                    {{ formatCurrency(monthlySavings) }} every single month
+                    Save
+                    <span class="savings-underline">{{
+                      formatCurrency(monthlySavings)
+                    }}</span>
+                    every single month
+                    <!-- – maximize your margins. -->
                   </h4>
                 </div>
 
@@ -428,7 +442,8 @@
     </div>
 
     <div class="scroll-fade-in">
-      <ValueProp video-src="/img/vid.mp4" />
+      <!-- <ValueProp video-src="/img/vid.mp4" /> -->
+      <ThreeUp />
     </div>
 
     <!-- <div class="scroll-fade-in">
@@ -436,10 +451,12 @@
     </div> -->
 
     <div class="scroll-fade-in">
-      <LeadForm />
+      <Testomonial />
     </div>
 
-    <!-- <Testomonial /> -->
+    <div class="scroll-fade-in">
+      <LeadForm />
+    </div>
   </div>
 
   <Footer />
@@ -1464,6 +1481,50 @@
     }
   }
 
+  @keyframes savings-underline-draw-clip {
+    0% {
+      clip-path: inset(0 100% 0 0);
+      -webkit-clip-path: inset(0 100% 0 0);
+    }
+    45% {
+      clip-path: inset(0 0 0 0);
+      -webkit-clip-path: inset(0 0 0 0);
+    }
+    55% {
+      clip-path: inset(0 0 0 0);
+      -webkit-clip-path: inset(0 0 0 0);
+    }
+    100% {
+      clip-path: inset(0 100% 0 0);
+      -webkit-clip-path: inset(0 100% 0 0);
+    }
+  }
+
+  .savings-underline {
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0.25rem;
+      right: 0;
+      bottom: -0.8rem;
+      height: 0.35em;
+      background-color: currentColor;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8'%3E%3Cpath d='M0 4 Q25 2 50 4 T100 5 T150 4 T200 4' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      mask-repeat: repeat-x;
+      mask-size: auto 100%;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8'%3E%3Cpath d='M0 4 Q25 2 50 4 T100 5 T150 4 T200 4' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      -webkit-mask-repeat: repeat-x;
+      -webkit-mask-size: auto 100%;
+      opacity: 0.9;
+      clip-path: inset(0 100% 0 0);
+      -webkit-clip-path: inset(0 100% 0 0);
+      animation: savings-underline-draw-clip 3s ease-in-out infinite;
+    }
+  }
+
   .card-savings {
     display: flex;
     flex-direction: column;
@@ -1684,7 +1745,23 @@
     layout: 'default',
   })
 
+  const LOCATIONS_SVG =
+    '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.4014 2.75716C17.6601 2.78902 17.8955 2.92974 18.0451 3.14746L20.4639 6.66732C20.5688 6.82006 20.625 7.0012 20.625 7.18652C20.625 8.41053 19.8436 9.38565 18.7917 9.82642V18.3333C18.7917 18.8396 18.3813 19.25 17.875 19.25H4.125C3.61874 19.25 3.20833 18.8396 3.20833 18.3333V9.82642C2.15637 9.38565 1.375 8.41053 1.375 7.18652C1.37503 7.0012 1.43117 6.82006 1.53613 6.66732L3.95492 3.14746L4.02474 3.05884C4.19745 2.8639 4.44647 2.75006 4.71045 2.75H17.2896L17.4014 2.75716ZM15.3542 9.24455C14.7818 9.77062 13.9998 10.0833 13.1771 10.0833C12.3544 10.0833 11.5723 9.77062 11 9.24455C10.4277 9.77062 9.64562 10.0833 8.82292 10.0833C8.00022 10.0833 7.21815 9.77062 6.64583 9.24455C6.2085 9.64655 5.6485 9.92292 5.04167 10.0314V17.4167H16.9583V10.0314C16.3515 9.92292 15.7915 9.64655 15.3542 9.24455ZM3.24235 7.42017C3.36316 7.85064 3.808 8.25 4.46875 8.25C5.24865 8.25 5.72917 7.69387 5.72917 7.18652C5.72924 6.68033 6.13962 6.26986 6.64583 6.26986C7.15205 6.26986 7.56242 6.68033 7.5625 7.18652C7.5625 7.69387 8.04302 8.25 8.82292 8.25C9.60282 8.25 10.0833 7.69387 10.0833 7.18652C10.0834 6.68033 10.4938 6.26986 11 6.26986C11.5062 6.26986 11.9166 6.68033 11.9167 7.18652C11.9167 7.69387 12.3972 8.25 13.1771 8.25C13.957 8.25 14.4375 7.69387 14.4375 7.18652C14.4376 6.68033 14.848 6.26986 15.3542 6.26986C15.8604 6.26986 16.2708 6.68033 16.2708 7.18652C16.2708 7.69387 16.7513 8.25 17.5312 8.25C18.1919 8.25 18.6358 7.85055 18.7568 7.42017L16.807 4.58333H5.19295L3.24235 7.42017Z" fill="#707070"/></svg>'
+
+  const KIOSK_SVG =
+    '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.332 2.75C19.3446 2.75 20.1654 3.57081 20.1654 4.58333V13.75C20.1654 14.7625 19.3446 15.5833 18.332 15.5833H12.832V20.1667H9.16536V15.5833H3.66536C2.65284 15.5833 1.83203 14.7625 1.83203 13.75V4.58333C1.83203 3.57081 2.65284 2.75 3.66536 2.75H18.332ZM3.66536 13.75H18.332V4.58333H3.66536V13.75Z" fill="#707070"/></svg>'
+
+  const KDS_SVG =
+    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 15C10.5523 15 11 15.4477 11 16V20C11 20.5523 10.5523 21 10 21H3C2.44775 21 2 20.5523 2 20V16C2 15.4477 2.44775 15 3 15H10ZM4 19H9V17H4V19Z" fill="#707070"/><path fill-rule="evenodd" clip-rule="evenodd" d="M21 12C21.5523 12 22 12.4477 22 13V20C22 20.5523 21.5523 21 21 21H14C13.4478 21 13 20.5523 13 20V13C13 12.4477 13.4478 12 14 12H21ZM15 19H20V14H15V19Z" fill="#707070"/><path fill-rule="evenodd" clip-rule="evenodd" d="M10 4C10.5523 4 11 4.44772 11 5V12C11 12.5523 10.5523 13 10 13H3C2.44776 13 2.00001 12.5523 2 12V5C2 4.44774 2.44775 4.00004 3 4H10ZM4 11H9V6H4V11Z" fill="#707070"/><path fill-rule="evenodd" clip-rule="evenodd" d="M21 4C21.5523 4 22 4.44772 22 5V9C22 9.55228 21.5523 10 21 10H14C13.4478 9.99996 13 9.55226 13 9V5C13 4.44774 13.4478 4.00004 14 4H21ZM15 8H20V6H15V8Z" fill="#707070"/></svg>'
+
+  const HANDHELD_SVG =
+    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5C9.55228 5 10 5.44772 10 6C10 6.55228 9.55228 7 9 7C8.44772 7 8 6.55228 8 6C8 5.44772 8.44772 5 9 5Z" fill="#707070"/><path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 2C18.1569 2 19.5 3.34315 19.5 5V19C19.5 20.6569 18.1569 22 16.5 22H7.5C5.84315 22 4.5 20.6569 4.5 19V5C4.5 3.34315 5.84315 2 7.5 2H16.5ZM17.5 9.8252C17.1869 9.93604 16.8511 10 16.5 10H7.5C7.14888 10 6.81314 9.93604 6.5 9.8252V19C6.5 19.5523 6.94772 20 7.5 20H16.5C17.0523 20 17.5 19.5523 17.5 19V9.8252ZM7.5 4C6.94772 4 6.5 4.44772 6.5 5V7C6.5 7.55228 6.94772 8 7.5 8H16.5C17.0523 8 17.5 7.55228 17.5 7V5C17.5 4.44772 17.0523 4 16.5 4H7.5Z" fill="#707070"/></svg>'
+
+  const EMPLOYEES_SVG =
+    '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.125 10.9993C18.8515 10.9993 22 13.8045 22 17.416C22 17.9223 21.5896 18.3327 21.0833 18.3327H15.5833V16.4993H20.0637C19.6009 14.4491 17.618 12.8327 15.125 12.8327H11.6866C12.9529 13.9869 13.75 15.5992 13.75 17.416C13.75 17.9223 13.3396 18.3327 12.8333 18.3327H0.916667C0.410406 18.3327 0 17.9223 0 17.416C3.17564e-08 13.8045 3.14851 10.9993 6.875 10.9993H15.125ZM6.875 12.8327C4.38204 12.8327 2.39914 14.4491 1.93628 16.4993H11.8137C11.3509 14.4491 9.36796 12.8327 6.875 12.8327Z" fill="#707070"/><path fill-rule="evenodd" clip-rule="evenodd" d="M6.875 3.66602C8.39378 3.66602 9.625 4.89723 9.625 6.41602C9.625 7.9348 8.39378 9.16602 6.875 9.16602C5.35622 9.16602 4.125 7.9348 4.125 6.41602C4.125 4.89723 5.35622 3.66602 6.875 3.66602ZM6.875 5.49935C6.36874 5.49935 5.95833 5.90975 5.95833 6.41602C5.95833 6.92228 6.36874 7.33268 6.875 7.33268C7.38126 7.33268 7.79167 6.92228 7.79167 6.41602C7.79167 5.90975 7.38126 5.49935 6.875 5.49935Z" fill="#707070"/><path fill-rule="evenodd" clip-rule="evenodd" d="M15.125 3.66602C16.6438 3.66602 17.875 4.89723 17.875 6.41602C17.875 7.9348 16.6438 9.16602 15.125 9.16602C13.6062 9.16602 12.375 7.9348 12.375 6.41602C12.375 4.89723 13.6062 3.66602 15.125 3.66602ZM15.125 5.49935C14.6187 5.49935 14.2083 5.90975 14.2083 6.41602C14.2083 6.92228 14.6187 7.33268 15.125 7.33268C15.6313 7.33268 16.0417 6.92228 16.0417 6.41602C16.0417 5.90975 15.6313 5.49935 15.125 5.49935Z" fill="#707070"/></svg>'
+
   const locations = ref(1)
+  const employees = ref(0)
   const kioskDevices = ref(0)
   const kdsDevices = ref(0)
   const handheldDevices = ref(0)
@@ -1803,7 +1880,8 @@
       locations.value +
       kioskDevices.value +
       kdsDevices.value +
-      handheldDevices.value
+      handheldDevices.value +
+      employees.value
     return Math.max(0, raw - 1)
   })
 
@@ -1818,17 +1896,18 @@
 
   const pulseLastGlyph = ref(false)
   watch(
-    [locations, kioskDevices, kdsDevices, handheldDevices],
+    [locations, kioskDevices, kdsDevices, handheldDevices, employees],
     (
-      [newLoc, newKiosk, newKds, newHand],
-      [oldLoc, oldKiosk, oldKds, oldHand],
+      [newLoc, newKiosk, newKds, newHand, newEmp],
+      [oldLoc, oldKiosk, oldKds, oldHand, oldEmp],
     ) => {
       if (oldLoc === undefined) return
       const increased =
         newLoc! > oldLoc! ||
         newKiosk! > oldKiosk! ||
         newKds! > oldKds! ||
-        newHand! > oldHand!
+        newHand! > oldHand! ||
+        newEmp! > oldEmp!
       if (increased && totalGlyphCount.value > 0) {
         pulseLastGlyph.value = true
         setTimeout(() => {
@@ -1915,6 +1994,8 @@
     qr: 20,
     customer: 30,
     email: 35,
+    payroll: 90,
+    doordash: 75,
   } as const
 
   type FeatureId = keyof typeof FEATURE_COSTS
@@ -1960,6 +2041,13 @@
       checked: true,
     },
     { id: 'email', name: 'Email marketing', cost: '+$35/month', checked: true },
+    {
+      id: 'doordash',
+      name: 'DoorDash Integration',
+      cost: '+$75/month',
+      checked: true,
+    },
+    { id: 'payroll', name: 'Payroll', cost: '+$90/month', checked: true },
   ])
 
   const processingFees = ref([
@@ -1979,11 +2067,14 @@
 
   // Computed pricing
   const squarePrice = computed(() => {
+    const payroll = features.value.find((f) => f.id === 'payroll')
+    const payrollAdd = payroll?.checked ? 35 : 0
     return (
       SQUARE_BASE_PRICE * locations.value +
       SQUARE_KIOSK_PRICE * kioskDevices.value +
       SQUARE_KDS_PRICE * kdsDevices.value +
-      SQUARE_HANDHELD_PRICE * handheldDevices.value
+      SQUARE_HANDHELD_PRICE * handheldDevices.value +
+      payrollAdd
     )
   })
 
