@@ -457,6 +457,17 @@
     <div class="scroll-fade-in">
       <LeadForm />
     </div>
+
+    <div class="scroll-fade-in">
+      <FAQ
+        :heading="faqHeading"
+        :items="faqItems"
+      />
+    </div>
+  </div>
+
+  <div class="scroll-fade-in">
+    <ClosingCTA />
   </div>
 
   <Footer />
@@ -1257,11 +1268,14 @@
   .aside-card-frame {
     position: relative;
     /* Extra padding = gap between card and 2.5rem marquee strips; bottom/right slightly larger so gap matches top/left */
-    padding: 3rem 3.2rem 3.2rem 3rem;
+    padding: 3rem 0 3.2rem;
     width: 100%;
 
     &.aside-card-frame--marquee-hidden .aside-card-marquee {
       display: none;
+    }
+    @include breakpoint(md) {
+      padding: 3rem 3.2rem 3.2rem 3rem;
     }
   }
 
@@ -1763,6 +1777,51 @@
 
   const EMPLOYEES_SVG =
     '<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.125 10.9993C18.8515 10.9993 22 13.8045 22 17.416C22 17.9223 21.5896 18.3327 21.0833 18.3327H15.5833V16.4993H20.0637C19.6009 14.4491 17.618 12.8327 15.125 12.8327H11.6866C12.9529 13.9869 13.75 15.5992 13.75 17.416C13.75 17.9223 13.3396 18.3327 12.8333 18.3327H0.916667C0.410406 18.3327 0 17.9223 0 17.416C3.17564e-08 13.8045 3.14851 10.9993 6.875 10.9993H15.125ZM6.875 12.8327C4.38204 12.8327 2.39914 14.4491 1.93628 16.4993H11.8137C11.3509 14.4491 9.36796 12.8327 6.875 12.8327Z" fill="#707070"/><path fill-rule="evenodd" clip-rule="evenodd" d="M6.875 3.66602C8.39378 3.66602 9.625 4.89723 9.625 6.41602C9.625 7.9348 8.39378 9.16602 6.875 9.16602C5.35622 9.16602 4.125 7.9348 4.125 6.41602C4.125 4.89723 5.35622 3.66602 6.875 3.66602ZM6.875 5.49935C6.36874 5.49935 5.95833 5.90975 5.95833 6.41602C5.95833 6.92228 6.36874 7.33268 6.875 7.33268C7.38126 7.33268 7.79167 6.92228 7.79167 6.41602C7.79167 5.90975 7.38126 5.49935 6.875 5.49935Z" fill="#707070"/><path fill-rule="evenodd" clip-rule="evenodd" d="M15.125 3.66602C16.6438 3.66602 17.875 4.89723 17.875 6.41602C17.875 7.9348 16.6438 9.16602 15.125 9.16602C13.6062 9.16602 12.375 7.9348 12.375 6.41602C12.375 4.89723 13.6062 3.66602 15.125 3.66602ZM15.125 5.49935C14.6187 5.49935 14.2083 5.90975 14.2083 6.41602C14.2083 6.92228 14.6187 7.33268 15.125 7.33268C15.6313 7.33268 16.0417 6.92228 16.0417 6.41602C16.0417 5.90975 15.6313 5.49935 15.125 5.49935Z" fill="#707070"/></svg>'
+
+  const faqHeading = 'FAQs'
+  const faqItems = [
+    {
+      question: 'Do I have to sign a long-term contract to use Square?',
+      answer:
+        "No. Square offers month-to-month pricing with no long-term contracts required. You can cancel anytime without penalty. We believe you should stay with Square because it's working for your business—not because you're locked into a contract.",
+    },
+    {
+      question: 'Are there any hidden fees I should know about?',
+      answer:
+        'Square believes in transparent pricing—no hidden fees, no long-term contracts, and no surprise costs. Your subscription price is your subscription price. We recommend asking any POS provider for a complete breakdown of all fees before signing, so you can make an apples-to-apples comparison.',
+    },
+    {
+      question:
+        "I'm currently using another POS. How hard is it to switch to Square?",
+      answerHtml:
+        "Switching POS systems is easier than most restaurant owners expect. Square offers: <ul><li>Free data migration assistance for menu items, customer data, and more</li><li>Dedicated onboarding support to get you up and running quickly</li><li>No long-term contracts—so you're never locked in</li><li>Hardware flexibility—use your existing iPad or purchase Square hardware</li></ul> Many restaurants complete their switch in just a few days with minimal disruption to operations.",
+    },
+    {
+      question: 'Will I lose my customer data if I switch?',
+      answer:
+        "No. Square can help you migrate your existing customer data, including contact information, purchase history, and loyalty program data. Our team will work with you to ensure a smooth transition so you don't lose the relationships you've built with your customers.",
+    },
+    {
+      question: 'What about my existing hardware?',
+      answer:
+        "Square works with hardware you may already own. Our POS runs on iPads, and we offer a range of purpose-built hardware options including Square Register, Square Terminal, Square Stand, and handheld devices for tableside ordering. Square doesn't require proprietary hardware—giving you more flexibility and potentially saving you thousands on equipment costs.",
+    },
+    {
+      question: "What's included in Square's subscription?",
+      answerHtml:
+        'Square Plus for Restaurants is $60/month per location and includes everything you need to run your restaurant. You get unlimited devices at no extra cost, along with menu and table management, floor plan customization, and live sales reporting. For your team, Plus includes shift scheduling and tip management. To help you reach more customers, you also get commission-free online ordering, a built-in loyalty program, gift cards, customer directory, and email and SMS marketing (500 messages free, then $0.03 each). QR code ordering is included as well.<br><br>If you need additional hardware, Kitchen Display Systems are available for $30/month per device and Self-Service Kiosks for $50/month per device. Visit <a href="https://squareup.com/us/en/point-of-sale/restaurants/pricing" target="_blank" rel="noopener noreferrer">squareup.com/us/en/point-of-sale/restaurants/pricing</a> for the full feature breakdown.',
+    },
+    {
+      question: 'Can Square handle my multi-location restaurant group?',
+      answer:
+        'Absolutely. Square is built to scale with your business, whether you have 1 location or 100+. You can manage all locations from a single dashboard, maintain consistent menus and pricing, and access consolidated reporting across your entire operation. Each additional location is just $60/month with Square Plus.',
+    },
+    {
+      question: 'What happens if I need help during a busy service?',
+      answer:
+        "Square's systems are built for reliability, with 99.99% uptime. In the rare event of an internet outage, Square's Offline Mode lets you continue accepting card payments. Our 24/7 support team is always available for urgent issues, and our hardware is designed for the demands of high-volume restaurant environments.",
+    },
+  ]
 
   const locations = ref(1)
   const employees = ref(0)

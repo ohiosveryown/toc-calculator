@@ -21,15 +21,19 @@
 </template>
 
 <style lang="scss" scoped>
+  @import '~/style/grid.scss';
   @import '~/style/colors.scss';
   footer {
     // margin-top: 6.4rem;
     margin: 0 auto;
-    padding: 6.4rem 8rem 2rem;
+    padding: 6.4rem 2.4rem 2rem;
     width: 100vw;
     height: 72rem;
     background: $color-neutral-000;
     color: $color-neutral-300;
+    @include breakpoint(md) {
+      padding: 6.4rem 8rem 2rem;
+    }
   }
 
   p {

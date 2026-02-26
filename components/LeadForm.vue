@@ -1,7 +1,7 @@
 <template>
   <section class="passive-lead-form">
     <div class="lead-container">
-      <h2 class="type-heading-800">
+      <h2 class="type-heading-700">
         Join the 450K+ businesses who run their restaurants with Square
       </h2>
       <div class="content">
@@ -36,9 +36,8 @@
     flex-direction: column;
     gap: 2.4rem;
     margin: 0 auto;
-    padding: 0 2rem;
-    background: #000;
-    color: #fff;
+    padding: 4rem 2rem;
+    background: $background-accent;
     @include breakpoint(md) {
       padding: 0;
     }
@@ -59,7 +58,7 @@
 
     h2 {
       @include breakpoint(md) {
-        max-width: 48ch;
+        // max-width: 32ch;
       }
     }
 
@@ -75,7 +74,7 @@
       gap: 4.2rem;
       flex-direction: column;
       margin: 0 auto;
-      padding: 9.6rem 0;
+      padding: 9.6rem 0 2.4rem;
       max-width: 160rem;
       width: grid-width(10);
       text-align: center;
@@ -96,7 +95,7 @@
     align-items: center;
 
     @include breakpoint(lg) {
-      width: grid-width(6.5);
+      width: grid-width(8);
     }
   }
 
@@ -111,11 +110,10 @@
     width: 100%;
     padding: 1.2rem 1.6rem;
     border-radius: 0.8rem;
-    background: #000;
+    background: #fff;
     border: 1px solid rgba(255, 255, 255, 0.32);
     font-family: inherit;
     font-size: 1.6rem;
-    color: $color-neutral-200;
     transition: border-color 0.2s ease;
 
     &::placeholder {
