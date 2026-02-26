@@ -74,7 +74,7 @@
       gap: 4.2rem;
       flex-direction: column;
       margin: 0 auto;
-      padding: 9.6rem 0 2.4rem;
+      padding: 7.2rem 0;
       max-width: 160rem;
       width: grid-width(10);
       text-align: center;
