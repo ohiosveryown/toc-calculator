@@ -1481,22 +1481,26 @@
     }
   }
 
+  /* Delay between iterations: total duration = action + delay. All keyframe
+     changes happen in the first (action/total) of the timeline; 50–100% = pause.
+     e.g. 5s total = ~2.5s draw/clip + ~2.5s delay. Adjust total duration below. */
   @keyframes savings-underline-draw-clip {
     0% {
       clip-path: inset(0 100% 0 0);
       -webkit-clip-path: inset(0 100% 0 0);
     }
-    45% {
+    16% {
       clip-path: inset(0 0 0 0);
       -webkit-clip-path: inset(0 0 0 0);
     }
-    55% {
+    41% {
       clip-path: inset(0 0 0 0);
       -webkit-clip-path: inset(0 0 0 0);
     }
+    50%,
     100% {
-      clip-path: inset(0 100% 0 0);
-      -webkit-clip-path: inset(0 100% 0 0);
+      clip-path: inset(0 0 0 100%);
+      -webkit-clip-path: inset(0 0 0 100%);
     }
   }
 
@@ -1521,7 +1525,7 @@
       opacity: 0.9;
       clip-path: inset(0 100% 0 0);
       -webkit-clip-path: inset(0 100% 0 0);
-      animation: savings-underline-draw-clip 3s ease-in-out infinite;
+      animation: savings-underline-draw-clip 5s ease-in-out infinite;
     }
   }
 
