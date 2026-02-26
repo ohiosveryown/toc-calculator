@@ -1,10 +1,10 @@
 <template>
   <section class="faq">
     <div class="faq__container">
-      <div
+      <!-- <div
         class="faq__top-border"
         aria-hidden="true"
-      ></div>
+      ></div> -->
       <div class="faq__layout">
         <h2 class="faq__heading type-heading-600-serif text-heading">
           {{ heading }}
@@ -60,7 +60,8 @@
   @import '@/style/colors.scss';
 
   .faq {
-    background-color: $color-neutral-900;
+    // background-color: $color-neutral-900;
+    background: #fff;
     padding: 6rem 0 8rem;
 
     @include breakpoint(mdl) {

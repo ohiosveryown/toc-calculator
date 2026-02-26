@@ -459,6 +459,10 @@
     </div>
 
     <div class="scroll-fade-in">
+      <Resources />
+    </div>
+
+    <div class="scroll-fade-in">
       <FAQ
         :heading="faqHeading"
         :items="faqItems"
